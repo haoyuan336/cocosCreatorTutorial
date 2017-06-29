@@ -1,14 +1,14 @@
 {
   "ver": "1.0.0",
-  "uuid": "d90eed95-8be7-4bb5-9625-c3c2e8a757db",
+  "uuid": "467052f6-5b0c-4dc9-a10b-3099ea6d5f85",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "cell_bg_big": {
+    "puzzle_bg": {
       "ver": "1.0.3",
-      "uuid": "cd7a82c4-2ed8-4ec0-9d64-1c27acdb6580",
-      "rawTextureUuid": "d90eed95-8be7-4bb5-9625-c3c2e8a757db",
+      "uuid": "6111f5d6-7d9a-4001-8f19-04c9cfb49f29",
+      "rawTextureUuid": "467052f6-5b0c-4dc9-a10b-3099ea6d5f85",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 261,
-      "height": 265,
-      "rawWidth": 261,
-      "rawHeight": 265,
+      "width": 260,
+      "height": 260,
+      "rawWidth": 260,
+      "rawHeight": 260,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

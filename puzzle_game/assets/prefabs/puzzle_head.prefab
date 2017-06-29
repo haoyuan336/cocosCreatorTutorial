@@ -10,15 +10,19 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "cell_bg",
+    "_name": "puzzle_head",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
     "_tag": -1,
     "_active": true,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
     "_prefab": {
-      "__id__": 2
+      "__id__": 3
     },
     "_id": "",
     "_opacity": 255,
@@ -37,13 +41,13 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 261,
-      "height": 265
+      "width": 62,
+      "height": 65
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 0.95,
-    "_scaleY": 0.95,
+    "_scaleX": 1,
+    "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -57,14 +61,40 @@
     "groupIndex": 0
   },
   {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_spriteFrame": {
+      "__uuid__": "4fddeca9-7312-4893-bfd2-8deac62c5a22"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_atlas": null
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "ff98226c-2f19-41be-8af5-e389d0648c6e"
+      "__uuid__": "290ea23b-7290-43a0-b7be-0bffac9eb26e"
     },
-    "fileId": "b396eNfyudNrrRlzDECqDTR",
+    "fileId": "4a1c2wc9B1FPJyf4TZN/6XR",
     "sync": false
   }
 ]

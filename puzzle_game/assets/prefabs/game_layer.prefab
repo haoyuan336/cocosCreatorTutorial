@@ -599,15 +599,9 @@
       "__id__": 17
     },
     "_enabled": true,
-    "bgSptiteFrame": {
-      "__uuid__": "cd7a82c4-2ed8-4ec0-9d64-1c27acdb6580"
-    },
-    "cellDown": {
-      "__uuid__": "455f3f19-0285-4aad-8328-95d0e422c81c"
-    },
-    "cellUp": {
-      "__uuid__": "122a5c07-ebbc-48de-962f-de9c0aebcf6b"
-    }
+    "bgSptiteFrame": null,
+    "cellUp": null,
+    "label": null
   },
   {
     "__type__": "cc.Sprite",
@@ -654,7 +648,11 @@
     "_enabled": true,
     "cell_bg": {
       "__uuid__": "ff98226c-2f19-41be-8af5-e389d0648c6e"
-    }
+    },
+    "puzzleCell": {
+      "__uuid__": "8956d52b-c379-47ea-a4e8-3b92fa7d6f83"
+    },
+    "touchCellList": []
   },
   {
     "__type__": "cc.PrefabInfo",

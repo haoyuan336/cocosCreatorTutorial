@@ -2,6 +2,7 @@
  * Created by chuhaoyuan on 2017/6/28.
  */
 const defines = {};
+defines.PuzzleLineTypeList = ["UP","DOWN","MIDDLE"];
 defines.PuzzleLineType = {
   UP: 1,
   DOWN: -1,
@@ -13,10 +14,5 @@ defines.PuzzleDirectionMap = {
   DOWN: 2,
   LEFT: 3,
   RIGHT: 4
-};
-defines.PuzzleCellState = {
-  "ONTOUCH": 1,
-  "ONDRAGGING": 2,
-  "ONMAP": 3
 };
 export default defines

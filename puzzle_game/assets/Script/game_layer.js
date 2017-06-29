@@ -54,47 +54,28 @@ cc.Class({
         this.referCellUI();
     }
     ,
-    referCellUI : function (target) {
-        let beganIndex = 0;
-        if (target){
-            beganIndex = target.index;
-        }
-
-        let onTouchMapIndex = 0;
-
-
-
-        for (let i = beganIndex ; i < this.cellList.length + beganIndex ; i ++){
-            let index = i;
-            if (i >= this.cellList.length){
-                index =  i -  this.cellList.length;
-            }
-
-            cc.log('index = ' + index);
-
-            let node = this.cellList[index];
-            node.getComponent('puzzle_cell');
-            if (node.getComponent('puzzle_cell').getIsOnTouchLayer()){
-                if (onTouchMapIndex < 3){
-                    node.getComponent('puzzle_cell').setStartPos(this.touchCellList[index].position);
-                    onTouchMapIndex ++
+    referCellUI : function () {
+        let index = 0;
+       for (let i = 0 ; i < this.cellList.length ; i ++){
+           let cell = this.cellList[i];
+           if (cell.getComponent('puzzle_cell').getIsOnTouchMap()){
+               // console.log('is on map');
+               cell.active = true;
+                if (index < 3){
+                    cell.position = this.touchCellList[index].position;
                 }else {
-                    node.active = false
+                    cell.active = false;
                 }
-            }
-            // if (onTouchMapIndex < 3){
-            //     // node.position = this.touchCellList[i].position;
-            //     // node.oldPosition = node.position;
-            //     node.getComponent('puzzle_cell').setStartPos(this.touchCellList[index].position);
-            // }else {
-            //     node.active = false;
-            // }
-        }
+               index ++;
+
+           }
+       }
     },
     puzzleCellTouchEnd: function (target) {
       // x
         //得到最近的点
         let minDis = 10000;
+        let purPos = undefined;
         for (let i = 0 ; i < this.purCellList.length ; i ++){
             let purCell = this.purCellList[i];
             let pos = purCell.position;
@@ -102,31 +83,38 @@ cc.Class({
             let distance = cc.pDistance(pos,touchEndPos);
             if (distance < minDis){
                 minDis = distance;
+                purPos = pos;
             }
         }
-        cc.log("mndis = " + minDis);
-        if (minDis > 100){
-            target.setStartPos();
+        //再次检测碰撞
+        let nodeMinDis = 10000;
+        for  (let i = 0 ; i < this.cellList.length ; i ++){
+            let node = this.cellList[i];
+            if (node.getComponent('puzzle_cell').getIsOnMap()){
+                let dis = cc.pDistance(purPos, node.position);
+                if (dis < nodeMinDis){
+                    nodeMinDis = dis;
+                }
+            }
+        }
+        if (minDis < 140 && nodeMinDis > 140){
+            target.node.position = purPos;
+            target.setOnMap();
         }else {
+            target.setOnTouchMap();
 
         }
+        this.referCellUI();
+        // cc.log("mndis = " + minDis);
+
     },
     puzzleCellTouchBegan: function (target) {
-
-        // if (target.getMapOn() === defines.OnMap.YES){
-        //     //在地图上
-        //
-        //
-        // }else {
-        //
-        // }
-
-        this.referCellUI(target);
-
 
         for (let i in this.cellList){
             this.cellList[i].zIndex = 10;
         }
         target.node.zIndex = 100;
+        this.referCellUI();
+
     }
 });

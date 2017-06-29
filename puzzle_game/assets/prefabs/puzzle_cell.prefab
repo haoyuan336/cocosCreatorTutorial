@@ -13,19 +13,23 @@
     "_name": "puzzle_cell",
     "_objFlags": 0,
     "_parent": null,
-    "_children": [],
+    "_children": [
+      {
+        "__id__": 2
+      }
+    ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 2
+        "__id__": 5
       },
       {
-        "__id__": 3
+        "__id__": 6
       }
     ],
     "_prefab": {
-      "__id__": 4
+      "__id__": 7
     },
     "_id": "",
     "_opacity": 255,
@@ -64,6 +68,93 @@
     "groupIndex": 0
   },
   {
+    "__type__": "cc.Node",
+    "_name": "label",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 3
+      }
+    ],
+    "_prefab": {
+      "__id__": 4
+    },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 147.3,
+      "height": 56
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "_useOriginalSize": false,
+    "_actualFontSize": 60.20000000000007,
+    "_fontSize": 60.20000000000007,
+    "_lineHeight": 56.30000000000005,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_N$string": "Label",
+    "_N$horizontalAlign": 1,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "8956d52b-c379-47ea-a4e8-3b92fa7d6f83"
+    },
+    "fileId": "d1cddH/doRNQ4Aodz8556bh",
+    "sync": false
+  },
+  {
     "__type__": "6a696dMCktKKYiVFWCAfWQG",
     "_name": "",
     "_objFlags": 0,
@@ -72,13 +163,13 @@
     },
     "_enabled": true,
     "bgSptiteFrame": {
-      "__uuid__": "cd7a82c4-2ed8-4ec0-9d64-1c27acdb6580"
-    },
-    "cellDown": {
-      "__uuid__": "455f3f19-0285-4aad-8328-95d0e422c81c"
+      "__uuid__": "6111f5d6-7d9a-4001-8f19-04c9cfb49f29"
     },
     "cellUp": {
-      "__uuid__": "122a5c07-ebbc-48de-962f-de9c0aebcf6b"
+      "__uuid__": "290ea23b-7290-43a0-b7be-0bffac9eb26e"
+    },
+    "label": {
+      "__id__": 3
     }
   },
   {
