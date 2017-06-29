@@ -20,22 +20,13 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         this.node.getComponent(cc.Sprite).spriteFrame = this.bgSptiteFrame;
-        this.isOnMap = defines.OnMap.NO;
+        this.puzzleState = defines.PuzzleCellState.ONTOUCH;
         this.isDragging = false;
         let self = this;
-        // this.node.on(cc.Event.EventTouch,function (event) {
-        //     self.node.position = event.getLocation();
-        // },this.parent);\
-
-        // this.node.on(cc.Node.EventType.TOUCH_START, this.memberFunction, this);  // if "this" is component and the "memberFunction" declared in CCClass.
-        // node.on(cc.Node.EventType.TOUCH_START, callback, this.node);
-        // node.on(cc.Node.EventType.TOUCH_MOVE, callback, this.node);
-        // node.on(cc.Node.EventType.TOUCH_END, callback, this.node);
-        // node.on(cc.Node.EventType.TOUCH_CANCEL, callback, this.node);
-        // node.on("anchor-changed", callback, this);
         const touchStart = function (event) {
             console.log('touch start =' + JSON.stringify(event.getLocation()));
             self.isDragging = true;
+            self.parentScript.puzzleCellTouchBegan(self);
         };
         const  touchMove = function (event) {
             console.log('touch move =' + JSON.stringify(event.getLocation()));
@@ -48,8 +39,8 @@ cc.Class({
         };
         const touchEnd = function (event) {
             console.log('touch end =' + JSON.stringify(event.getLocation()));
-            self.isDragging = false;
 
+            self.isDragging = false;
             self.parentScript.puzzleCellTouchEnd(self);
 
 
@@ -63,17 +54,21 @@ cc.Class({
 
     }
     ,
-    init: function (spec, parentScript) {
+    init: function (spec, parentScript,index) {
+        this.index = index;
         this.parentScript = parentScript;
         console.log('spec' + JSON.stringify(spec));
     },
-    getMapOn: function () {
-        return this.isOnMap;
+    setStartPos: function (position) {
+        if (position){
+            this.startPos = position;
+        }
+        this.node.position = this.startPos;
     },
-    setStartPos: function () {
-      //回到原点
-        this.position = this.oldPosition;
+    getIsOnTouchLayer: function () {
+        if (this.puzzleState === defines.PuzzleCellState.ONTOUCH){
+            return true;
+        }
+        return false;
     }
-
-
 });

@@ -1,4 +1,5 @@
 import PuzzleController from './puzzle_controller'
+import defines from './game_defines'
 cc.Class({
     extends: cc.Component,
 
@@ -42,24 +43,52 @@ cc.Class({
 
         //初始化碎片节点
         this.cellList = [];
+        let index = 0;
         for (let i in mapData){
             let node = cc.instantiate(this.puzzleCell);
             node.parent = this.node;
-            node.getComponent("puzzle_cell").init(mapData[i],this);
+            node.getComponent("puzzle_cell").init(mapData[i],this,index);
             this.cellList.push(node);
+            index ++;
         }
         this.referCellUI();
     }
     ,
-    referCellUI : function () {
-        for (let i = 0 ; i < this.cellList.length ; i ++){
-            let node = this.cellList[i];
-            if (i < 3){
-                node.position = this.touchCellList[i].position;
-                node.oldPosition = node.position;
-            }else {
-                node.active = false;
+    referCellUI : function (target) {
+        let beganIndex = 0;
+        if (target){
+            beganIndex = target.index;
+        }
+
+        let onTouchMapIndex = 0;
+
+
+
+        for (let i = beganIndex ; i < this.cellList.length + beganIndex ; i ++){
+            let index = i;
+            if (i >= this.cellList.length){
+                index =  i -  this.cellList.length;
             }
+
+            cc.log('index = ' + index);
+
+            let node = this.cellList[index];
+            node.getComponent('puzzle_cell');
+            if (node.getComponent('puzzle_cell').getIsOnTouchLayer()){
+                if (onTouchMapIndex < 3){
+                    node.getComponent('puzzle_cell').setStartPos(this.touchCellList[index].position);
+                    onTouchMapIndex ++
+                }else {
+                    node.active = false
+                }
+            }
+            // if (onTouchMapIndex < 3){
+            //     // node.position = this.touchCellList[i].position;
+            //     // node.oldPosition = node.position;
+            //     node.getComponent('puzzle_cell').setStartPos(this.touchCellList[index].position);
+            // }else {
+            //     node.active = false;
+            // }
         }
     },
     puzzleCellTouchEnd: function (target) {
@@ -81,9 +110,23 @@ cc.Class({
         }else {
 
         }
+    },
+    puzzleCellTouchBegan: function (target) {
+
+        // if (target.getMapOn() === defines.OnMap.YES){
+        //     //在地图上
+        //
+        //
+        // }else {
+        //
+        // }
+
+        this.referCellUI(target);
 
 
+        for (let i in this.cellList){
+            this.cellList[i].zIndex = 10;
+        }
+        target.node.zIndex = 100;
     }
-
-
 });

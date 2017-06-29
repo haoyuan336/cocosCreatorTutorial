@@ -14,8 +14,9 @@ defines.PuzzleDirectionMap = {
   LEFT: 3,
   RIGHT: 4
 };
-defines.OnMap = {
-  "YES": 1,
-  "NO": 0
+defines.PuzzleCellState = {
+  "ONTOUCH": 1,
+  "ONDRAGGING": 2,
+  "ONMAP": 3
 };
 export default defines
