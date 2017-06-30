@@ -76,6 +76,15 @@ cc.Class({
 
 
     },
+    buweiPosList : function (index) {
+        const list = [
+            cc.v2(0,98),
+            cc.v2(0,-98),
+            cc.v2(-98,0),
+            cc.v2(98,0)
+        ];
+        return list[index];
+    },
     cellUpPosList:function (index) {
         let list = [
                 cc.v2(0,156),
@@ -96,13 +105,8 @@ cc.Class({
 
         console.log('direction = ' + direction);
         console.log('value = ' + value);
-        if (direction === undefined){
-            return
-        }
-        if (value === undefined){
-            return
-        }
         if (value === defines.PuzzleLineType.DOWN){
+            console.log('空位直接返回');
             return
         }
         //
@@ -113,10 +117,16 @@ cc.Class({
             //
             let node = cc.instantiate(this.cellUp);
             node.parent = this.node;
-            // node.position = this.cellUpPosList(direction);
-            // node.rotation = this.angleMap(direction);
+            node.position = this.cellUpPosList(direction - 1);
+            node.rotation = this.angleMap(direction - 1);
         }
         console.log('this。index ' + this.index);
+
+        let buwei = cc.instantiate(this.cellUp);
+        buwei.parent = this.node;
+        buwei.position = this.buweiPosList(direction - 1);
+        buwei.rotation = this.angleMap(direction - 1) + 180;
+
 
 
     },

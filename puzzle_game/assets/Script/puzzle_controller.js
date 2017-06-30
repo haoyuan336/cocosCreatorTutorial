@@ -18,18 +18,15 @@ const PuzzleController = function () {
         list.push(map);
         map[defines.PuzzleDirectionMap.RIGHT] = getRandomValue();
         map[defines.PuzzleDirectionMap.DOWN] = getRandomValue();
+
         if (list.length > 1){
-          let beforMap = undefined;
-          if ( i === 0 ){
-            beforMap = list[list.length - 2];
-          }
-          if ( i === 1){
-            beforMap = list[list.length - 4];
-          }
-          map[defines.PuzzleDirectionMap.UP] = 0 - beforMap[defines.PuzzleDirectionMap.DOWN];
+          let beforMap = list[list.length - 2];
           map[defines.PuzzleDirectionMap.LEFT] = 0 - beforMap[defines.PuzzleDirectionMap.RIGHT];
         }
-
+        if (list.length > 3){
+          let beforMap = list[list.length - 4];
+          map[defines.PuzzleDirectionMap.UP] = 0 - beforMap[defines.PuzzleDirectionMap.DOWN];
+        }
 
         if (i === 0){
           map[defines.PuzzleDirectionMap.UP] = defines.PuzzleLineType.MIDDLE;
