@@ -29,7 +29,7 @@ cc.Class({
                 node.active = false;
                 node.position = {
                     x: (3 - 1) * - 0.5 * 260 + j * 260,
-                    y: 180 +  260 * i
+                    y:  440-  260 * i
                 };
                 this.purCellList.push(node);
             }
@@ -70,6 +70,8 @@ cc.Class({
 
            }
        }
+
+
     },
     puzzleCellTouchEnd: function (target) {
       // x
@@ -106,6 +108,43 @@ cc.Class({
         }
         this.referCellUI();
         // cc.log("mndis = " + minDis);
+
+        //检测胜利失败
+        this.checkWin();
+
+    },
+    checkWin: function () {
+        //首先检查，是否所有的点都在地图上了
+        for (let i in this.cellList){
+            let cell = this.cellList[i];
+            if (cell.getComponent("puzzle_cell").getIsOnMap() === false){
+                return
+            }
+        }
+        console.log('都在地图上了');
+        //开始检测位置
+        //做进一步的碰撞检测
+        for (let i = 0 ; i < this.cellList.length ; i ++) {
+            let cell = this.cellList[i];
+            let purCell = this.purCellList[cell.getComponent('puzzle_cell').index];
+            let dis = cc.pDistance(purCell.position,cell.position);
+            console.log('dis = ' + dis);
+            if (dis > 10){
+
+                //有一个方块没在正确的位置上，所以返回
+                console.log('这个点不在地图上' + cell.getComponent('puzzle_cell').index);
+                return
+            }
+        }
+
+
+        console.log('全面胜利了');
+
+
+
+        //全面胜利之后 ，加载游戏胜利界面
+        this.node.parent.getComponent("layout_controller").gameSuccess();
+
 
     },
     puzzleCellTouchBegan: function (target) {

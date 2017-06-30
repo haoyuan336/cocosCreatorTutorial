@@ -62,7 +62,7 @@ cc.Class({
     ,
     init: function (spec, parentScript,index) {
         this.index = index;
-        this.label.string = index + '';
+        // this.label.string = index + '';
         this.parentScript = parentScript;
         console.log('spec' + JSON.stringify(spec));
 
