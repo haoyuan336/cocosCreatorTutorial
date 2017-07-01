@@ -64,7 +64,7 @@ cc.Class({
     init: function (data, index) {
         //初始化一些数据
         cc.log("index = " + index + ",data = " + JSON.stringify(data));
-        this.label.string = index + "";
+        // this.label.string = index + "";
         //根据边缘的值 ，绘制方向
 
 

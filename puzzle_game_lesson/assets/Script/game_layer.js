@@ -42,6 +42,18 @@ cc.Class({
             node.getComponent('puzzle_cell').init(gameData[i], i);
             this.puzzleCellList.push(node);
         }
+
+        //将得到的列表打乱
+
+        for (let i = 0 ; i < this.puzzleCellList.length ; i ++){
+            //随机一个index
+            let index = Math.floor(Math.random() * this.puzzleCellList.length);
+            let temp = this.puzzleCellList[i];
+            this.puzzleCellList[i] = this.puzzleCellList[index];
+            this.puzzleCellList[index] = temp;
+        }
+
+        //试一下
         this.referPuzzleCellPos();
     },
     referPuzzleCellPos : function () {
