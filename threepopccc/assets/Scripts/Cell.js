@@ -17,6 +17,8 @@ cc.Class({
         cc.log("init cell " + JSON.stringify(data));
         let type = data.type;
         let index = defines.cellType[type];
+        this.indexWidth = data.indexWidth;
+        this.indexHeight = data.indexHeight;
         this.node.getComponent(cc.Sprite).spriteFrame = this.Textures[index];
     },
     update: function (dt) {
