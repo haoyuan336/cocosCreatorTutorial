@@ -14,7 +14,7 @@ const GameDataController = function() {
       list.push(i);
     }
 
-    let type = list[Math.floor(Math.random() * (list.length - 1))]
+    let type = list[Math.floor(Math.random() * (list.length - 1))];
     return type;
 
   };
