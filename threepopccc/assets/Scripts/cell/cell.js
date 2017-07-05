@@ -18,9 +18,21 @@ cc.Class({
         this.animationController = AnimationController();
         let isTouch = false;
         let self = this;
+        this.touchpopTime = 0;
         const onTouchStart = function () {
+
+            self.touchpopTime += 0.24;
+
+
             self.oldPos = self.node.position;
             self.currentDirection = undefined;
+            // if (nowTimeList.length >= 2){
+            //     if (nowTimeList[1] - nowTimeList[0] < 300){
+            //         cc.log("双击");
+            //     }
+            //     nowTimeList = [];
+            // }
+
 
             if (global.gameDataController.getIsCanInput()){
                 isTouch = true;
@@ -77,8 +89,17 @@ cc.Class({
         this.index = data.index;
 
     },
-    update: function () {
+    update: function (dt) {
+        if (this.touchpopTime > 0){
+            this.touchpopTime -= dt;
+        }
+        // cc.log("touchpostime = " + this.touchpopTime);
+        if (this.touchpopTime > 0.24){
+            cc.log("双击");
+            this.touchpopTime = 0;
+            this.node.parent.getComponent("GameLayer").doubleClick(this);
 
+        }
 
         if (this.isMoving){
 

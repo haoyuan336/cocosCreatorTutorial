@@ -37,6 +37,11 @@ const GameDataController = function() {
     return gameData
   };
 
+  that.getOneCellData = function () {
+    let data = {};
+    data.type = getRandomType();
+    return data;
+  };
   that.addOneAction = function () {
     _actionCount ++;
 
@@ -77,11 +82,13 @@ const GameDataController = function() {
     ///只要上下左右连续三个是相同颜色的就ok
     cc.log("target type = " + target.getType());
 
-
-
-
-
     return true;
+  };
+
+  that.getPopCellList = function (targrt, cellList) {
+    let list = [];
+    list.push(targrt.node);
+    return list;
   };
 
   return that;
