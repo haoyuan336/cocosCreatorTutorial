@@ -1,0 +1,31 @@
+{
+  "version": 3,
+  "sources": [
+    "unknown"
+  ],
+  "names": [
+    "cc",
+    "Class",
+    "extends",
+    "Component",
+    "properties",
+    "game_layer",
+    "type",
+    "Prefab",
+    "default",
+    "ready_layer",
+    "Node",
+    "onLoad",
+    "startButton",
+    "log",
+    "node",
+    "removeChild",
+    "instantiate",
+    "parent"
+  ],
+  "mappings": ";;AAAAA,GAAGC,KAAH,CAAS;AACLC,aAASF,GAAGG,SADP;;AAGLC,gBAAY;;AAERC,oBAAY;AACRC,kBAAMN,GAAGO,MADD;AAERC,qBAAS;AAFD,SAFJ;AAMRC,qBAAa;AACTH,kBAAMN,GAAGU,IADA;AAETF,qBAAS;AAFA;AANL,KAHP;;AAeL;AACAG,YAAQ,kBAAY,CAEnB,CAlBI;AAmBLC,iBAAa,uBAAY;AACrBZ,WAAGa,GAAH,CAAO,QAAP;AACA,aAAKC,IAAL,CAAUC,WAAV,CAAsB,KAAKN,WAA3B;AACA,YAAIK,OAAOd,GAAGgB,WAAH,CAAe,KAAKX,UAApB,CAAX;AACAS,aAAKG,MAAL,GAAc,KAAKH,IAAnB;AACH;;AAxBI,CAAT",
+  "file": "unknown",
+  "sourcesContent": [
+    "cc.Class({\n    extends: cc.Component,\n\n    properties: {\n\n        game_layer: {\n            type: cc.Prefab,\n            default: null\n        },\n        ready_layer: {\n            type: cc.Node,\n            default: null\n        }\n    },\n\n    // use this for initialization\n    onLoad: function () {\n\n    },\n    startButton: function () {\n        cc.log(\"游戏开始按钮\");\n        this.node.removeChild(this.ready_layer);\n        let node = cc.instantiate(this.game_layer);\n        node.parent = this.node;\n    }\n\n\n});\n"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "version": 3,
+  "sources": [
+    "unknown"
+  ],
+  "names": [
+    "PuzzleController",
+    "that",
+    "getRandomValue",
+    "PuzzleLineType",
+    "PuzzleLineTypeList",
+    "Math",
+    "floor",
+    "random",
+    "length",
+    "getPuzzleMap",
+    "list",
+    "i",
+    "j",
+    "map",
+    "push",
+    "PuzzleDirectionMap",
+    "RIGHT",
+    "DOWN",
+    "beforMap",
+    "undefined",
+    "UP",
+    "LEFT",
+    "MIDDLE",
+    "console",
+    "log",
+    "JSON",
+    "stringify"
+  ],
+  "mappings": ";;;;;;AAGA;;;;;;AACA,IAAMA,mBAAmB,SAAnBA,gBAAmB,GAAY;AACnC,MAAIC,OAAO,EAAX;;AAGA,MAAMC,iBAAiB,SAAjBA,cAAiB,GAAY;AACjC,WAAO,uBAAQC,cAAR,CAAuB,uBAAQC,kBAAR,CAA2BC,KAAKC,KAAL,CAAWD,KAAKE,MAAL,KAAiB,uBAAQH,kBAAR,CAA2BI,MAAvD,CAA3B,CAAvB,CAAP;AACD,GAFD;;AAIAP,OAAKQ,YAAL,GAAoB,YAAY;AAC9B,QAAIC,OAAO,EAAX;AACA,SAAK,IAAIC,IAAI,CAAb,EAAiBA,IAAI,CAArB,EAAyBA,GAAzB,EAA8B;AAC5B,WAAK,IAAIC,IAAI,CAAb,EAAiBA,IAAI,CAArB,EAAyBA,GAAzB,EAA8B;AAC5B,YAAIC,MAAM,EAAV;AACAH,aAAKI,IAAL,CAAUD,GAAV;AACAA,YAAI,uBAAQE,kBAAR,CAA2BC,KAA/B,IAAwCd,gBAAxC;AACAW,YAAI,uBAAQE,kBAAR,CAA2BE,IAA/B,IAAuCf,gBAAvC;AACA,YAAIQ,KAAKF,MAAL,GAAc,CAAlB,EAAoB;AAClB,cAAIU,WAAWC,SAAf;AACA,cAAKR,MAAM,CAAX,EAAc;AACZO,uBAAWR,KAAKA,KAAKF,MAAL,GAAc,CAAnB,CAAX;AACD;AACD,cAAKG,MAAM,CAAX,EAAa;AACXO,uBAAWR,KAAKA,KAAKF,MAAL,GAAc,CAAnB,CAAX;AACD;AACDK,cAAI,uBAAQE,kBAAR,CAA2BK,EAA/B,IAAqC,IAAIF,SAAS,uBAAQH,kBAAR,CAA2BE,IAApC,CAAzC;AACAJ,cAAI,uBAAQE,kBAAR,CAA2BM,IAA/B,IAAuC,IAAIH,SAAS,uBAAQH,kBAAR,CAA2BC,KAApC,CAA3C;AACD;;AAGD,YAAIL,MAAM,CAAV,EAAY;AACVE,cAAI,uBAAQE,kBAAR,CAA2BK,EAA/B,IAAqC,uBAAQjB,cAAR,CAAuBmB,MAA5D;AACD;AACD,YAAIX,MAAM,CAAV,EAAY;AACVE,cAAI,uBAAQE,kBAAR,CAA2BE,IAA/B,IAAuC,uBAAQd,cAAR,CAAuBmB,MAA9D;AACD;AACD,YAAIV,MAAM,CAAV,EAAY;AACVC,cAAI,uBAAQE,kBAAR,CAA2BM,IAA/B,IAAuC,uBAAQlB,cAAR,CAAuBmB,MAA9D;AACD;AACD,YAAIV,MAAM,CAAV,EAAY;AACVC,cAAI,uBAAQE,kBAAR,CAA2BC,KAA/B,IAAwC,uBAAQb,cAAR,CAAuBmB,MAA/D;AACD;;AAEDC,gBAAQC,GAAR,CAAY,WAAUC,KAAKC,SAAL,CAAeb,GAAf,CAAtB;AACAU,gBAAQC,GAAR,CAAY,YAAYb,CAAZ,GAAgB,GAAhB,GAAsBC,CAAlC;AAGD;AACF;;AAED,WAAOF,IAAP;AACD,GA1CD;;AA4CA,SAAOT,IAAP;AACD,CArDD,C,CAJA;;;kBA0DeD,gB",
+  "file": "unknown",
+  "sourcesContent": [
+    "/**\n * Created by chuhaoyuan on 2017/6/28.\n */\nimport defines from './game_defines'\nconst PuzzleController = function () {\n  let that = {};\n\n\n  const getRandomValue = function () {\n    return defines.PuzzleLineType[defines.PuzzleLineTypeList[Math.floor(Math.random() * (defines.PuzzleLineTypeList.length))]];\n  };\n\n  that.getPuzzleMap = function () {\n    let list = [];\n    for (let i = 0 ; i < 2 ; i ++){\n      for (let j = 0 ; j < 3 ; j ++){\n        let map = {};\n        list.push(map);\n        map[defines.PuzzleDirectionMap.RIGHT] = getRandomValue();\n        map[defines.PuzzleDirectionMap.DOWN] = getRandomValue();\n        if (list.length > 1){\n          let beforMap = undefined;\n          if ( i === 0 ){\n            beforMap = list[list.length - 2];\n          }\n          if ( i === 1){\n            beforMap = list[list.length - 4];\n          }\n          map[defines.PuzzleDirectionMap.UP] = 0 - beforMap[defines.PuzzleDirectionMap.DOWN];\n          map[defines.PuzzleDirectionMap.LEFT] = 0 - beforMap[defines.PuzzleDirectionMap.RIGHT];\n        }\n\n\n        if (i === 0){\n          map[defines.PuzzleDirectionMap.UP] = defines.PuzzleLineType.MIDDLE;\n        }\n        if (i === 1){\n          map[defines.PuzzleDirectionMap.DOWN] = defines.PuzzleLineType.MIDDLE;\n        }\n        if (j === 0){\n          map[defines.PuzzleDirectionMap.LEFT] = defines.PuzzleLineType.MIDDLE;\n        }\n        if (j === 2){\n          map[defines.PuzzleDirectionMap.RIGHT] = defines.PuzzleLineType.MIDDLE;\n        }\n\n        console.log('map = '+ JSON.stringify(map));\n        console.log('index =' + i + ',' + j);\n\n\n      }\n    }\n\n    return list;\n  };\n\n  return that;\n};\nexport default PuzzleController;\n"
+  ]
+}
