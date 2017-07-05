@@ -2,8 +2,8 @@
  * Created by chuhaoyuan on 2017/7/3.
  */
 import GameDataController from './GameDataController'
-import AnimationController from './AnimationController'
+import EventListener from './EventListener'
 const global = {};
 global.gameDataController = GameDataController();
-global.animationController = AnimationController();
+global.eventListener = EventListener({});
 export default global;

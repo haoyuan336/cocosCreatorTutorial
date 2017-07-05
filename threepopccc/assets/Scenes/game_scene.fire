@@ -24,7 +24,7 @@
     "_active": true,
     "_components": [],
     "_prefab": null,
-    "_id": "424805b6WtMc5tJ36f8VIBo",
+    "_id": "ad837193-91de-4297-a8ae-6faf71f5bf95",
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
@@ -47,7 +47,8 @@
     "_localZOrder": 0,
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
-    "groupIndex": 0
+    "groupIndex": 0,
+    "autoReleaseAssets": false
   },
   {
     "__type__": "cc.Node",
@@ -275,7 +276,8 @@
       {
         "__uuid__": "9f1e3fe7-3714-4920-8b2f-ad2aa26c24d1"
       }
-    ]
+    ],
+    "label": null
   },
   {
     "__type__": "cc.Sprite",

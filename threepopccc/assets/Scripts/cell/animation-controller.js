@@ -8,6 +8,7 @@ const AnimationController = function () {
 
   that.pushAnimation = function (animation) {
 
+
     _animationList.push(animation)
 
   };
@@ -17,6 +18,7 @@ const AnimationController = function () {
     }
     let animation = _animationList[0];
     _animationList.splice(0,1);
+    console.log('animation list = ' + _animationList.length);
     return animation;
   };
 
