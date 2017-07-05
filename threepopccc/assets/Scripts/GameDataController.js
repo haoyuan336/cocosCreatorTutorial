@@ -75,6 +75,7 @@ const GameDataController = function() {
   that.checkCanSet = function (target,list) {
 
     ///只要上下左右连续三个是相同颜色的就ok
+    cc.log("target type = " + target.getType());
 
 
 
