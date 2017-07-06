@@ -176,12 +176,11 @@ const GameDataController = function() {
       count++
     }
     //一共消了几个豆   得到的能力有数量加成
-    count *= Math.floor(count / 2);
+    // count *= Math.floor(count / );
     energyCount *= count;
     cc.log("energy count = " + energyCount);
     return energyCount;
   };
-  
 
   return that;
 };

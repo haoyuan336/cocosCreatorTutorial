@@ -25,13 +25,20 @@ const GameData = function () {
     that.heartCount -= count;
   };
   that.addEnergyCount = function (count) {
+
     that.energyCount += count;
+    if (that.energyCount > that.totalEnergyCount){
+      that.energyCount = that.totalEnergyCount;
+    }
   };
   that.subEnergyCount = function (count) {
     that.energyCount -= count;
   };
   that.getEnergyProgress = function () {
-    return that.energyCount / that.totalEnergyCount;
+    let value = that.energyCount / that.totalEnergyCount;
+    // return that.energyCount / that.totalEnergyCount;
+    cc.log("value = " + value);
+    return value;
   }
   return that;
 };
