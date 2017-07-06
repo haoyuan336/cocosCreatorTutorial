@@ -182,7 +182,6 @@ const GameDataController = function() {
     return energyCount;
   };
 
-
   return that;
 };
 export default GameDataController;
