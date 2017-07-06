@@ -117,7 +117,11 @@ cc.Class({
                     self.isMoving = false;
                     global.gameDataController.removeOneAction();
                 },this);
-                let action = cc.sequence(cc.moveTo(0.2, actionData.position.x,actionData.position.y),callBack);
+                let dis = cc.pDistance(this.node.position, actionData.position);
+                let timeDuraction = dis / defines.cellSpeed;
+
+
+                let action = cc.sequence(cc.moveTo(timeDuraction, actionData.position.x,actionData.position.y),callBack);
                 this.node.runAction(action)
             }
         }
@@ -134,6 +138,14 @@ cc.Class({
       return this.isMoving;
     },
     getType : function () {
+        cc.log("get type" + this.type);
         return this.type;
+    },
+    setLabelIndex: function (index) {
+        this.index = index;
+        this.label.string = index + "";
+    },
+    getIndex: function () {
+        return this.index;
     }
 });

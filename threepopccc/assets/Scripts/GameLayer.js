@@ -25,8 +25,9 @@ cc.Class({
         let index = 0;
         for (let i = 0 ; i < defines.gameDataHeight ; i ++){
             for (let j = 0 ; j < defines.gameDataWidth; j ++){
-                let data = gameData[ i * defines.gameDataWidth + j];
-                let cell = this.createOneCell(i,j,this.CellPrefab,data,index);
+                // let data = gameData[ i * defines.gameDataWidth + j];
+                // let cell = this.createOneCell(i,j,this.CellPrefab,data,index);
+                let cell = undefined;
                 this.cellList.push(cell);
                 index ++;
 
@@ -40,7 +41,7 @@ cc.Class({
                 let node = cc.instantiate(this.NullPosPrefab);
                 node.parent = this.node;
                 node.position = cc.p((defines.gameDataWidth - 1) * - 0.5 * 100 + 100 * j,
-                                    100 * i );
+                                    100 * i  - 400 );
                 this.nullPosList.push(node);
                 // global.gameDataController.nullPosList.push(node);
             }
@@ -52,6 +53,7 @@ cc.Class({
             if (cell !== undefined && cell.getComponent('cell').getIsMoving() === false){
                 let index = cell.indexRow * defines.gameDataWidth + cell.indexLine;
                 // cc.log('index = ' + index);
+                cell.getComponent("cell").setLabelIndex(index);
                 let nullCell = this.nullPosList[index];
                 if (cc.pDistance(cell.position,nullCell.position) > 10){
                     cell.getComponent("cell").pushAnimationData({
@@ -61,7 +63,6 @@ cc.Class({
                 }
             }
         }
-
         for (let i in this.cellList) {
             let cell = this.cellList[i];
             if (cell !== undefined) {
@@ -94,9 +95,11 @@ cc.Class({
 
 
 
-        for (let i in this.removeCellList){
+        for (let i = 0 ;i < this.removeCellList.length ; i ++){
             this.node.removeChild(this.removeCellList[i]);
+            this.removeCellList.splice(i,1);
         }
+        // cc.log("remove cell list length = " + this.removeCellList.length);
 
     },
     cellScrollDirection: function (target) {
@@ -171,13 +174,11 @@ cc.Class({
     },
     doubleClick: function (target) {
         //这个cell双击了
-        cc.log("双击" + target.node.indexRow + "," + target.node.indexLine);
-        let list = global.gameDataController.getPopCellList(target, this.cellList);
-        for (let i = 0 ;i < list.length ; i ++){
-            let  cell = list[i];
-            let index = cell.indexRow * defines.gameDataWidth + cell.indexLine;
-            this.cellList[index] = undefined;
-            this.removeCellList.push(cell);
+        // cc.log("双击" + target.node.indexRow + "," + target.node.indexLine);
+        let map = global.gameDataController.getPopCellList(target, this.cellList);
+        for (let i in map){
+            this.removeCellList.push(this.cellList[parseInt(i)]);
+            this.cellList[parseInt(i)] = undefined;
         }
     },
     createOneCell: function (i, j,prefab, data,index) {
@@ -188,14 +189,7 @@ cc.Class({
         node.getComponent('cell').init(data);
         node.indexRow = i;
         node.indexLine = j;
-        node.getComponent('cell').pushAnimationData({
-            type: "move",
-            position: (()=>{
-                let nullPos = this.nullPosList[(node.indexRow) * defines.gameDataWidth + j];
-                nullPos.cell = node;
-                return nullPos.position;
-            })()
-        });
+        node.position = cc.p((defines.gameDataWidth - 1) * -0.5 * 100 + j * 100, 600);
         return node;
     }
 

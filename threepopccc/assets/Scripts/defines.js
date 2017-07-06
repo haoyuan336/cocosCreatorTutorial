@@ -14,4 +14,5 @@ defines.cellType = {
   "boom7": 6,
 
 };
+defines.cellSpeed = 1000;
 export default defines

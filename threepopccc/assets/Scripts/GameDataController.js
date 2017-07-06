@@ -85,10 +85,85 @@ const GameDataController = function() {
     return true;
   };
 
-  that.getPopCellList = function (targrt, cellList) {
-    let list = [];
-    list.push(targrt.node);
-    return list;
+  const getDirectionIndex = function (target,direction) {
+    let index = null;
+    cc.log("direction = " + JSON.stringify(direction));
+    switch (direction){
+      case "UP":
+        if (target.indexRow < defines.gameDataHeight - 1){
+          index = (target.indexRow + 1) * defines.gameDataWidth + target.indexLine;
+        }
+        break;
+      case "DOWN":
+        if (target.indexRow > 0){
+          index = (target.indexRow - 1) * defines.gameDataWidth + target.indexLine;
+        }
+        break;
+      case "LEFT":
+        if (target.indexLine > 0 ){
+          index = (target.indexRow * defines.gameDataWidth + target.indexLine - 1);
+        }
+        break;
+      case "RIGHT":
+        if (target.indexLine < defines.gameDataWidth - 1 ){
+          index = (target.indexRow * defines.gameDataWidth + target.indexLine + 1);
+        }
+        break;
+    }
+    return index;
+  };
+
+  const DirectionList = ["UP","DOWN","LEFT","RIGHT"];
+
+
+  const getTargetIndex = function (target) {
+    let index = 0;
+    cc.log("index row = " + target.indexRow);
+    cc.log("index line = " + target.indexLine);
+    index = (target.indexRow * defines.gameDataWidth + target.indexLine);
+    return index;
+  };
+  const getDirectionCell = function (target,map, cellList) {
+    let targetIndex = getTargetIndex(target);
+    cc.log("target index = " + targetIndex);
+    if (map[targetIndex] === true){
+      cc.log("检查过了");
+
+      return;
+    }
+    map[targetIndex] = true;
+    let count = 0;
+    for (let i in map){
+      count ++;
+    };
+    cc.log("count = " + count);
+    for (let i = 0 ; i < DirectionList.length ; i ++ ){
+      let index = getDirectionIndex(target, DirectionList[i]);
+      cc.log("index = " + index);
+      if (index !== null){
+        let cell = cellList[index];
+        if (cell.getComponent("cell").getType() === target.getComponent("cell").getType()){
+          getDirectionCell(cell,map,cellList);
+        }else {
+          cc.log("不等，跳出");
+        }
+      }
+
+    }
+  };
+  that.getPopCellList = function (target, cellList) {
+    let map = {};
+    getDirectionCell(target.node,map, cellList);
+    let count = 0;
+    for (let i in map){
+      count ++;
+    }
+    cc.log("count = " + JSON.stringify(map));
+
+    if (count > 1){
+      return map;
+    }
+    return {};
   };
 
   return that;
