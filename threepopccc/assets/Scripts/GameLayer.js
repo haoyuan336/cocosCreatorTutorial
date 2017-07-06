@@ -31,7 +31,6 @@ cc.Class({
                 let cell = undefined;
                 this.cellList.push(cell);
                 index ++;
-
             }
         }
     },
@@ -96,7 +95,6 @@ cc.Class({
         for (let i = 0 ;i < this.removeCellList.length ; i ++){
             let cell = this.removeCellList[i];
             global.gameData.addScore(cell.getComponent("cell").getScore());
-
             this.popLayer.removeChild(cell);
             this.removeCellList.splice(i,1);
         }
@@ -177,6 +175,9 @@ cc.Class({
         //这个cell双击了
         // cc.log("双击" + target.node.indexRow + "," + target.node.indexLine);
         let map = global.gameDataController.getPopCellList(target, this.cellList);
+        //            global.gameData.addEnergyCount(cell.getComponent("cell").getEnergy());
+        let energyCount = global.gameDataController.proceGetAllEnergy(map, this.cellList);
+        global.gameData.addEnergyCount(energyCount);
         for (let i in map){
             this.removeCellList.push(this.cellList[parseInt(i)]);
             this.cellList[parseInt(i)] = undefined;

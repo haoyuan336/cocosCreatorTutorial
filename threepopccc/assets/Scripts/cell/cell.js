@@ -20,6 +20,7 @@ cc.Class({
         let self = this;
         this.touchpopTime = 0;
         this.score = 1;
+        this.energy = 1;
         const onTouchStart = function () {
 
             self.touchpopTime += 0.24;
@@ -139,5 +140,8 @@ cc.Class({
     },
     getScore: function () {
         return this.score;
+    },
+    getEnergy: function () {
+        return this.energy;
     }
 });

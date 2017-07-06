@@ -166,6 +166,22 @@ const GameDataController = function() {
     return {};
   };
 
+  that.proceGetAllEnergy = function (map, cellList) {
+    let count = 0;
+    let energyCount = 0;
+    for (let  i in map){
+      let cell = cellList[i];
+      energyCount += cell.getComponent("cell").getEnergy();
+
+      count++
+    }
+    //一共消了几个豆   得到的能力有数量加成
+    energyCount *= count;
+    cc.log("energy count = " + energyCount);
+    return energyCount;
+  };
+  
+
   return that;
 };
 export default GameDataController;
