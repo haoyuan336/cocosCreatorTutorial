@@ -11,6 +11,10 @@ cc.Class({
         NullPosPrefab: {
             type: cc.Prefab,
             default: null
+        },
+        popLayer: {
+            type: cc.Node,
+            default: null
         }
     },
     onLoad: function () {
@@ -21,12 +25,9 @@ cc.Class({
     },
     initGame: function () {
         this.cellList = [];
-        let gameData = global.gameDataController.getGameData();
         let index = 0;
         for (let i = 0 ; i < defines.gameDataHeight ; i ++){
             for (let j = 0 ; j < defines.gameDataWidth; j ++){
-                // let data = gameData[ i * defines.gameDataWidth + j];
-                // let cell = this.createOneCell(i,j,this.CellPrefab,data,index);
                 let cell = undefined;
                 this.cellList.push(cell);
                 index ++;
@@ -39,9 +40,9 @@ cc.Class({
         for (let i = 0 ; i < defines.gameDataHeight ; i ++){
             for (let j = 0 ; j < defines.gameDataWidth ; j ++){
                 let node = cc.instantiate(this.NullPosPrefab);
-                node.parent = this.node;
+                node.parent = this.popLayer;
                 node.position = cc.p((defines.gameDataWidth - 1) * - 0.5 * 100 + 100 * j,
-                                    100 * i  - 400 );
+                                    100 * i  - 800 );
                 this.nullPosList.push(node);
                 // global.gameDataController.nullPosList.push(node);
             }
@@ -82,7 +83,6 @@ cc.Class({
             }
         }
 
-
        for (let i = 0 ; i < defines.gameDataWidth ; i ++){
            let index = (defines.gameDataHeight - 1 ) * defines.gameDataWidth + i;
            let cell = this.cellList[index];
@@ -93,10 +93,11 @@ cc.Class({
            }
        }
 
-
-
         for (let i = 0 ;i < this.removeCellList.length ; i ++){
-            this.node.removeChild(this.removeCellList[i]);
+            let cell = this.removeCellList[i];
+            global.gameData.addScore(cell.getComponent("cell").getScore());
+
+            this.popLayer.removeChild(cell);
             this.removeCellList.splice(i,1);
         }
         // cc.log("remove cell list length = " + this.removeCellList.length);
@@ -184,7 +185,8 @@ cc.Class({
     createOneCell: function (i, j,prefab, data,index) {
         let node = cc.instantiate(prefab);
         // node.nullPos = this.nullPosList[ (defines.gameDataHeight - 1) * defines.gameDataWidth + j];
-        node.parent = this.node;
+        // node.parent = this.node;
+        node.parent = this.popLayer;
         data.index = index;
         node.getComponent('cell').init(data);
         node.indexRow = i;
@@ -192,6 +194,5 @@ cc.Class({
         node.position = cc.p((defines.gameDataWidth - 1) * -0.5 * 100 + j * 100, 600);
         return node;
     }
-
 
 });

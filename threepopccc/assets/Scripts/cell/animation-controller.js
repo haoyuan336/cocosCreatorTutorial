@@ -4,11 +4,7 @@
 const AnimationController = function () {
   let that = {};
   let _animationList = [];
-
-
   that.pushAnimation = function (animation) {
-
-
     _animationList.push(animation)
 
   };

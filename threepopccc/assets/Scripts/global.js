@@ -3,7 +3,9 @@
  */
 import GameDataController from './GameDataController'
 import EventListener from './EventListener'
+import GameData from './data/game-data'
 const global = {};
 global.gameDataController = GameDataController();
 global.eventListener = EventListener({});
+global.gameData = GameData();
 export default global;

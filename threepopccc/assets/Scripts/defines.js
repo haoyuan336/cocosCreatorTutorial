@@ -2,7 +2,7 @@
  * Created by chuhaoyuan on 2017/7/3.
  */
 const defines = {};
-defines.gameDataWidth = 7;
+defines.gameDataWidth = 8;
 defines.gameDataHeight = 9;
 defines.cellType = {
   "boom1": 0,

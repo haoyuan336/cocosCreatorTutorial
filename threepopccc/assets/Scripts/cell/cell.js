@@ -19,6 +19,7 @@ cc.Class({
         let isTouch = false;
         let self = this;
         this.touchpopTime = 0;
+        this.score = 1;
         const onTouchStart = function () {
 
             self.touchpopTime += 0.24;
@@ -26,14 +27,6 @@ cc.Class({
 
             self.oldPos = self.node.position;
             self.currentDirection = undefined;
-            // if (nowTimeList.length >= 2){
-            //     if (nowTimeList[1] - nowTimeList[0] < 300){
-            //         cc.log("双击");
-            //     }
-            //     nowTimeList = [];
-            // }
-
-
             if (global.gameDataController.getIsCanInput()){
                 isTouch = true;
             }
@@ -41,7 +34,7 @@ cc.Class({
         };
         const onTouchMove = function (event) {
             if (isTouch){
-                let targetPos = self.node.parent.convertTouchToNodeSpace(event);
+                let targetPos = self.node.parent.parent.convertTouchToNodeSpace(event);
                 self.processDirection(targetPos);
             }
         };
@@ -71,7 +64,7 @@ cc.Class({
         // cc.log("this.currentDirection =  " + this.currentDirection);
 
         if (this.currentDirection !== undefined){
-            this.node.parent.getComponent("GameLayer").cellScrollDirection(this);
+            this.node.parent.parent.getComponent("GameLayer").cellScrollDirection(this);
         }
         //通知parent的脚本  ，我滑动了方向
     }
@@ -97,10 +90,8 @@ cc.Class({
         if (this.touchpopTime > 0.24){
             cc.log("双击");
             this.touchpopTime = 0;
-            this.node.parent.getComponent("GameLayer").doubleClick(this);
-
+            this.node.parent.parent.getComponent("GameLayer").doubleClick(this);
         }
-
         if (this.isMoving){
 
         }else {
@@ -119,8 +110,6 @@ cc.Class({
                 },this);
                 let dis = cc.pDistance(this.node.position, actionData.position);
                 let timeDuraction = dis / defines.cellSpeed;
-
-
                 let action = cc.sequence(cc.moveTo(timeDuraction, actionData.position.x,actionData.position.y),callBack);
                 this.node.runAction(action)
             }
@@ -147,5 +136,8 @@ cc.Class({
     },
     getIndex: function () {
         return this.index;
+    },
+    getScore: function () {
+        return this.score;
     }
 });
