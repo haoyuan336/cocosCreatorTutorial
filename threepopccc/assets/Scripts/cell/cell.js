@@ -111,7 +111,7 @@ cc.Class({
                 },this);
                 let dis = cc.pDistance(this.node.position, actionData.position);
                 let timeDuraction = dis / defines.cellSpeed;
-                let action = cc.sequence(cc.moveTo(timeDuraction, actionData.position.x,actionData.position.y),callBack);
+                let action = cc.sequence(cc.moveTo(timeDuraction, actionData.position.x,actionData.position.y).easing(cc.easeIn(1.6)),callBack);
                 this.node.runAction(action)
             }
         }

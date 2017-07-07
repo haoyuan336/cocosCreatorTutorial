@@ -42,6 +42,7 @@ cc.Class({
                 node.parent = this.popLayer;
                 node.position = cc.p((defines.gameDataWidth - 1) * - 0.5 * 100 + 100 * j,
                                     100 * i  - 800 );
+                node.active = false;
                 this.nullPosList.push(node);
                 // global.gameDataController.nullPosList.push(node);
             }
@@ -176,8 +177,9 @@ cc.Class({
         // cc.log("双击" + target.node.indexRow + "," + target.node.indexLine);
         let map = global.gameDataController.getPopCellList(target, this.cellList);
         //            global.gameData.addEnergyCount(cell.getComponent("cell").getEnergy());
-        let energyCount = global.gameDataController.proceGetAllEnergy(map, this.cellList);
-        global.gameData.addEnergyCount(energyCount);
+        let data = global.gameDataController.proceGetAllEnergy(map, this.cellList);
+        global.eventListener.fire("add_combo_effect",data.rateIndex);
+        global.eventListener.fire("add_energy",data.energyCount);//增加能量
         for (let i in map){
             this.removeCellList.push(this.cellList[parseInt(i)]);
             this.cellList[parseInt(i)] = undefined;
@@ -193,6 +195,7 @@ cc.Class({
         node.indexRow = i;
         node.indexLine = j;
         node.position = cc.p((defines.gameDataWidth - 1) * -0.5 * 100 + j * 100, 600);
+
         return node;
     }
 

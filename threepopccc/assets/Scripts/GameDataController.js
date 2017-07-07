@@ -166,6 +166,17 @@ const GameDataController = function() {
     return {};
   };
 
+  const getCurrentRateIndex = function (count) {
+    let rate = defines.energyComboRateList.length;
+    for (let i = 0 ; i <= defines.energyComboRateList.length ; i ++){
+      if (count < defines.energyComboRateList[i]){
+        rate = i;
+        return rate;
+      }
+    };
+    return rate;
+  };
+  that.getCurrentRateIndex = getCurrentRateIndex;
   that.proceGetAllEnergy = function (map, cellList) {
     let count = 0;
     let energyCount = 0;
@@ -175,11 +186,19 @@ const GameDataController = function() {
 
       count++
     }
-    //一共消了几个豆   得到的能力有数量加成
-    // count *= Math.floor(count / );
-    energyCount *= count;
-    cc.log("energy count = " + energyCount);
-    return energyCount;
+
+    let rateIndex = getCurrentRateIndex(count);
+    energyCount *= rateIndex;
+    cc.log("count = " + count + "rate index = " + rateIndex + "energy count = " + energyCount);
+
+    return {
+      energyCount: energyCount,
+      rateIndex: count   //直接将消除的数目返回
+    };
+  };
+
+  that.getRandomObjInList = function (list) {
+    return list[Math.floor(Math.random() * (list.length - 1))];
   };
 
   return that;

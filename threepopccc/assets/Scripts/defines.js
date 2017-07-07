@@ -15,4 +15,19 @@ defines.cellType = {
 
 };
 defines.cellSpeed = 1000;
+defines.energyComboRateList = [0,1,4,7,9,12];
+defines.SkillList = ["fireAttack","tornadoAttack","iceAttack", "thunderAttack","heartCure","speedState"];
+defines.SkillMap = {
+  "fireAttack": 0,
+  "tornadoAttack": 1,
+  "iceAttack": 2,
+  "thunderAttack": 3,
+  "heartCure": 4,
+  "speedState": 5
+};
+defines.localStorageKeyMap = {
+  "EnerySkill": "enery_skill" //激活的技能豆
+};
+defines.userKey = "userkey";
+
 export default defines

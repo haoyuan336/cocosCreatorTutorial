@@ -1,0 +1,10 @@
+{
+  "name": "three_pop",
+  "version": "0.0.1",
+  "dependencies": {
+    "encrypt": "2.0.0"
+  },
+  "devDependencies": {
+    "encryptjs": "^2.0.0"
+  }
+}
