@@ -57,8 +57,9 @@ cc.Class({
           //加满了,这时候给玩家加一个豆，
           // let bomnSkill = global.gameDataController.getOneEnergyBomb();
           //在这里初始化一个技能豆,并且gameui进行管理
-          let bombSkill = global.gameDataController.getRandomObjInList(global.gameData.skillList);
-          cc.log("bomb skill" + bombSkill);
+          // let bombSkill = global.gameDataController.getRandomObjInList(global.gameData.skillList);
+          // cc.log("bomb skill" + bombSkill);
+          global.eventListener.fire("add_one_skill_node");
 
         });
         self.energyProgressBar.progress = global.gameData.getEnergyProgress();
