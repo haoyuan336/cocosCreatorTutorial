@@ -87,8 +87,7 @@ cc.Class({
            let index = (defines.gameDataHeight - 1 ) * defines.gameDataWidth + i;
            let cell = this.cellList[index];
            if (cell === undefined){
-               let data = global.gameDataController.getOneCellData();
-               let node = this.createOneCell(defines.gameDataHeight - 1 , i ,this.CellPrefab,data,index);
+               let node = this.createOneCell(defines.gameDataHeight - 1 , i ,index);
                this.cellList[index] = node;
            }
        }
@@ -185,8 +184,10 @@ cc.Class({
             this.cellList[parseInt(i)] = undefined;
         }
     },
-    createOneCell: function (i, j,prefab, data,index) {
-        let node = cc.instantiate(prefab);
+    createOneCell: function (i, j,index) {
+        let data = global.gameDataController.getOneCellData();
+
+        let node = cc.instantiate(this.CellPrefab);
         // node.nullPos = this.nullPosList[ (defines.gameDataHeight - 1) * defines.gameDataWidth + j];
         // node.parent = this.node;
         node.parent = this.popLayer;

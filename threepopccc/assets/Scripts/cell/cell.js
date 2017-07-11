@@ -78,8 +78,31 @@ cc.Class({
         let index = defines.cellType[type];
         this.indexWidth = data.indexWidth;
         this.indexHeight = data.indexHeight;
-        this.node.getComponent(cc.Sprite).spriteFrame = this.Textures[index];
-        this.label.string = data.index;
+        // this.node.getComponent(cc.Sprite).spriteFrame = ;
+        // let spriteF = this.SpriteFrame.clone();
+        let node = new cc.Node("sprite");
+        node.addComponent(cc.Sprite).spriteFrame = this.Textures[index];
+        node.parent = this.node;
+        node.scale = {
+            x: 1.4,
+            y: 1.4
+        };
+        // cc.log("index ==== " + index);
+        // this.node.getComponent(cc.Sprite).spriteFrame.setRect(cc.rect(20 * index,0,21,21));
+        // this.node.scale = {x: 6,y: 6};
+        //
+        // // this.label.string = data.index;
+        // let self = this;
+        // cc.loader.loadRes("mash_room1.png",cc.SpriteFrame,function (err, spriteFrame) {
+        //     cc.log("loader  err+" + JSON.stringify(err));
+        //     cc.log("index sprite =" + index);
+        //     var node = new cc.Node("sprite");
+        //     spriteFrame.setRect(cc.rect(20 * index,0,21,21));
+        //     node.addComponent(cc.Sprite).spriteFrame = spriteFrame;
+        //     node.parent = self.node;
+        //     node.scale = {x: 5,y: 5};
+        // });
+
         this.index = data.index;
 
     },

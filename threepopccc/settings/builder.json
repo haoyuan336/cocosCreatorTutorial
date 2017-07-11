@@ -1,0 +1,24 @@
+{
+  "appKey": "",
+  "appSecret": "",
+  "excludeScenes": [],
+  "includeAnySDK": false,
+  "includeSdk": [
+    "anysdk"
+  ],
+  "inlineSpriteFrames": true,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "orientation": {
+    "landscapeLeft": false,
+    "landscapeRight": false,
+    "portrait": true,
+    "upsideDown": true
+  },
+  "packageName": "org.cocos2d.threepopccc",
+  "privateKey": "",
+  "renderMode": "0",
+  "startScene": "ad837193-91de-4297-a8ae-6faf71f5bf95",
+  "title": "threepopccc",
+  "webOrientation": "auto"
+}
