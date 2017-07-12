@@ -23,12 +23,12 @@ cc.Class({
         this.energy = 1;
         const onTouchStart = function () {
 
-            self.touchpopTime += 0.24;
 
 
             self.oldPos = self.node.position;
             self.currentDirection = undefined;
             if (global.gameDataController.getIsCanInput()){
+                self.touchpopTime += 0.24;
                 isTouch = true;
             }
 
@@ -87,22 +87,6 @@ cc.Class({
             x: 1.4,
             y: 1.4
         };
-        // cc.log("index ==== " + index);
-        // this.node.getComponent(cc.Sprite).spriteFrame.setRect(cc.rect(20 * index,0,21,21));
-        // this.node.scale = {x: 6,y: 6};
-        //
-        // // this.label.string = data.index;
-        // let self = this;
-        // cc.loader.loadRes("mash_room1.png",cc.SpriteFrame,function (err, spriteFrame) {
-        //     cc.log("loader  err+" + JSON.stringify(err));
-        //     cc.log("index sprite =" + index);
-        //     var node = new cc.Node("sprite");
-        //     spriteFrame.setRect(cc.rect(20 * index,0,21,21));
-        //     node.addComponent(cc.Sprite).spriteFrame = spriteFrame;
-        //     node.parent = self.node;
-        //     node.scale = {x: 5,y: 5};
-        // });
-
         this.index = data.index;
 
     },
@@ -166,5 +150,14 @@ cc.Class({
     },
     getEnergy: function () {
         return this.energy;
+    },
+    onDestroy: function () {
+      //被删除
+      //   if (this.isMoving === true){
+      //       cc.log("被删除是，还在运动");
+      //       global.gameDataController.removeOneAction();
+      //       ///被删除的时候删除是如果还在运动中，就删掉一个
+        //暂时用不到
+      //   }
     }
 });

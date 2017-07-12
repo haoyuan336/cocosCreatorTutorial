@@ -90,13 +90,48 @@ cc.Class({
 
     referSkillListUI: function () {
         cc.log('刷新技能都的位置');
+        for (let i = 0 ; i < this.skillList.length ; i ++){
+            let scale = {};
+            let pos = {};
+            if (i === 0 ){
+               scale= {
+                   x: 1.4,
+                   y: 1.4
+               };
+               pos = {
+                   x: 0,
+                   y: 0
+               }
+            }else {
+                scale = {
+                    x: 1,
+                    y: 1
+                };
+                pos = {
+                    x: -20 - 70 * i,
+                    y: -10
+                }
+            }
+            let skillNode = this.skillList[i];
+            skillNode.runAction(cc.scaleTo(0.1,scale.x, scale.y));
+            skillNode.runAction(cc.moveTo(0.1, pos.x, pos.y));
+
+        }
+
+
+
     },
     popOneSkill: function (target) {
 
         this.skillList.splice(0,1);
-        target.destroy();
-        this.referSkillListUI();
-
+        let action = cc.scaleTo(0.1,2,2);
+        let callBack = ()=>{
+            cc.log("结束");
+            target.destroy();
+            this.referSkillListUI();
+        };
+        let seq = cc.sequence(action,cc.callFunc(callBack));
+        target.runAction(seq);
 
         // if (this.skillList.length === 0 ){
         //
