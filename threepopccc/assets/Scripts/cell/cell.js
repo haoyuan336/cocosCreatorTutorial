@@ -98,7 +98,7 @@ cc.Class({
         if (this.touchpopTime > 0.24){
             cc.log("双击");
             this.touchpopTime = 0;
-            this.node.parent.parent.getComponent("GameLayer").doubleClick(this);
+            this.node.parent.parent.parent.getComponent("GameLayer").doubleClick(this);
         }
         if (this.isMoving){
 

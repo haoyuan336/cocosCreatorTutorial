@@ -11,10 +11,6 @@ cc.Class({
             type: cc.Prefab,
             default: null
         },
-        bgUpLayer: {
-            type: cc.Node,
-            default: null
-        },
         starBgLayer: {
             type: cc.Node,
             default: null
