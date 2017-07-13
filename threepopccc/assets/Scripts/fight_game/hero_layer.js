@@ -3,37 +3,65 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        bg_node: {
+            type: cc.Node,
+            default: null
+        },
         heroNode: {
             type: cc.Node,
             default: null
         },
-        StartPrefab: {
+        recirclePrefab: {
             type: cc.Prefab,
             default: null
-        },
-        starBgLayer: {
-            type: cc.Node,
-            default: null
-        },
-        bgUpPrefab: {
-            type: cc.Prefab,
-            default: null
-        }
+        }//循环背景
     },
 
     // use this for initialization
     onLoad: function () {
         // this.zIndex = -100;
-        this.addStartDuraction = 0;
+        // this.addStartDuraction = 0;
         // this.bgList = [];
+        ///刚初始化进来，需要加载一些背景
+
+
+        cc.loader.loadRes("shan.png",cc.SpriteFrame, (err, spriteFrame) => {
+
+            let node = cc.instantiate(this.recirclePrefab);
+            node.parent = this.bg_node;
+            // node.getComponent("recircle_bg").init([spriteFrame],1,0,0);
+            node.getComponent("recircle_bg").init({
+                spriteFrames: [spriteFrame],
+                speed: 1,
+                minY: -300,
+                maxY: -300,
+                minX: 0,
+                maxX: 0
+            })
+        });
+
+
+        cc.loader.loadRes("yun10.png",cc.SpriteFrame, (err, spriteFrame) => {
+
+            let node = cc.instantiate(this.recirclePrefab);
+            node.parent = this.bg_node;
+            node.getComponent("recircle_bg").init({
+                spriteFrames: [spriteFrame],
+                speed: 1,
+                minY: 0,
+                maxY: 300,
+                minX: 100,
+                maxX: 300
+            })
+        });
     },
 
     addStart: function () {
-        let data = global.gameDataController.getOneCellData();
-        let start = cc.instantiate(this.StartPrefab);
-        data.index = 0;
-        start.getComponent("cell").init(data);
-        start.parent = this.node;
+        // let data = global.gameDataController.getOneCellData();
+        // let start = cc.instantiate(this.StartPrefab);
+        // data.index = 0;
+        // start.getComponent("cell").init(data);
+        // start.parent = this.node;
         // start.position = cc.p(this.camera.position.x + 100,0);
     },
     update: function (dt) {
@@ -68,7 +96,7 @@ cc.Class({
         //     }
         // }
 
-        this.starBgLayer.position = cc.p(this.starBgLayer.position.x - 1, this.starBgLayer.position.y);
+        // this.starBgLayer.position = cc.p(this.starBgLayer.position.x - 1, this.starBgLayer.position.y);
 
 
     },

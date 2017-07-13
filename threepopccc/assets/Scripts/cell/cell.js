@@ -35,7 +35,8 @@ cc.Class({
         };
         const onTouchMove = function (event) {
             if (isTouch){
-                let targetPos = self.node.parent.parent.convertTouchToNodeSpace(event);
+                // let targetPos = self.node.parent.parent.convertTouchToNodeSpace(event);
+                let targetPos = self.parentJS.node.convertTouchToNodeSpace(event);
                 self.processDirection(targetPos);
             }
         };
@@ -65,16 +66,19 @@ cc.Class({
         // cc.log("this.currentDirection =  " + this.currentDirection);
 
         if (this.currentDirection !== undefined){
-            this.node.parent.parent.getComponent("GameLayer").cellScrollDirection(this);
+            // this.node.parent.parent.getComponent("GameLayer").cellScrollDirection(this);
+            this.parentJS.cellScrollDirection(this);
         }
         //通知parent的脚本  ，我滑动了方向
     }
     ,
     init: function (data) {
-        cc.log("init cell " + JSON.stringify(data));
+        // cc.log("init cell " + JSON.stringify(data));
         let type = data.type;
         this.isMoving = false;
         this.type = data.type;
+        this.parentJS = data.parentJS;
+        // cc.log("parentJS = " + JSON.stringify(this.parentJS));
         let index = defines.cellType[type];
         this.indexWidth = data.indexWidth;
         this.indexHeight = data.indexHeight;
@@ -98,7 +102,10 @@ cc.Class({
         if (this.touchpopTime > 0.24){
             cc.log("双击");
             this.touchpopTime = 0;
-            this.node.parent.parent.parent.getComponent("GameLayer").doubleClick(this);
+            // this.node.parent.parent.parent.getComponent("GameLayer").doubleClick(this);
+            // this.parentJS.cellScrollDirection(this);
+            this.parentJS.doubleClick(this);
+
         }
         if (this.isMoving){
 

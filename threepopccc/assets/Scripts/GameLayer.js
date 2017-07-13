@@ -172,6 +172,7 @@ cc.Class({
         });
     },
     doubleClick: function (target) {
+        cc.log("双击了");
         //这个cell双击了
         // cc.log("双击" + target.node.indexRow + "," + target.node.indexLine);
         let map = global.gameDataController.getPopCellList(target, this.cellList);
@@ -192,6 +193,7 @@ cc.Class({
         // node.parent = this.node;
         node.parent = this.popLayer;
         data.index = index;
+        data.parentJS = this;
         node.getComponent('cell').init(data);
         node.indexRow = i;
         node.indexLine = j;
