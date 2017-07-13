@@ -12,8 +12,8 @@ cc.Class({
         this.speed = 0;
         this.distance = 0;//间隔
         this.bgList = [];//背景 的列表
-        this.randomY = 0
 
+        this.scale = 1;
     },
     init: function (spec) {
       //需要两个参数,需要滚动的
@@ -24,6 +24,11 @@ cc.Class({
         this.maxY = spec.maxY;
         this.minX = spec.minX;
         this.maxX = spec.maxX;
+
+        if (spec.scale){
+            this.scale = spec.scale;
+        }
+
        // this.node.addComponent(cc.Sprite).spriteFrame = resList[0];
 
 
@@ -43,6 +48,10 @@ cc.Class({
             let node = new cc.Node("bg");
             node.parent = this.node;
             node.addComponent(cc.Sprite).spriteFrame = global.gameDataController.getRandomObjInList(this.bgTextureList);
+            node.scale = {
+                x: this.scale,
+                y: this.scale
+            }
             node.position = {
                 x: (()=>{
                     if (this.bgList.length === 0){
@@ -70,7 +79,7 @@ cc.Class({
             let width = cc.Canvas.instance.designResolution.width;
             // console.log('width = '+ width);
 
-            if (node.position.x + node.width * 0.5 < width * - 0.5){
+            if (node.position.x + node.width < width * - 0.5){
 
                 console.log("删掉");
 
