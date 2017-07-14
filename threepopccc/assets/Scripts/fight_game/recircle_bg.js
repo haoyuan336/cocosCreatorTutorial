@@ -38,28 +38,30 @@ cc.Class({
         let maxX = -10000;
         for (let i in this.bgList){
             let bg = this.bgList[i];
-            if (bg.position.x > maxX){
+            if (bg.position.x + bg.width * 0.5 > maxX){
                 maxX = bg.position.x + bg.width * 0.5
             }
         }
 
 
-        if (this.bgTextureList.length !== 0 && maxX < cc.Canvas.instance.designResolution.width * 0.5) {
+        if (this.bgTextureList.length !== 0 && maxX < cc.Canvas.instance.designResolution.width) {
             let node = new cc.Node("bg");
             node.parent = this.node;
             node.addComponent(cc.Sprite).spriteFrame = global.gameDataController.getRandomObjInList(this.bgTextureList);
             node.scale = {
                 x: this.scale,
                 y: this.scale
-            }
+            };
             node.position = {
                 x: (()=>{
                     if (this.bgList.length === 0){
 
-                        return -200
+                        return 0
 
                     }else {
 
+
+                        cc.log("node width = " + node.width);
                         //最后找到了最后的那个点的位置了
                         return maxX + Math.random() * (this.maxX - this.minX) + this.minX + node.width * 0.5;
                     }

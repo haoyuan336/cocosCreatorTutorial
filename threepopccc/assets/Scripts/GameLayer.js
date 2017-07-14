@@ -197,7 +197,7 @@ cc.Class({
         node.getComponent('cell').init(data);
         node.indexRow = i;
         node.indexLine = j;
-        node.position = cc.p((defines.gameDataWidth - 1) * -0.5 * 100 + j * 100, 600);
+        node.position = cc.p((defines.gameDataWidth - 1) * -0.5 * 100 + j * 100, 400);
 
         return node;
     }

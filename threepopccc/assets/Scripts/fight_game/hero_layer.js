@@ -36,15 +36,15 @@ cc.Class({
         // });
 
 
-        cc.loader.loadRes("yun10.png",cc.SpriteFrame, (err, spriteFrame) => {
+        cc.loader.loadResArray(["yun3.png","yun4.png"],cc.SpriteFrame, (err, spriteFrames) => {
 
             let node = cc.instantiate(this.recirclePrefab);
             node.parent = this.bg_node;
             node.getComponent("recircle_bg").init({
-                spriteFrames: [spriteFrame],
+                spriteFrames: spriteFrames,
                 speed: 0.5,
-                minY: 0,
-                maxY: 300,
+                minY: -200,
+                maxY: 200,
                 minX: 100,
                 maxX: 300
             })
@@ -56,11 +56,33 @@ cc.Class({
             node.parent = this.bg_node;
             node.getComponent("recircle_bg").init({
                 spriteFrames: [spriteFrame],
-                speed: 2,
-                minY: -300,
-                maxY: -300,
+                speed: 1.5,
+                minY: -290,
+                maxY: -290,
                 minX: 300,
                 maxX: 500,
+                scale: 2
+            });
+            // node.scale = {
+            //     x: 2,
+            //     y: 2
+            // };
+        });
+
+
+
+
+        cc.loader.loadRes("earth_0.png",cc.SpriteFrame, (err, spriteFrame) => {
+
+            let node = cc.instantiate(this.recirclePrefab);
+            node.parent = this.bg_node;
+            node.getComponent("recircle_bg").init({
+                spriteFrames: [spriteFrame],
+                speed: 2,
+                minY: -410,
+                maxY: -410,
+                minX: 0,
+                maxX: 0,
                 scale: 2
             });
             // node.scale = {
