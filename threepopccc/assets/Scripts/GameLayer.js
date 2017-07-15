@@ -15,6 +15,10 @@ cc.Class({
         popLayer: {
             type: cc.Node,
             default: null
+        },
+        diamondAnimation: {
+            type: cc.Prefab,
+            default: null
         }
     },
     onLoad: function () {
@@ -22,6 +26,22 @@ cc.Class({
         this.initGame();
         this.indexHeight = 0;
         this.removeCellList = [];
+        global.eventListener.on("play_suilie_animation", (data)=> {
+            cc.log("remove a diamond" + JSON.stringify(data));
+
+            let animate = cc.instantiate(this.diamondAnimation);
+            animate.parent = this.popLayer;
+            animate.position = data;
+            animate.getComponent(cc.Animation).on("finished",()=>{
+                cc.log("播放完成");
+                this.popLayer.removeChild(animate);
+                animate.destroy();
+            });
+            // animate.on("finished",(event)=>{
+            //     cc.log("播放结束");
+            // });
+        });
+
     },
     initGame: function () {
         this.cellList = [];
@@ -96,6 +116,10 @@ cc.Class({
             let cell = this.removeCellList[i];
             global.gameData.addScore(cell.getComponent("cell").getScore());
             this.popLayer.removeChild(cell);
+            cell.destroy();
+
+            // cell.getComponent("cell").removeFromWorld();
+
             this.removeCellList.splice(i,1);
         }
         // cc.log("remove cell list length = " + this.removeCellList.length);

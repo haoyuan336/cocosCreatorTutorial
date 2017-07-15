@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "7abde122-ff59-44c6-9b84-7cd4ce3e0713",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "suilieanimation_1": {
+      "ver": "1.0.3",
+      "uuid": "6a14e9fc-a0a1-4bb5-b2f4-d3fb01af5a94",
+      "rawTextureUuid": "7abde122-ff59-44c6-9b84-7cd4ce3e0713",
+      "trimType": "custom",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -2.5,
+      "offsetY": 20,
+      "trimX": 20,
+      "trimY": 0,
+      "width": 155,
+      "height": 240,
+      "rawWidth": 200,
+      "rawHeight": 280,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -87,10 +87,10 @@ cc.Class({
         let node = new cc.Node("sprite");
         node.addComponent(cc.Sprite).spriteFrame = this.Textures[index];
         node.parent = this.node;
-        node.scale = {
-            x: 1.4,
-            y: 1.4
-        };
+        // node.scale = {
+        //     x: 1.2,
+        //     y: 1.2
+        // };
         this.index = data.index;
 
     },
@@ -166,5 +166,14 @@ cc.Class({
       //       ///被删除的时候删除是如果还在运动中，就删掉一个
         //暂时用不到
       //   }
-    }
+
+        cc.log("destroy");
+
+        global.eventListener.fire("play_suilie_animation",this.node.position);
+    },
+    // removeFromWorld: function () {
+    //     //从父类里面删掉自己  播放移除动画
+    //
+    //
+    // }
 });

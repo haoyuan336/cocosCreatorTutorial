@@ -45,8 +45,8 @@ cc.Class({
 
         if (this.skillList.length === 0){
             scale = {
-                x: 1.4,
-                y: 1.4
+                x: 1.2,
+                y: 1.2
             }
         }else {
             scale = {
@@ -54,7 +54,7 @@ cc.Class({
                 y: 1
             };
             skillNode.position = {
-                x: -20 - 70 * this.skillList.length,
+                x: -40 - 100 * this.skillList.length,
                 y: -10
             }
 
@@ -95,8 +95,8 @@ cc.Class({
             let pos = {};
             if (i === 0 ){
                scale= {
-                   x: 1.4,
-                   y: 1.4
+                   x: 1.2,
+                   y: 1.2
                };
                pos = {
                    x: 0,
@@ -108,7 +108,7 @@ cc.Class({
                     y: 1
                 };
                 pos = {
-                    x: -20 - 70 * i,
+                    x: -40 - 100 * i,
                     y: -10
                 }
             }

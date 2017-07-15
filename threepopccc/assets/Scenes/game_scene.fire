@@ -1328,6 +1328,9 @@
     },
     "popLayer": {
       "__id__": 15
+    },
+    "diamondAnimation": {
+      "__uuid__": "f7af10d4-30a8-40ca-90b0-242450727b12"
     }
   },
   {
@@ -2228,22 +2231,25 @@
     "_enabled": true,
     "skinSpriteFrame": [
       {
-        "__uuid__": "499dd224-62e3-4966-8f22-02c60b8c78ed"
+        "__uuid__": "c5dee423-1be3-4184-8289-f80326bbd118"
       },
       {
-        "__uuid__": "b24676f4-d3c4-43d7-998c-a04bad2e280e"
+        "__uuid__": "0445c568-437a-40db-aa11-b4937d51f854"
       },
       {
-        "__uuid__": "ea873931-4ef3-4bcb-9cc3-aeb748b29686"
+        "__uuid__": "8e9b199d-5232-451c-8033-776e1bdcf93b"
       },
       {
-        "__uuid__": "9b0c9e34-a6d2-4207-a615-4ba3c091a868"
+        "__uuid__": "ec225e6b-fd61-40ba-beaa-2b61a4fc15de"
       },
       {
-        "__uuid__": "1ae5bf38-0536-4121-81e2-3952b927b86e"
+        "__uuid__": "3b13aaf0-14af-4030-bcbc-3dd04e939d9a"
       },
       {
-        "__uuid__": "bea891f8-2b42-44b1-8c15-99cdb86e8915"
+        "__uuid__": "5952fbf2-55ca-4b4d-b665-cd5bb916874f"
+      },
+      {
+        "__uuid__": "6e56245a-5c63-4502-9597-bb195f2418ff"
       }
     ]
   },
@@ -2266,10 +2272,10 @@
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 3
+      "__id__": 69
     },
     "asset": {
-      "__uuid__": "b0b21b49-7f8b-4de9-855c-8acb853479e2"
+      "__uuid__": "0f265480-ea21-4822-999b-0d8f0d7e1b1b"
     },
     "fileId": "195f6L/PyxLMqzhcjCTLCOf",
     "sync": false
