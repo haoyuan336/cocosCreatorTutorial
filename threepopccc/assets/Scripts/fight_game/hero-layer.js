@@ -32,6 +32,7 @@ cc.Class({
                 minX: 100,
                 maxX: 300
             })
+            cc.director.getCollisionManager().enabled = true;
         });
 
         cc.loader.loadRes("bg_12.png",cc.SpriteFrame, (err, spriteFrame) => {

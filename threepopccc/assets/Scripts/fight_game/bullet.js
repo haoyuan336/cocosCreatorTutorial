@@ -24,6 +24,12 @@ cc.Class({
         let randomAngle =Math.PI  + ( 0 -  Math.random() * Math.PI * 0.1) * -1 ;
         this.moveSpeed = cc.pRotateByAngle(cc.p(0,0), this.moveSpeed, randomAngle);
         this.moveSpeed = cc.pMult(this.moveSpeed,8);
+        //
+        // let manager = cc.director.getCollisionManager();
+        // manager.enabled = true;
+        // manager.enabledDebugDraw = true;
+        // manager.enabledDrawBoundingBox = true;
+        //
 
 
     },
@@ -42,5 +48,11 @@ cc.Class({
         }
     },
     onDestroy: function () {
+    },
+    onCollisionEnter: function (other, self) {
+        cc.log("碰撞了");
+        // other.removeFromParent(true);
+        // self.removeFromParent(true);
+        this.node.destroy();
     }
 });

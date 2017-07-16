@@ -10,7 +10,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.shootSpeed = 0.5;
+        this.shootSpeed = 0.1;
         this.shootNowTime = 0;
     },
     update: function (dt) {
@@ -27,7 +27,7 @@ cc.Class({
         let bullet = cc.instantiate(this.bulletPrefab);
         bullet.parent = this.node.parent;
         bullet.position = {
-            x: this.node.position.x + 50,
+            x: this.node.position.x + 100,
             y: this.node.position.y
         };
     }
