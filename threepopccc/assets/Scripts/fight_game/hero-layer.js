@@ -20,27 +20,11 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
 
-        // cc.loader.loadRes("shan.png",cc.SpriteFrame, (err, spriteFrame) => {
-        //
-        //     let node = cc.instantiate(this.recirclePrefab);
-        //     node.parent = this.bg_node;
-        //     // node.getComponent("recircle_bg").init([spriteFrame],1,0,0);
-        //     node.getComponent("recircle_bg").init({
-        //         spriteFrames: [spriteFrame],
-        //         speed: 1,
-        //         minY: -300,
-        //         maxY: -300,
-        //         minX: 0,
-        //         maxX: 0
-        //     })
-        // });
-
-
         cc.loader.loadResArray(["yun3.png","yun4.png"],cc.SpriteFrame, (err, spriteFrames) => {
 
             let node = cc.instantiate(this.recirclePrefab);
             node.parent = this.bg_node;
-            node.getComponent("recircle_bg").init({
+            node.getComponent("recircle-bg").init({
                 spriteFrames: spriteFrames,
                 speed: 0.5,
                 minY: -200,
@@ -54,7 +38,7 @@ cc.Class({
 
             let node = cc.instantiate(this.recirclePrefab);
             node.parent = this.bg_node;
-            node.getComponent("recircle_bg").init({
+            node.getComponent("recircle-bg").init({
                 spriteFrames: [spriteFrame],
                 speed: 1.5,
                 minY: -290,
@@ -63,20 +47,13 @@ cc.Class({
                 maxX: 500,
                 scale: 2
             });
-            // node.scale = {
-            //     x: 2,
-            //     y: 2
-            // };
         });
-
-
-
 
         cc.loader.loadRes("earth_0.png",cc.SpriteFrame, (err, spriteFrame) => {
 
             let node = cc.instantiate(this.recirclePrefab);
             node.parent = this.bg_node;
-            node.getComponent("recircle_bg").init({
+            node.getComponent("recircle-bg").init({
                 spriteFrames: [spriteFrame],
                 speed: 2,
                 minY: -410,
