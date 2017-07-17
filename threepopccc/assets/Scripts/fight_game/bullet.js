@@ -31,6 +31,7 @@ cc.Class({
         // manager.enabledDrawBoundingBox = true;
         //
 
+        this.damage = 1;
 
     },
 
@@ -40,7 +41,7 @@ cc.Class({
             x: this.node.position.x + this.moveSpeed.x,
             y: this.node.position.y + this.moveSpeed.y
         };
-        if (this.node.position.x > cc.Canvas.instance.designResolution.width){
+        if (this.node.position.x > cc.Canvas.instance.designResolution.width * 0.5 - 200){
             this.node.destroy();
         }
         if (this.node.position.y > cc.Canvas.instance.designResolution.height){
@@ -50,9 +51,13 @@ cc.Class({
     onDestroy: function () {
     },
     onCollisionEnter: function (other, self) {
-        cc.log("碰撞了");
+        // cc.log("碰撞了");
         // other.removeFromParent(true);
         // self.removeFromParent(true);
+        this.node.removeFromParent(true);
         this.node.destroy();
+    },
+    getDamage: function () {
+        return this.damage;
     }
 });
