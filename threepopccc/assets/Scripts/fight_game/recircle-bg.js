@@ -12,8 +12,13 @@ cc.Class({
         this.speed = 0;
         this.distance = 0;//间隔
         this.bgList = [];//背景 的列表
-
         this.scale = 1;
+
+        global.eventListener.on("enter_game_level_2",()=>{
+           cc.log("recircle bg 游戏进入第二阶段，背景停止滚动");
+        });
+
+
     },
     init: function (spec) {
       //需要两个参数,需要滚动的

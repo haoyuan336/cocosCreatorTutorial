@@ -31,6 +31,4 @@ cc.Class({
             y: this.node.position.y
         };
     }
-
-
 });

@@ -17,6 +17,9 @@ defines.cellType = {
 defines.cellSpeed = 1000;
 defines.energyComboRateList = [0,1,4,7,9,12];
 defines.SkillList = ["fireAttack","tornadoAttack","iceAttack", "thunderAttack","heartCure","speedState"];
+defines.monsterType = {
+  "monster_0": "monster_0"
+},
 defines.SkillMap = {
   "fireAttack": 0,
   "tornadoAttack": 1,

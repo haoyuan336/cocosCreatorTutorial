@@ -24,6 +24,13 @@ cc.Class({
         this.setState(MonsterState.Live);
 
     },
+    init: function (data) {
+        cc.log("初始化敌人用数据 " + JSON.stringify(data));
+        this.moveSpeed = data.monster_move_speed;
+        this.healthCount = data.monster_health;
+        this.healthCountTotral = data.monster_health;
+
+    },
 
     update: function (dt) {
         this.node.position = cc.p(this.node.position.x - this.moveSpeed , this.node.position.y);
