@@ -23,7 +23,7 @@ cc.Class({
     },
     shootBullet: function () {
         //发射一枚子弹
-        cc.log("shoow");
+        // cc.log("shoow");
         let bullet = cc.instantiate(this.bulletPrefab);
         bullet.parent = this.node.parent;
         bullet.position = {
