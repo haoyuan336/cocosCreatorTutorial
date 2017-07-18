@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="80" tileheight="80" nextobjectid="1">
+ <tileset firstgid="1" source="moashroom.tsx"/>
+ <group name="组 1">
+  <layer name="块层 1" width="10" height="10">
+   <data encoding="csv">
+0,1,0,1,1,1,1,1,1,0,
+0,1,0,0,0,0,0,0,1,0,
+0,1,1,1,1,1,1,0,1,0,
+0,0,0,0,0,0,1,0,1,0,
+1,1,1,1,0,0,1,0,1,0,
+1,0,0,1,0,0,1,0,1,0,
+1,0,0,1,1,1,1,0,1,0,
+1,0,0,0,0,0,0,0,1,0,
+1,0,0,0,0,1,1,1,1,0,
+1,1,1,0,0,1,0,0,0,0
+</data>
+  </layer>
+  <objectgroup name="对象层 1"/>
+  <imagelayer name="图像图层 1" offsetx="-1.13687e-13" offsety="-5.68434e-14"/>
+ </group>
+</map>
