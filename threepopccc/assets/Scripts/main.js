@@ -13,9 +13,9 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
 
-        global.gameData.monsterType = defines.monsterType.monster_0;
-        let levelNode = cc.instantiate(this.levelNodePrefab);
-        levelNode.parent = this.node;
+        // global.gameData.monsterType = defines.monsterType.monster_0;
+        // let levelNode = cc.instantiate(this.levelNodePrefab);
+        // levelNode.parent = this.node;
     },
 
 
