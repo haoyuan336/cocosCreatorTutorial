@@ -1,5 +1,5 @@
-import global from './../global'
-import monsterleveldata from './../data/config/monster-level-data'
+import global from './../../global'
+import monsterleveldata from './../../data/config/monster-level-data'
 cc.Class({
     extends: cc.Component,
 

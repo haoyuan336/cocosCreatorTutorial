@@ -1,6 +1,6 @@
-import defines from './../defines'
+import defines from './../../defines'
 import AnimationController from './animation-controller'
-import global from './../global'
+import global from './../../global'
 cc.Class({
     extends: cc.Component,
 

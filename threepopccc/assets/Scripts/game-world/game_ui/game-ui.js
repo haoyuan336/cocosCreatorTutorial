@@ -1,4 +1,4 @@
-import global from './../global'
+import global from './../../global'
 cc.Class({
     extends: cc.Component,
 

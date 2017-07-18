@@ -1,5 +1,5 @@
-import global from './../global'
-import defines from './../defines'
+import global from './../../global'
+import defines from './../../defines'
 cc.Class({
     extends: cc.Component,
 

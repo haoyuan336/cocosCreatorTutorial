@@ -1,4 +1,4 @@
-import global from './../global'
+import global from './../../global'
 const MonsterLevelState =  {
     Invalide: -1,
     AddEnemyLevel1: 1,
