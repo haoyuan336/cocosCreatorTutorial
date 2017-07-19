@@ -26,6 +26,7 @@ cc.Class({
             x: this.playerNode.position.x,
             y: this.playerNode.position.y - 500
         };
+
     }
 
 
