@@ -11,6 +11,10 @@ cc.Class({
         camera: {
             default: null,
             type: cc.Node
+        },
+        mapNode: {
+            default: null,
+            type: cc.Node
         }
     },
 
@@ -38,7 +42,11 @@ cc.Class({
                     break
             }
             this.playerNode.position = pos;
-        })
+        });
+
+        let size = this.mapNode.getComponent(cc.TiledMap).getMapSize();
+        cc.log("size = " + JSON.stringify(size));
+
     },
     update: function (dt) {
         this.camera.position = {
