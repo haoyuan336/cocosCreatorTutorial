@@ -43,9 +43,17 @@ cc.Class({
             }
             this.playerNode.position = pos;
         });
+    },
+    start: function () {
+        cc.log("start");
+        let tileMap = this.mapNode.getComponent(cc.TiledMap);
+        let startPos = tileMap.getObjectGroup("players").getObject("startPos");
+        cc.log("start pos =  " + JSON.stringify(startPos));
 
-        let size = this.mapNode.getComponent(cc.TiledMap).getMapSize();
-        cc.log("size = " + JSON.stringify(size));
+
+        let layers = tileMap.getLayer("food");
+        cc.log("layers" + layers.length);
+
 
     },
     update: function (dt) {
