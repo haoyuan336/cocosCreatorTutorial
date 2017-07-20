@@ -20,7 +20,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.getComponent(cc.TiledMap);
+        // this.getComponent(cc.TiledMap);
         global.eventListener.on("button_click", (direction) => {
             cc.log(" button click" + direction);
             let pos = this.playerNode.position;
@@ -46,13 +46,14 @@ cc.Class({
     },
     start: function () {
         cc.log("start");
-        let tileMap = this.mapNode.getComponent(cc.TiledMap);
-        let startPos = tileMap.getObjectGroup("players").getObject("startPos");
-        cc.log("start pos =  " + JSON.stringify(startPos));
-
-
-        let layers = tileMap.getLayer("food");
-        cc.log("layers" + layers.length);
+        // let tileMap = this.mapNode.getComponent(cc.TiledMap);
+        // let startPos = tileMap.getObjectGroup("players").getObject("startPos");
+        // cc.log("start pos =  " + JSON.stringify(startPos));
+        //
+        //
+        // let layers = tileMap.getLayer("food");
+        // cc.log("layers" + layers.length);
+        // let cell = layers.getTileGIDAt(10,10);
 
 
     },

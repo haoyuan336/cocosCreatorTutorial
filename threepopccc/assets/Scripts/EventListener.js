@@ -15,15 +15,30 @@ const EventListener = function (object) {
 
   };
   that.fire = function (type) {
-    let list = handlerMap[type];
-    let paramList = [];
-    for (let i = 1 ; i < arguments.length ; i ++){
-      paramList.push(arguments[i]);
+    // let list = handlerMap[type];
+    // let paramList = [];
+    // for (let i = 1 ; i < arguments.length ; i ++){
+    //   paramList.push(arguments[i]);
+    // }
+    // for (let i = 0 ; i < list.length ; i ++){
+    //   let method = list[i];
+    //   console.log("paramlist = " + JSON.stringify(paramList));
+    //   method.apply(this, paramList);
+    // }
+    let handler = null;
+    if (handlerMap.hasOwnProperty(type)){
+      let handlerList = handlerMap[type];
+      for (let i = 0 ; i < handlerList.length ; i ++){
+        handler = handlerList[i];
+        let args = [];
+        for (let i = 1 ; i < arguments.length ; i ++){
+          args.push(arguments[i]);
+        }
+        handler.apply(this, args);
+      }
     }
-    for (let i in list){
-      let method = list[i];
-      method.apply(this, paramList);
-    }
+
+
   };
   that.removeListener = function (type, method) {
     let list = handlerMap[type];
