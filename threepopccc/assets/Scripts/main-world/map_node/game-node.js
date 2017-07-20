@@ -46,16 +46,26 @@ cc.Class({
     },
     start: function () {
         cc.log("start");
-        // let tileMap = this.mapNode.getComponent(cc.TiledMap);
-        // let startPos = tileMap.getObjectGroup("players").getObject("startPos");
-        // cc.log("start pos =  " + JSON.stringify(startPos));
-        //
-        //
-        // let layers = tileMap.getLayer("food");
-        // cc.log("layers" + layers.length);
-        // let cell = layers.getTileGIDAt(10,10);
+        this.tiledMap = this.mapNode.getComponent(cc.TiledMap);
+        let startPoint = this.tiledMap.getObjectGroup("players").getObject("startPos").getProperties();
+        let endPoint = this.tiledMap.getObjectGroup("players").getObject("endPos").getProperties();
+        this.startPos = cc.p(startPoint.x, startPoint.y);
+        this.endPos = cc.p(endPoint.x,endPoint.y);
+        cc.log("startPos = " + JSON.stringify(this.startPos));
+        cc.log("end Pos = " + JSON.stringify(this.endPos));
+        this.playerNode.position = {
+            x: this.startPos.x,
+            y: this.playerNode.position.y
+        };
+        // this.convertTheCurrentPos(this.startPos);
 
-
+    },
+    convertTheCurrentPos: function (pos) {
+        let currentPos = {
+            x: pos.x,
+            y: this.mapNode.height - pos.y
+        }
+        return currentPos;
     },
     update: function (dt) {
         this.camera.position = {

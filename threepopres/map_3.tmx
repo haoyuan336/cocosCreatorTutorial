@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="64" tileheight="64" nextobjectid="7">
+ <tileset firstgid="1" name="tiledMapCell_0" tilewidth="64" tileheight="64" tilecount="8" columns="2">
+  <image source="tiledMapCell_0.png" width="128" height="256"/>
+ </tileset>
+ <layer name="ground" width="20" height="20" opacity="0.9">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYBzFo3gUj+JRPIpJxADrnAGR
+  </data>
+ </layer>
+ <layer name="wall" width="20" height="20">
+  <properties>
+   <property name="wall" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBhagJlETIx5pNg9at6oedQ2D1+aJTU9E3IDOWYMBfOoHX5DIW1Ro/yjFAAAMb4AwQ==
+  </data>
+ </layer>
+ <objectgroup name="players">
+  <object id="3" name="startPos" gid="7" x="380.121" y="444.121" width="64" height="64"/>
+  <object id="6" name="endPos" gid="7" x="637.697" y="1022.91" width="64" height="64"/>
+ </objectgroup>
+ <layer name="foods" width="20" height="20">
+  <properties>
+   <property name="food" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6IBjoB1AAhhKbqUUUOJXXHqpEX4jKQ5GwShABgC84AAx
+  </data>
+ </layer>
+</map>
