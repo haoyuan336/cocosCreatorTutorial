@@ -15,16 +15,7 @@ const EventListener = function (object) {
 
   };
   that.fire = function (type) {
-    // let list = handlerMap[type];
-    // let paramList = [];
-    // for (let i = 1 ; i < arguments.length ; i ++){
-    //   paramList.push(arguments[i]);
-    // }
-    // for (let i = 0 ; i < list.length ; i ++){
-    //   let method = list[i];
-    //   console.log("paramlist = " + JSON.stringify(paramList));
-    //   method.apply(this, paramList);
-    // }
+
     let handler = null;
     if (handlerMap.hasOwnProperty(type)){
       let handlerList = handlerMap[type];
