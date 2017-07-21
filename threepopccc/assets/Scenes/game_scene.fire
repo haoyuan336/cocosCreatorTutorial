@@ -664,7 +664,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 64,
-      "height": 60
+      "height": 64
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -694,7 +694,7 @@
       "__uuid__": "499dd224-62e3-4966-8f22-02c60b8c78ed"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -818,6 +818,15 @@
     },
     "mapNode": {
       "__id__": 5
+    },
+    "grounds": {
+      "__id__": 7
+    },
+    "walls": {
+      "__id__": 10
+    },
+    "foods": {
+      "__id__": 13
     }
   },
   {

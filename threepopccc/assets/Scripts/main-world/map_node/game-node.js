@@ -15,6 +15,18 @@ cc.Class({
         mapNode: {
             default: null,
             type: cc.Node
+        },
+        grounds: {
+            default: null,
+            type: cc.TiledLayer
+        },
+        walls: {
+            default: null,
+            type: cc.TiledLayer
+        },
+        foods: {
+            default: null,
+            type: cc.TiledLayer
         }
     },
 
@@ -22,43 +34,84 @@ cc.Class({
     onLoad: function () {
         // this.getComponent(cc.TiledMap);
         global.eventListener.on("button_click", (direction) => {
-            cc.log(" button click" + direction);
-            let pos = this.playerNode.position;
+            let newTiled = cc.p(this.playerTiled.x, this.playerTiled.y);
             switch (direction){
                 case "up":
-                    pos.y += 100;
+                    newTiled.y -= 1;
                     break;
                 case "down":
+                    newTiled.y += 1;
 
-                    pos.y -= 100;
                     break;
                 case "left":
-                    pos.x -= 100;
+                    newTiled.x -= 1;
                     break;
                 case "right":
-                    pos.x += 100;
+                    newTiled.x += 1;
                     break;
                 default:
                     break
             }
-            this.playerNode.position = pos;
+            this.moveToTiledMapPos(newTiled);
         });
     },
+    moveToTiledMapPos: function (newTiled) {
+
+        if (newTiled.x < 0 || newTiled.x > this.tiledMap.getTileSize().width){
+            return;
+        }
+        if (newTiled.y < 0 || newTiled.y > this.tiledMap.getTileSize().height){
+            return;
+        }
+
+
+
+        if (this.checkWall(newTiled)){
+            return
+        }
+        if (this.catchFood(newTiled)){
+        }
+        let pos = this.grounds.getPositionAt(newTiled.x, newTiled.y);
+        let worldPos = this.grounds.node.convertToWorldSpace(pos);
+        let gameNodePos = this.node.convertToNodeSpace(worldPos);
+        this.playerNode.position = {
+            x: gameNodePos.x + 32,
+            y: gameNodePos.y + 32
+        };
+        this.playerTiled = newTiled;
+    },
+
+    catchFood: function (newTiled) {
+        if (this.foods.getTileGIDAt(newTiled.x, newTiled.y)){
+            this.foods.removeTileAt(newTiled.x, newTiled.y);
+            return true;
+        }
+    },
+    checkWall: function (newTiled) {
+      if (this.walls.getTileGIDAt(newTiled.x, newTiled.y)){
+          return true;
+      }
+    },
+
     start: function () {
         cc.log("start");
-        this.tiledMap = this.mapNode.getComponent(cc.TiledMap);
-        let startPoint = this.tiledMap.getObjectGroup("players").getObject("startPos").getProperties();
-        let endPoint = this.tiledMap.getObjectGroup("players").getObject("endPos").getProperties();
-        this.startPos = cc.p(startPoint.x, startPoint.y);
-        this.endPos = cc.p(endPoint.x,endPoint.y);
-        cc.log("startPos = " + JSON.stringify(this.startPos));
-        cc.log("end Pos = " + JSON.stringify(this.endPos));
-        this.playerNode.position = {
-            x: this.startPos.x,
-            y: this.playerNode.position.y
-        };
-        // this.convertTheCurrentPos(this.startPos);
 
+        this.tiledMap = this.mapNode.getComponent(cc.TiledMap);
+        let startPos = this.tiledMap.getObjectGroup("players").getObject("startPos").getProperties();
+        let startPoint = this.getTiledPoint(cc.p(startPos.x,startPos.y));
+        this.moveToTiledMapPos(startPoint);
+
+
+    },
+    
+    getTiledPoint: function (position) {
+        let tiledSize = this.mapNode.getComponent(cc.TiledMap).getTileSize();
+        cc.log("tiled size = " + JSON.stringify(tiledSize));
+        let x = Math.floor(position.x / tiledSize.width);
+        let y = Math.floor(position.y / tiledSize.height);
+        let tilePos = cc.p(x,y);
+        cc.log("tiled pos = " + JSON.stringify(tilePos));
+        return tilePos
     },
     convertTheCurrentPos: function (pos) {
         let currentPos = {

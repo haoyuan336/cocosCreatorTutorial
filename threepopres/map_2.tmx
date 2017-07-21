@@ -24,11 +24,11 @@
    eJxjYBgF6IBjoB1AAhhKbqUUUOJXXHqpEX4jKQ5GwShABgC84AAx
   </data>
  </layer>
- <objectgroup color="#ff5500" name="players">
+ <objectgroup color="#ff5500" name="players" visible="0">
   <properties>
    <property name="test" type="bool" value="true"/>
   </properties>
-  <object id="3" name="startPos" gid="7" x="380.121" y="444.121" width="64" height="64"/>
+  <object id="3" name="startPos" gid="7" x="380" y="444" width="64" height="64"/>
   <object id="6" name="endPos" gid="7" x="637.697" y="1022.91" width="64" height="64"/>
  </objectgroup>
 </map>
