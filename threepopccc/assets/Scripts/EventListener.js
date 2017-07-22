@@ -8,6 +8,7 @@ const EventListener = function (object) {
   let handlerMap = {};
   that.on = function (type, method) {
 
+    cc.log("on type = " + type);
     if (handlerMap.hasOwnProperty(type) === false){
       handlerMap[type] = [];
     }
@@ -19,6 +20,7 @@ const EventListener = function (object) {
     let handler = null;
     if (handlerMap.hasOwnProperty(type)){
       let handlerList = handlerMap[type];
+      cc.log("handler = " + handlerList.length);
       for (let i = 0 ; i < handlerList.length ; i ++){
         handler = handlerList[i];
         let args = [];
@@ -38,6 +40,10 @@ const EventListener = function (object) {
         list.splice(i, 1);
       }
     }
+  };
+  that.removeListenerType = function (type) {
+    console.log("remove listener type" + type);
+    handlerMap[type] = [];
   };
   that.removeAllListener = function (type) {
     for (let i in handlerMap){

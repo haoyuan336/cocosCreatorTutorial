@@ -3,8 +3,12 @@
  */
 import localDataController from './local-data-controller'
 import defines from './../defines'
+const InfoMap = {
+  levelCount: "level_count"
+};
 const GameData = function () {
   let that = {};
+  that.levelCount = 0;
   that.playerID = 0;
   that.heartCount = 6;
   that.scoreCount = 0;
@@ -28,10 +32,15 @@ const GameData = function () {
       let skillList = defines.SkillList[[defines.SkillMap.fireAttack]];
       cc.log("skill list = " + JSON.stringify(skillList));
       localDataController.setData(defines.localStorageKeyMap.EnerySkill,skillList);
+
+
+      //储存一下 当前玩家在第几关的位置
+      localDataController.setData(InfoMap.levelCount, 0 );
     }
     that.playerID = localDataController.getData(defines.userKey).playerID;
     cc.log("用户ID = " + that.playerID);
     that.skillList = localDataController.getData(defines.localStorageKeyMap.EnerySkill);
+    that.levelCount = localDataController.getData(InfoMap.levelCount);
 
   };
   that.addScore = function (score) {
