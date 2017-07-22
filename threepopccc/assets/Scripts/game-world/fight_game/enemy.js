@@ -1,3 +1,4 @@
+import monsterDataConfig from './../../data/config/monster-data'
 const MonsterState = {
     Invalide: -1,
     Live: 1,
@@ -24,12 +25,13 @@ cc.Class({
         this.setState(MonsterState.Live);
 
     },
-    init: function (data) {
-        cc.log("初始化敌人用数据 " + JSON.stringify(data));
-        this.moveSpeed = data.monster_move_speed;
-        this.healthCount = data.monster_health;
-        this.healthCountTotral = data.monster_health;
-
+    init: function (monstername) {
+        cc.log("初始化敌人用数据 " + JSON.stringify(monstername));
+        let enemyData = monsterDataConfig[monstername];
+        cc.log("enemy data = " + JSON.stringify(enemyData));
+        this.moveSpeed = enemyData["speed"];
+        this.healthCount = enemyData["health"];
+        this.healthCountTotal = enemyData["health"];
     },
 
     update: function (dt) {
@@ -37,7 +39,7 @@ cc.Class({
         if (this.node.position.x < - cc.Canvas.instance.designResolution.width * 0.5){
             this.node.destroy();
         }
-        this.healthProgress.getComponent(cc.ProgressBar).progress = this.healthCount / this.healthCountTotral;
+        this.healthProgress.getComponent(cc.ProgressBar).progress = this.healthCount / this.healthCountTotal;
 
     },
     onCollisionEnter: function (other, self) {

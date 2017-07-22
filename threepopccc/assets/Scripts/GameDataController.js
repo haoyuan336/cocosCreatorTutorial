@@ -201,6 +201,14 @@ const GameDataController = function() {
     return list[Math.floor(Math.random() * (list.length))];
   };
 
+  that.getRandomMonsterData = function (levelData,config) {
+    let dataList = config[levelData];
+    let data = that.getRandomObjInList(dataList);
+    return data;
+  };
+  that.getMonsterData = function (monster, config) {
+    return config[monster];
+  };
   return that;
 };
 export default GameDataController;

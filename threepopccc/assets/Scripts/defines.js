@@ -31,6 +31,16 @@ defines.SkillMap = {
 defines.localStorageKeyMap = {
   "EnerySkill": "enery_skill" //激活的技能豆
 };
+defines.initMainWorldType = {
+  startPos: "startPos",
+  returnStartPos: "returnStartPos"
+};
+defines.monsterSpriteFrameConfig = {
+  "monster_0": "mash_room_0.png",
+  "monster_1": "mash_room_1.png",
+  "monster_2": "mash_room_2.png",
+  "monster_3": "mash_room_3.png"
+};
 defines.userKey = "userkey";
 
 export default defines

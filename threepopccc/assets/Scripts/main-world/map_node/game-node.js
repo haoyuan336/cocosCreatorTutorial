@@ -1,4 +1,6 @@
 import global from './../../global'
+import defines from './../../defines'
+import LevelData from './../../data/config/level-data'
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -13,11 +15,16 @@ cc.Class({
         mapNode: {
             default: null,
             type: cc.Node
+        },
+        gameNode: {
+            default: null,
+            type: cc.Node
         }
     },
 
     // use this for initialization
     onLoad: function () {
+        this.monsterList = [];
     },
     moveToTiledMapPoint: function (newTiled) {
         cc.log("new tiled = " + JSON.stringify(newTiled));
@@ -37,8 +44,8 @@ cc.Class({
             cc.log("是墙");
             return
         }
-        if (this.catchFood(newTiled)){
-        }
+
+
         this.moveToCurrentPos(newTiled);
         this.playerTiled = newTiled;
         if (cc.pointEqualToPoint(newTiled,this.endPoint)){
@@ -49,26 +56,45 @@ cc.Class({
             cc.log("返回上一个地图");
             global.eventListener.fire("enter_befor_map");
         }
+
+        let monster = this.checkMonsterPoint(newTiled);
+        if (monster === null){
+            cc.log("没找到怪兽");
+        }else {
+            global.eventListener.fire("enter_monster_world",{
+                point: monster.point,
+                name: monster.name
+            });
+        }
+
+        // if (this.checkMonsterPoint(newTiled)){
+        //     cc.log("打怪");
+        //     global.eventListener.fire("enter_monster_world",)
+        // }
     },
 
+    checkMonsterPoint: function (point) {
+        for (let i = 0 ; i < this.monsterList.length ; i ++){
+            let node = this.monsterList[i];
+            if (cc.pointEqualToPoint(point, node.point)){
+                return node;
+            }
+        }
+        return null;
+    },
     moveToCurrentPos: function (newTiled) {
-        let mapTiledNode = this.mapNode.getChildByName("mapTiledNode");
-        let pos = this.grounds.getPositionAt(newTiled.x, newTiled.y);
-        cc.log("pos = " + JSON.stringify(pos));
-        let convertPos = mapTiledNode.convertToWorldSpace(pos);
+        let convertPos = this.getMapWorldPosition(newTiled);
         cc.log("转换"  + JSON.stringify(convertPos));
-        let endPos = this.node.convertToNodeSpace(convertPos);
+        let endPos = this.gameNode.convertToNodeSpace(convertPos);
         this.playerNode.position = {
             x: endPos.x + 32,
             y: endPos.y + 32
         };
     },
-    catchFood: function (newTiled) {
-        if (this.foods.getTileGIDAt(newTiled.x, newTiled.y)){
-            console.log("食物");
-            this.foods.removeTileAt(newTiled.x, newTiled.y);
-            return true;
-        }
+    getMapWorldPosition: function (point) {
+        let mapTiledNode = this.mapNode.getChildByName("mapTiledNode");
+        let pos = this.grounds.getPositionAt(point.x, point.y);
+        return mapTiledNode.convertToWorldSpace(pos);
     },
 
     checkWall: function (newTiled) {
@@ -77,6 +103,61 @@ cc.Class({
       }
     },
 
+    init: function (object) {
+        let type = object.data;
+        let nowLevel = global.gameData.levelCount;
+        let str ="tiledmap/" + "map_" + (nowLevel + 1);
+        cc.loader.loadRes(str, (err, tiledMap) =>{
+            if (err){
+                cc.log("err "  + err);
+                return ;
+            }
+            let mapNode = new cc.Node("mapTiledNode");
+            mapNode.parent = this.mapNode;
+            this.tiledMap = mapNode.addComponent(cc.TiledMap);
+            this.tiledMap.tmxAsset = tiledMap;
+            let players = this.tiledMap.getObjectGroup("players");
+            let startPos = players.getObject(type).getProperties();
+            let startPoint = this.getTiledPoint(startPos);
+            let endPos = players.getObject("endPos").getProperties();
+            this.endPoint = this.getTiledPoint(endPos);
+            let returnPos = players.getObject("returnPos").getProperties();
+            this.returnPoint = this.getTiledPoint(returnPos);
+            this.grounds = this.tiledMap.getLayer("ground");
+            this.walls = this.tiledMap.getLayer("wall");
+            this.playerTiled = startPoint;
+            this.createMonstersList(this.tiledMap.getObjectGroup("monsters").getObjects());
+            this.moveToTiledMapPoint(startPoint);
+        });
+    },
+    createMonstersList: function (monsterList) {
+        cc.log("monsterList = " + monsterList.length);
+
+        //初始化几个怪兽
+        for (let i = 0 ; i < monsterList.length ; i ++){
+            let point = this.getTiledPoint(monsterList[i].getProperties());
+            this.createMonster(point);
+        }
+
+    },
+    createMonster: function (point) {
+        let data = global.gameDataController.getRandomMonsterData(global.gameData.levelCount, LevelData);
+        cc.loader.loadRes(defines.monsterSpriteFrameConfig[data],cc.SpriteFrame,(err, spriteFrame)=>{
+            if (err){
+                return;
+            }
+            let node = new cc.Node(data);
+            node.addComponent(cc.Sprite).spriteFrame = spriteFrame;
+            node.parent = this.mapNode;
+            let pos = this.getMapWorldPosition(point);
+            node.position = cc.pAdd(this.gameNode.convertToNodeSpace(pos),cc.p(32,32));
+            node.point = point;
+            this.monsterList.push(node);
+        });
+
+
+        // cc.loader.loadRes()
+    },
     start: function () {
         cc.log("start");
         // let self = this;
@@ -102,32 +183,6 @@ cc.Class({
             }
             this.moveToTiledMapPoint(newTiled);
         });
-
-        let nowLevel = global.gameData.levelCount;
-        let str ="tiledmap/" + "map_" + (nowLevel + 1);
-        cc.loader.loadRes(str, (err, tiledMap) =>{
-            if (err){
-                cc.log("err "  + err);
-                return ;
-            }
-            let mapNode = new cc.Node("mapTiledNode");
-            mapNode.parent = this.mapNode;
-            this.tiledMap = mapNode.addComponent(cc.TiledMap);
-            this.tiledMap.tmxAsset = tiledMap;
-            let players = this.tiledMap.getObjectGroup("players");
-            let startPos = players.getObject("startPos").getProperties();
-            let startPoint = this.getTiledPoint(startPos);
-            let endPos = players.getObject("endPos").getProperties();
-            this.endPoint = this.getTiledPoint(endPos);
-            let returnPos = players.getObject("returnPos").getProperties();
-            this.returnPoint = this.getTiledPoint(returnPos);
-            this.grounds = this.tiledMap.getLayer("ground");
-            this.walls = this.tiledMap.getLayer("wall");
-            this.foods = this.tiledMap.getLayer("food");
-            this.playerTiled = startPoint;
-            this.moveToTiledMapPoint(startPoint);
-        });
-
     },
     
     getTiledPoint: function (position) {
@@ -152,16 +207,13 @@ cc.Class({
             x: this.playerNode.position.x,
             y: this.playerNode.position.y - 500
         };
-
     },
     removeAllEventListener: function () {
         global.eventListener.removeListenerType("button_click");
     },
     onDestroy: function () {
-        // this.tiledMap.releaseMap();
-
         cc.log("on destroy");
-        global.eventListener.removeListenerType("button_click");
+        global.eventListener.removeListenerType("button_click",LevelData);
 
     }
 

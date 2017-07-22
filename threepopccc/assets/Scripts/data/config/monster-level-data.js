@@ -2,21 +2,26 @@
  * Created by chuhaoyuan on 2017/7/17.
  */
 const MonsterLevelData = {
-  monster_0: {
-    monster_type: "monster_0",
-    monster_big_type: "monster_1",
-    monster_count_0: 2,
-    monster_count_1: 20,
-    monster_health: 4,
-    monster_move_speed: 1,
-    health: 20
+  monster_0_level: {
+    monster: "monster_0",
+    monster_boss: "monster_1",
+    monster_count: 2,
   },
-  monster_1: {
-    monster_type: "monster_0",
-    monster_count_0: 2,
-    monster_count_1: 30,
-    monster_health: 5,
-    health: 30
-  }
+  monster_1_level: {
+    monster: "monster_1",
+    monster_boss: "monster_1",
+    monster_count_0: 4,
+  },
+  monster_2_level: {
+    monster: "monster_2",
+    monster_boss: "monster_1",
+    monster_count_0: 8,
+  },
+  monster_3_level: {
+    monster: "monster_3",
+    monster_boss: "monster_1",
+    monster_count_0: 10,
+  },
+
 };
 export default MonsterLevelData;

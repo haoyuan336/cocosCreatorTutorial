@@ -12,8 +12,11 @@ cc.Class({
         // },1000);
 
     },
+    init: function (data) {
+      this.data = data;
+    },
     onDestroy: function () {
-        global.eventListener.fire("enter_game_node");
+        global.eventListener.fire("enter_game_node", this.data);
     }
 
 });

@@ -2766,7 +2766,10 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true
+    "_enabled": true,
+    "enemyController": {
+      "__id__": 36
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

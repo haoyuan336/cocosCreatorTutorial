@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="64" tileheight="64" nextobjectid="15">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="64" tileheight="64" nextobjectid="26">
  <tileset firstgid="1" name="tiledMapCell_0" tilewidth="64" tileheight="64" tilecount="8" columns="2">
   <image source="tiledMapCell_0.png" width="128" height="256"/>
  </tileset>
@@ -16,14 +16,32 @@
    eJxjYBhagJlETIx5pNg9at6oedQ2D1+aJTU9E3IDOWYMBfOoHX5DIW1Ro/yjFAAAMb4AwQ==
   </data>
  </layer>
- <layer name="food" width="20" height="20">
-  <properties>
-   <property name="food" type="bool" value="true"/>
-  </properties>
-  <data encoding="base64" compression="zlib">
-   eJxjYBgF6IBjoB1AAhhKbqUUUOJXXHqpEX4jKQ5GwShABgC84AAx
-  </data>
- </layer>
+ <objectgroup name="monsters">
+  <object id="17" name="monster_7" x="621.839" y="416.543">
+   <ellipse/>
+  </object>
+  <object id="19" name="monster_6" x="803.332" y="360.012">
+   <ellipse/>
+  </object>
+  <object id="20" name="monster_5" x="934.246" y="229.098">
+   <ellipse/>
+  </object>
+  <object id="21" name="monster_4" x="362.987" y="675.394">
+   <ellipse/>
+  </object>
+  <object id="22" name="monster_3" x="357.037" y="487.95">
+   <ellipse/>
+  </object>
+  <object id="23" name="monster_2" x="749.777" y="684.32">
+   <ellipse/>
+  </object>
+  <object id="24" name="monster_1" x="928.295" y="553.407">
+   <ellipse/>
+  </object>
+  <object id="25" name="monster_0" x="544.481" y="556.382">
+   <ellipse/>
+  </object>
+ </objectgroup>
  <objectgroup color="#ff5500" name="players">
   <properties>
    <property name="test" type="bool" value="true"/>
@@ -35,6 +53,9 @@
    <ellipse/>
   </object>
   <object id="14" name="returnPos" x="728.95" y="1121.69" width="26.7777" height="23.8024">
+   <ellipse/>
+  </object>
+  <object id="16" name="returnStartPos" x="467.123" y="223.148" width="23.8024" height="20.8271">
    <ellipse/>
   </object>
  </objectgroup>

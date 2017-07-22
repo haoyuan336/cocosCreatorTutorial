@@ -1,4 +1,6 @@
 import global from './../../global'
+import monsterLevelData from "./../../data/config/monster-level-data"
+import monsterData from './../../data/config/monster-data'
 const MonsterLevelState =  {
     Invalide: -1,
     AddEnemyLevel1: 1,
@@ -22,10 +24,21 @@ cc.Class({
     onLoad: function () {
         this.addEnemyTime = 0;
         this.addEnemySpeed = 0.1;
-        this.totalEnemyCount = global.gameData.monsterData.monster_count_0;
-        this.addEnemyCount = 0;
-        this.state = MonsterLevelState.Invalide;
+        // this.totalEnemyCount = global.gameData.monsterData.monster_count_0;
+        // this.addEnemyCount = 0;
+        // this.state = MonsterLevelState.Invalide;
+        // this.setState(MonsterLevelState.AddEnemyLevel1);
+
+    },
+    init: function (data) {
+        let monster = data.data.name;
+        cc.log("monster = " + monster);
+        this.levelData = global.gameDataController.getMonsterData(monster + "_level", monsterLevelData);
+        cc.log("enemy data" + JSON.stringify(this.levelData));
+        this.totalEnergyCount = this.levelData["monster_count"];
         this.setState(MonsterLevelState.AddEnemyLevel1);
+
+
 
     },
     update: function (dt) {
@@ -56,7 +69,7 @@ cc.Class({
         let enemy = cc.instantiate(this.EnemyPrefab);
         enemy.parent = this.node.parent;
         enemy.position = this.node.position;
-        enemy.getComponent("enemy").init(global.gameData.monsterData);
+        enemy.getComponent("enemy").init(this.levelData["monster"]);
         this.addEnemyCount ++;
     },
     addBigEnemy: function () {
