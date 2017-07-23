@@ -1,5 +1,10 @@
 import defines from './../../defines'
 import global from './../../global'
+const GameState = {
+    Invalide: -1,
+    Waiting: 1,
+    Running: 2
+}
 cc.Class({
     extends: cc.Component,
 
@@ -26,6 +31,7 @@ cc.Class({
         this.initGame();
         this.indexHeight = 0;
         this.removeCellList = [];
+        this.state = GameState.Invalide;
         global.eventListener.on("play_suilie_animation", (data)=> {
             cc.log("remove a diamond" + JSON.stringify(data));
 
@@ -41,6 +47,12 @@ cc.Class({
             //     cc.log("播放结束");
             // });
         });
+        global.eventListener.on("enter_game_level_2",function () {
+           cc.log("游戏进入第二阶段");
+        });
+        global.eventListener.on("game_start",  ()=> {
+            this.setState(GameState.Running);
+        })
 
     },
     initGame: function () {
@@ -126,6 +138,9 @@ cc.Class({
 
     },
     cellScrollDirection: function (target) {
+        if (this.state !== GameState.Running){
+            return;
+        }
         //得到方向之后，先来计算操作
         let direction = target.getDirection();
         let index = undefined;
@@ -196,6 +211,9 @@ cc.Class({
         });
     },
     doubleClick: function (target) {
+        if (this.state !== GameState.Running){
+            return;
+        }
         cc.log("双击了");
         //这个cell双击了
         // cc.log("双击" + target.node.indexRow + "," + target.node.indexLine);
@@ -224,6 +242,21 @@ cc.Class({
         node.position = cc.p((defines.gameDataWidth - 1) * -0.5 * 100 + j * 100, 400);
 
         return node;
+    },
+    onDestroy: function () {
+        global.eventListener.removeListenerType("enter_game_level_2");
+    },
+    setState: function (state) {
+        if (this.state === state){
+            return
+        }
+        switch (state){
+            case GameState.Running:
+                break;
+            default :
+                break;
+        }
+        this.state = state;
     }
 
 });

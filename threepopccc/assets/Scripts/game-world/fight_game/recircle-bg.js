@@ -1,4 +1,11 @@
 import global from './../../global'
+const BGState = {
+    Invalide: -1,
+    Start: 1,
+    Running: 2,
+    Stop: 3,
+
+};
 cc.Class({
     extends: cc.Component,
 
@@ -14,9 +21,16 @@ cc.Class({
         this.bgList = [];//背景 的列表
         this.scale = 1;
 
+        global.eventListener.on("game_start", ()=> {
+           this.setState(BGState.Running);
+        });
+
         global.eventListener.on("enter_game_level_2",()=>{
            cc.log("recircle bg 游戏进入第二阶段，背景停止滚动");
+            this.setState(BGState.Stop);
         });
+        this.state = BGState.Invalide;
+
 
 
     },
@@ -39,6 +53,8 @@ cc.Class({
 
     },
     update: function () {
+
+
 
         let maxX = -10000;
         for (let i in this.bgList){
@@ -76,28 +92,48 @@ cc.Class({
             this.bgList.push(node);
         }
 
+        if (this.state === BGState.Running){
 
-        for (let i = 0 ; i < this.bgList.length ; i ++) {
-            let node = this.bgList[i];
-            node.position = {
-                x: node.position.x - this.speed,
-                y:  node.position.y
-            };
-            let width = cc.Canvas.instance.designResolution.width;
-            // console.log('width = '+ width);
+            for (let i = 0 ; i < this.bgList.length ; i ++) {
+                let node = this.bgList[i];
+                node.position = {
+                    x: node.position.x - this.speed,
+                    y:  node.position.y
+                };
+                let width = cc.Canvas.instance.designResolution.width;
+                // console.log('width = '+ width);
 
-            if (node.position.x + node.width < width * - 0.5){
+                if (node.position.x + node.width < width * - 0.5){
 
-                console.log("删掉");
+                    console.log("删掉");
 
-                this.bgList.splice(i, 1);
-                node.destroy();
+                    this.bgList.splice(i, 1);
+                    node.destroy();
+                }
             }
         }
-    }
-    ,
+
+    },
     onDestroy: function () {
         
+    },
+    setState: function (state) {
+        if (this.state === state){
+            return
+        }
+        switch (state){
+            case BGState.Invalide:
+                break;
+            case BGState.Running:
+                break;
+            case BGState.End:
+                break;
+            case BGState.Start:
+                break;
+            default:
+                break;
+        }
+        this.state = state;
     }
 
 

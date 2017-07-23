@@ -25,7 +25,8 @@ cc.Class({
         this.addEnemyTime = 0;
         this.addEnemySpeed = 0.1;
         // this.totalEnemyCount = global.gameData.monsterData.monster_count_0;
-        // this.addEnemyCount = 0;
+        this.addEnemyCount = 0;
+        this.state = MonsterLevelState.Invalide;
         // this.state = MonsterLevelState.Invalide;
         // this.setState(MonsterLevelState.AddEnemyLevel1);
 
@@ -36,7 +37,9 @@ cc.Class({
         this.levelData = global.gameDataController.getMonsterData(monster + "_level", monsterLevelData);
         cc.log("enemy data" + JSON.stringify(this.levelData));
         this.totalEnergyCount = this.levelData["monster_count"];
-        this.setState(MonsterLevelState.AddEnemyLevel1);
+        global.eventListener.on("game_start",()=>{
+           this.setState(MonsterLevelState.AddEnemyLevel1);
+        });
 
 
 
@@ -46,7 +49,7 @@ cc.Class({
         if (this.state === MonsterLevelState.AddEnemyLevel1){
             if (this.addEnemyTime > 20){
                 this.addEnemyTime = 0;
-                if (this.addEnemyCount >= this.totalEnemyCount){
+                if (this.addEnemyCount >= this.totalEnergyCount){
                     //前期的敌人添加完成，显出关主
 
                     this.setState(MonsterLevelState.AddEnemyLevel2);//进入增加敌人数量第二阶段

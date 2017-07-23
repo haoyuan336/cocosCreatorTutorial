@@ -7,16 +7,17 @@ cc.Class({
     },
 
     onLoad: function () {
-        // setTimeout(function () {
-        //     global.eventListener.fire("enter_game_node");
-        // },1000);
+
 
     },
     init: function (data) {
       this.data = data;
+        setTimeout(function () {
+            global.eventListener.fire("enter_game_node",data);
+        },1000);
     },
     onDestroy: function () {
-        global.eventListener.fire("enter_game_node", this.data);
+        // global.eventListener.fire("enter_game_node", this.data);
     }
 
 });
