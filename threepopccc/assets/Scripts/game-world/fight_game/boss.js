@@ -1,3 +1,4 @@
+import MonsterData from './../../data/config/monster-data'
 cc.Class({
     extends: cc.Component,
 
@@ -19,6 +20,9 @@ cc.Class({
 
     },
 
+    init: function (data) {
+        cc.log("init boss with data = " + JSON.stringify(data));
+    }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 

@@ -1220,8 +1220,8 @@
     "EnemyPrefab": {
       "__uuid__": "f5952d01-0829-4e42-8a7a-476d9de83649"
     },
-    "EnemyBigPrefab": {
-      "__uuid__": "8abb308c-6389-49a4-b010-7bf543209f08"
+    "EnemyBossPrefab": {
+      "__uuid__": "5a1ad0f2-a979-45a1-8f74-7f83b71e2fe8"
     }
   },
   {

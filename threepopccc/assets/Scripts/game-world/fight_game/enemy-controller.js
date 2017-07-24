@@ -14,7 +14,7 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
-        EnemyBigPrefab: {
+        EnemyBossPrefab: {
             default: null,
             type: cc.Prefab
         }
@@ -62,7 +62,6 @@ cc.Class({
             }
         }else if (this.state === MonsterLevelState.AddEnemyLevel2){
             //第二阶段
-
         }
 
     },
@@ -77,13 +76,13 @@ cc.Class({
     },
     addBigEnemy: function () {
         // let obj = global.gameDataController
-        let enemy = cc.instantiate(this.EnemyBigPrefab);
+        let enemy = cc.instantiate(this.EnemyBossPrefab);
         enemy.parent = this.node.parent;
         enemy.position = {
             x: this.node.position.x - 400,
             y: this.node.position.y
         };
-        enemy.getComponent("big-enemy").init(global.gameData.monsterData);
+        enemy.getComponent("boss").init(this.levelData["monster_boss"]);
 
 
     },
@@ -97,7 +96,7 @@ cc.Class({
             case MonsterLevelState.AddEnemyLevel2:
                 global.eventListener.fire("enter_game_level_2"); //游戏进入第二阶段
               //添加一个游戏关主
-              this.addBigEnemy();
+                this.addBigEnemy();
                 break;
             default:
                 break;
