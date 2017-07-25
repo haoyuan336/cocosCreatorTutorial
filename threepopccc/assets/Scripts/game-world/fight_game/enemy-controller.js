@@ -78,10 +78,10 @@ cc.Class({
         // let obj = global.gameDataController
         let enemy = cc.instantiate(this.EnemyBossPrefab);
         enemy.parent = this.node.parent;
-        enemy.position = {
-            x: this.node.position.x - 400,
-            y: this.node.position.y
-        };
+        // enemy.position = {
+        //     x: this.node.position.x - 400,
+        //     y: this.node.position.y
+        // };
         enemy.getComponent("boss").init(this.levelData["monster_boss"]);
 
 

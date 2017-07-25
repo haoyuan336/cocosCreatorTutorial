@@ -55,7 +55,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 58
+      "y": 133
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -158,7 +158,10 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true
+    "_enabled": true,
+    "NameLabel": {
+      "__id__": 3
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
