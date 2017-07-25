@@ -37,17 +37,22 @@ cc.Class({
     update: function (dt) {
         this.node.position = cc.p(this.node.position.x - this.moveSpeed , this.node.position.y);
         if (this.node.position.x < - cc.Canvas.instance.designResolution.width * 0.5){
-            this.node.destroy();
+            // this.node.destroy();
         }
         this.healthProgress.getComponent(cc.ProgressBar).progress = this.healthCount / this.healthCountTotal;
 
     },
     onCollisionEnter: function (other, self) {
-        let damage = other.node.getComponent("bullet").getDamage();
-        this.healthCount -= damage;
+        if (other.node.getComponent("bullet")){
+            let damage = other.node.getComponent("bullet").getDamage();
+            this.healthCount -= damage;
+        }
+        if (other.node.getComponent("hero-node")){
+            cc.log("碰到主角了");
+        }
         if (this.healthCount <= 0 ){
             this.healthCount = 0;
-            this.setState(MonsterState.Dead);
+            // this.setState(MonsterState.Dead);
         }
     },
     setState: function (state) {

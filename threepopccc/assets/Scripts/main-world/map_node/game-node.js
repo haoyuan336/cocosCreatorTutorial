@@ -195,21 +195,11 @@ cc.Class({
         cc.log("tiled pos = " + JSON.stringify(tilePos));
         return tilePos;
     },
-    convertTheCurrentPos: function (pos) {
-        let currentPos = {
-            x: pos.x,
-            y: this.mapNode.height - pos.y
-        };
-        return currentPos;
-    },
     update: function (dt) {
         this.camera.position = {
             x: this.playerNode.position.x,
             y: this.playerNode.position.y - 500
         };
-    },
-    removeAllEventListener: function () {
-        global.eventListener.removeListenerType("button_click");
     },
     onDestroy: function () {
         cc.log("on destroy");

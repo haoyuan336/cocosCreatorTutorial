@@ -29,6 +29,9 @@ cc.Class({
         this.state = MonsterLevelState.Invalide;
         // this.state = MonsterLevelState.Invalide;
         // this.setState(MonsterLevelState.AddEnemyLevel1);
+        global.eventListener.on("add_enemy_with_data", (data)=>{
+            this.addEnemyWithInitData(data);
+        });
 
     },
     init: function (data) {
@@ -102,6 +105,19 @@ cc.Class({
                 break;
         }
         this.state = state;
+    }
+    ,
+    addEnemyWithInitData : function (data) {
+        // cc.log("add enemy with init data " + JSON.stringify(data));
+        // let image = monsterLevelData[data.monster].image;
+        // cc.loader.loadRes(image, cc.SpriteFrame, (err, spriteFrame)=>{
+        //     let monster = cc.instantiate(this)
+        // });
+
+        let enemy = cc.instantiate(this.EnemyPrefab);
+        enemy.parent = this.node;
+        enemy.position = this.node.convertToNodeSpace(data.position);
+        enemy.getComponent("enemy").init(data.monster);
     }
 
 

@@ -1,4 +1,6 @@
-import MonsterData from './../../data/config/monster-data'
+import MonsterData from './../../data/config/boss-data'
+import global from './../../global'
+
 const BossState = {
     Invalide: -1,
     EnterIng: 1,
@@ -31,7 +33,7 @@ cc.Class({
         this.monsterData = MonsterData[data];
         // cc.log("image)= " + this.monsterData.image);
         this.NameLabel.string = data;
-        cc.loader.loadRes(this.monsterData.image + "", cc.SpriteFrame, (err, spriteFrame)=>{
+        cc.loader.loadRes(this.monsterData.image, cc.SpriteFrame, (err, spriteFrame)=>{
             if (err){
                 cc.log("err = " + err);
                 return;
@@ -40,9 +42,11 @@ cc.Class({
 
         });
         this.setState(BossState.EnterIng);
+        this.addEnemyTime = 0;
 
     },
     setState: function (state) {
+        cc.log("this state = " + this.state  + "state = " + state);
         if (this.state === state){
             return;
         }
@@ -62,10 +66,38 @@ cc.Class({
     },
     update: function (dt) {
         if (this.state === BossState.EnterIng){
-            this.node.position = cc.p(this.position.node.x - 1, this.node.position.y);
-            if (this.node.position.x < cc.Canvas.instance.designResolution.width * 0.6){
+            this.node.position = cc.p(this.node.position.x - 4, this.node.position.y);
+            // cc.log('x = ' + this.node.position.x);
+            if (this.node.position.x < cc.Canvas.instance.designResolution.width * 0.25){
                 this.setState(BossState.Running);
             }
+        }
+        if (this.state ===  BossState.Running){
+            if (this.addEnemyTime > 1){
+                this.addEnemyTime = 0;
+                this.addEnemy();
+            }else {
+                this.addEnemyTime += dt;
+            }
+        }
+    },
+    addEnemy: function () {
+        cc.log("加敌人");
+
+
+        cc.log("boss data = " + JSON.stringify(this.monsterData));
+
+
+        let count = this.monsterData.addEnemyPointsCount;
+        cc.log("需要添加的敌人的个数是" + count);
+        let startVec = cc.p(0,100);
+        let preAngle = Math.PI * 2 / count;
+        for (let i = 0 ; i < count ; i ++){
+            let pos = cc.pRotateByAngle(startVec, cc.p(0,0), preAngle);
+            global.eventListener.fire("add_enemy_with_data",{
+                monster: this.monsterData["monster_1"],
+                position: this.node.convertToWorldSpace(pos)
+            })
         }
     }
 
