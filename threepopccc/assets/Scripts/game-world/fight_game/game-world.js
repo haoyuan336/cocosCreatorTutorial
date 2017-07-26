@@ -11,6 +11,14 @@ cc.Class({
         timeCountDownLabel: {
             default: null,
             type: cc.Label
+        },
+        gameWinLabel: {
+            default: null,
+            type: cc.Label
+        },
+        gameWinModelLayerPrefab: {
+            default: null,
+            type: cc.Prefab
         }
        
     },
@@ -24,6 +32,16 @@ cc.Class({
         this.StringList = ["","GO!","1","2","3"];
 
         this.timeCountDownLabel.string = "3";
+        global.eventListener.on("game_win", ()=>{
+            this.gameWinLabel.string = "WIN";
+            setTimeout(()=>{
+                let node = cc.instantiate(this.gameWinModelLayerPrefab);
+                node.parent = this.node;
+            }, 1000);
+
+
+        });
+
     },
     init: function (data) {
         cc.log("game world " + JSON.stringify(data));

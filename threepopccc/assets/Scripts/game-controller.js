@@ -61,6 +61,10 @@ cc.Class({
                 data: monster
             });
         });
+        global.eventListener.on("enter_main_world", ()=>{
+            cc.log("进入mainworld的关卡")
+        });
+
 
         global.gameData.init();
         this.enterLoadingNode({

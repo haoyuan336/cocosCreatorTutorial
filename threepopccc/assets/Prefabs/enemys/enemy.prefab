@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "monster_0",
+    "_name": "enemy",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -250,11 +250,11 @@
       "__id__": 2
     },
     "_enabled": true,
+    "_N$totalLength": 100,
     "_N$barSprite": {
       "__id__": 4
     },
     "_N$mode": 0,
-    "_N$totalLength": 100,
     "_N$progress": 0.3,
     "_N$reverse": false
   },
@@ -270,7 +270,7 @@
     "sync": false
   },
   {
-    "__type__": "22b4d0uhWZKgZXn7Gru+Syf",
+    "__type__": "8d78bUV64pOyanmMHg+e2b2",
     "_name": "",
     "_objFlags": 0,
     "node": {

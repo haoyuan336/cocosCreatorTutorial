@@ -61,6 +61,9 @@ cc.Class({
             case BossState.EnterIng:
                 break;
             case BossState.Dead:
+
+                global.eventListener.fire("game_win"); // 游戏胜利
+
                 break;
             case BossState.Running:
                 break;
@@ -78,13 +81,18 @@ cc.Class({
             }
         }
         if (this.state ===  BossState.Running){
-            if (this.addEnemyTime > 1){
+            if (this.addEnemyTime > 3){
                 this.addEnemyTime = 0;
                 this.addEnemy();
             }else {
                 this.addEnemyTime += dt;
             }
+            if (this.healthCount <= 0 ){
+                this.setState(BossState.Dead);
+            }
         }
+
+
 
 
         this.HealthProgressBar.progress = this.healthCount / this.healthTotalCount;
@@ -100,9 +108,12 @@ cc.Class({
         for (let i = 0 ; i < count ; i ++){
             //每添加一个敌人，自己减一定的血量
 
-            this.healthCount -= EnemyMonsterData[this.monsterData["monster_1"]].healthCount;
+
+            let healthCount = EnemyMonsterData[this.monsterData["monster_1"]].health;
             if (this.healthCount <= 0 ){
                 this.healthCount = 0;
+            }else {
+                this.healthCount -= healthCount;
             }
 
 

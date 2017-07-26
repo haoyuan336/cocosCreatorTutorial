@@ -28,10 +28,12 @@ cc.Class({
         global.eventListener.on("game_start" , ()=>{
             this.setState(PlayerState.Running);
         });
+        global.eventListener.on("game_win", ()=>{
+            this.setState(PlayerState.Win);
+        });
         this.state = PlayerState.Invalide;
     },
     update: function (dt) {
-
 
         if (this.state === PlayerState.Running || this.state === PlayerState.GameLevel2){
             if (this.shootNowTime > 1){
@@ -76,5 +78,11 @@ cc.Class({
             default: break;
         }
         this.state = state;
+    },
+    onDestroy: function () {
+        global.eventListener.removeListenerType("enter_game_level_2");
+        global.eventListener.removeListenerType("game_start");
+        global.eventListener.removeListenerType("game_win");
+
     }
 });
