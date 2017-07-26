@@ -115,8 +115,8 @@ cc.Class({
         // });
 
         let enemy = cc.instantiate(this.EnemyPrefab);
-        enemy.parent = this.node;
-        enemy.position = this.node.convertToNodeSpace(data.position);
+        enemy.parent = this.node.parent;
+        enemy.position = this.node.parent.convertToNodeSpace(data.position);
         enemy.getComponent("enemy").init(data.monster);
     }
 

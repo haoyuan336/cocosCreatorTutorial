@@ -24,6 +24,8 @@ cc.Class({
         this.state = MonsterState.Invalide;
         this.setState(MonsterState.Live);
 
+        this.speedY = 0;
+        this.accY = 0.1;
     },
     init: function (monstername) {
         cc.log("初始化敌人用数据 " + JSON.stringify(monstername));
@@ -39,20 +41,29 @@ cc.Class({
         if (this.node.position.x < - cc.Canvas.instance.designResolution.width * 0.5){
             // this.node.destroy();
         }
+        cc.log("this node position y = " + this.node.position.y);
+
+
+        if (this.node.position.y > -200){
+
+            this.node.position.y -= this.speedY;
+            this.speedY += this.accY;
+        }
         this.healthProgress.getComponent(cc.ProgressBar).progress = this.healthCount / this.healthCountTotal;
 
     },
     onCollisionEnter: function (other, self) {
-        if (other.node.getComponent("bullet")){
-            let damage = other.node.getComponent("bullet").getDamage();
+        // if (other.node.getComponent("bullet")){
+        //
+        // }
+        let damage = other.node.getComponent("bullet").getDamage();
             this.healthCount -= damage;
-        }
         if (other.node.getComponent("hero-node")){
             cc.log("碰到主角了");
         }
         if (this.healthCount <= 0 ){
             this.healthCount = 0;
-            // this.setState(MonsterState.Dead);
+            this.setState(MonsterState.Dead);
         }
     },
     setState: function (state) {
