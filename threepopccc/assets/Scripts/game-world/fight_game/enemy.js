@@ -5,7 +5,7 @@ const MonsterState = {
     Live: 1,
     Running: 3,
     Dead: 2,
-    ToDead: 3
+    ToDead: 4
 };
 cc.Class({
     extends: cc.Component,
@@ -27,7 +27,8 @@ cc.Class({
         this.speedY = 0;
         this.accY = 0.1;
         global.eventListener.on("game_win", ()=>{
-           this.setState(MonsterState.ToDead);
+            cc.log("game win");
+           // this.setState(MonsterState.ToDead);
         });
 
     },
@@ -52,9 +53,6 @@ cc.Class({
             if (this.node.position.x < - cc.Canvas.instance.designResolution.width * 0.5){
                 // this.node.destroy();
             }
-            cc.log("this node position y = " + this.node.position.y);
-
-
             if (this.node.position.y > -160){
                 this.node.position = cc.p(this.node.position.x, this.node.position. y - this.speedY);
                 this.speedY += this.accY;

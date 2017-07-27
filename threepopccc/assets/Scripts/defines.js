@@ -42,5 +42,10 @@ defines.monsterSpriteFrameConfig = {
   "monster_3": "mash_room_3.png"
 };
 defines.userKey = "userkey";
+defines.KeyMap = {
+  "now_level_count": "now_level_count",
+  "start_point": "start_point"
+
+};
 
 export default defines

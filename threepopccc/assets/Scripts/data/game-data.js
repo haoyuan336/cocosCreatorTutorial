@@ -3,6 +3,7 @@
  */
 import localDataController from './local-data-controller'
 import defines from './../defines'
+import LevelData from './../data/config/level-data'
 const InfoMap = {
   levelCount: "level_count"
 };
@@ -21,7 +22,7 @@ const GameData = function () {
     that.scoreCount = 0;
     that.distanceCount = 0;
     that.energyCount = 0;
-    localDataController.removeLocalData(defines.userKey);
+    // localDataController.removeLocalData(defines.userKey);
     if (localDataController.getData(defines.userKey) === null){
       let date = new Date();
       let id = date.getTime();
@@ -72,7 +73,24 @@ const GameData = function () {
     // return that.energyCount / that.totalEnergyCount;
     // cc.log("value = " + value);
     return value;
-  }
+  };
+  that.getMonsterLevelAndStartPoint = function () {
+    //获取初始
+    let monsterLevelCount = "Level1";
+    let startPoint = undefined;
+
+    if (localDataController.getData(defines.KeyMap.now_level_count)){
+      monsterLevelCount = localDataController.getData(defines.KeyMap.now_level_count);
+    }
+    if (localDataController.getData(defines.KeyMap.start_point)){
+      startPoint = localDataController.getData(defines.KeyMap.start_point);
+    }
+
+    return {
+      nowLevelCount: monsterLevelCount,
+      startPoint: startPoint
+    }
+  };
   return that;
 };
 export default GameData;

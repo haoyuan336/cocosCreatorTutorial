@@ -28,9 +28,8 @@ cc.Class({
            //
             global.gameData.levelCount ++;
             // this.enterMainWorld();
-            this.enterLoadingNode({
-                type: "main_world",
-                data: defines.initMainWorldType.startPos
+            this.enterLoadingNode(()=>{
+
             });
         });
 
@@ -41,24 +40,20 @@ cc.Class({
             }else {
                 global.gameData.levelCount --;
                 // this.enterMainWorld();
-                this.enterLoadingNode({
-                    type: "main_world",
-                    data: defines.initMainWorldType.returnStartPos
+                this.enterLoadingNode(()=>{
+
                 });
             }
         });
-        global.eventListener.on("enter_game_node",(data)=>{
-            // this.enterMainWorld(type);
-            this.enterWorld(data);
+        global.eventListener.on("enter_game_world",(data)=>{
         });
 
 
 
         global.eventListener.on("enter_monster_world",(monster)=>{
             cc.log("enter monster world" + monster.name);
-            this.enterLoadingNode({
-                type: "game_world",
-                data: monster
+            this.enterLoadingNode(()=>{
+
             });
         });
         global.eventListener.on("enter_main_world", ()=>{
@@ -67,9 +62,15 @@ cc.Class({
 
 
         global.gameData.init();
-        this.enterLoadingNode({
-            type: "main_world",
-            data: defines.initMainWorldType.startPos
+        // this.enterLoadingNode({
+        //     type: "main_world",
+        //     data: defines.initMainWorldType.startPos
+        // });
+
+
+        this.enterLoadingNode(()=>{
+           cc.log("加载完毕");
+            this.enterMainWorld()
         });
         
     },
@@ -85,33 +86,21 @@ cc.Class({
 
     },
     enterGameWorld: function (data) {
-        // cc.log("enter game world" + JSON.stringify(data.data.name));
         let node = cc.instantiate(this.gameWorldPrefab);
         node.parent = this.node;
         node.getComponent("game-world").init(data);
-
-
     },
-    enterMainWorld: function (data) {
-
-        this.loadingNode.removeFromParent(true);
-        this.loadingNode.destroy();
+    enterMainWorld: function () {
         this.mainWorld = cc.instantiate(this.mainWorldPrefab);
-        this.mainWorld.getComponent("game-node").init(data);
+        // this.mainWorld.getComponent("game-node").init();
         this.mainWorld.parent = this.node;
-        // this.mainWorld.getComponent("game-node").init(type);
     },
-    enterLoadingNode: function (data) {
-        if (this.mainWorld !== undefined){
-            this.mainWorld.removeFromParent(true);
-            this.mainWorld.destroy();
-        }
-        this.loadingNode = cc.instantiate(this.loadingPrefab);
-        this.loadingNode.parent = this.node;
-        this.loadingNode.getComponent("loding-node").init(data);
+    enterLoadingNode: function (callBack) {
+        let node = cc.instantiate(this.loadingPrefab);
+        node.parent = this.node;
+        node.getComponent("loding-node").init(callBack);
 
-        this.loadingNode.removeFromParent(true);
-        this.loadingNode.destroy();
+
     }
 
 });

@@ -25,6 +25,63 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         this.monsterList = [];
+        let startData = global.gameData.getMonsterLevelAndStartPoint();
+        cc.log("startData = " + JSON.stringify(startData));
+
+        let levelCount = startData.nowLevelCount;
+        let levelData = LevelData[levelCount];
+        this.levelData = levelData;
+        cc.log("level data = " + JSON.stringify(levelData));
+        cc.loader.loadRes(levelData.map, (err, tiledMap)=>{
+            if (err){
+                cc.log("err = " + err);
+                return;
+            }
+            let mapNode = new cc.Node("mapTiledNode");
+            mapNode.parent = this.mapNode;
+            this.tiledMap = mapNode.addComponent(cc.TiledMap);
+            this.tiledMap.tmxAsset = tiledMap;
+            let players = this.tiledMap.getObjectGroup("players");
+
+            let startPoint = undefined;
+            if (startData.startPoint === undefined){
+                let startPos = players.getObject("startPos").getProperties();
+                startPoint = this.getTiledPoint(startPos);
+            }
+            let endPos = players.getObject("endPos").getProperties();
+            this.endPoint = this.getTiledPoint(endPos);
+            let returnPos = players.getObject("returnPos").getProperties();
+            this.returnPoint = this.getTiledPoint(returnPos);
+            this.grounds = this.tiledMap.getLayer("ground");
+            this.walls = this.tiledMap.getLayer("wall");
+            this.createMonstersList(this.tiledMap.getObjectGroup("monsters").getObjects());
+
+            this.moveToTiledMapPoint(startPoint);
+        });
+
+
+        // cc.loader.loadRes(str, (err, tiledMap) =>{
+        //     if (err){
+        //         cc.log("err "  + err);
+        //         return ;
+        //     }
+        //     let mapNode = new cc.Node("mapTiledNode");
+        //     mapNode.parent = this.mapNode;
+        //     this.tiledMap = mapNode.addComponent(cc.TiledMap);
+        //     this.tiledMap.tmxAsset = tiledMap;
+        //     let players = this.tiledMap.getObjectGroup("players");
+        //     let startPos = players.getObject(type).getProperties();
+        //     let startPoint = this.getTiledPoint(startPos);
+        //     let endPos = players.getObject("endPos").getProperties();
+        //     this.endPoint = this.getTiledPoint(endPos);
+        //     let returnPos = players.getObject("returnPos").getProperties();
+        //     this.returnPoint = this.getTiledPoint(returnPos);
+        //     this.grounds = this.tiledMap.getLayer("ground");
+        //     this.walls = this.tiledMap.getLayer("wall");
+        //     this.playerTiled = startPoint;
+        //     this.createMonstersList(this.tiledMap.getObjectGroup("monsters").getObjects());
+        //     this.moveToTiledMapPoint(startPoint);
+        // });
     },
     moveToTiledMapPoint: function (newTiled) {
         cc.log("new tiled = " + JSON.stringify(newTiled));
@@ -103,33 +160,9 @@ cc.Class({
       }
     },
 
-    init: function (object) {
-        let type = object.data;
-        let nowLevel = global.gameData.levelCount;
-        let str ="tiledmap/" + "map_" + (nowLevel + 1);
-        cc.loader.loadRes(str, (err, tiledMap) =>{
-            if (err){
-                cc.log("err "  + err);
-                return ;
-            }
-            let mapNode = new cc.Node("mapTiledNode");
-            mapNode.parent = this.mapNode;
-            this.tiledMap = mapNode.addComponent(cc.TiledMap);
-            this.tiledMap.tmxAsset = tiledMap;
-            let players = this.tiledMap.getObjectGroup("players");
-            let startPos = players.getObject(type).getProperties();
-            let startPoint = this.getTiledPoint(startPos);
-            let endPos = players.getObject("endPos").getProperties();
-            this.endPoint = this.getTiledPoint(endPos);
-            let returnPos = players.getObject("returnPos").getProperties();
-            this.returnPoint = this.getTiledPoint(returnPos);
-            this.grounds = this.tiledMap.getLayer("ground");
-            this.walls = this.tiledMap.getLayer("wall");
-            this.playerTiled = startPoint;
-            this.createMonstersList(this.tiledMap.getObjectGroup("monsters").getObjects());
-            this.moveToTiledMapPoint(startPoint);
-        });
-    },
+    // init: function (object) {
+    //
+    // },
     createMonstersList: function (monsterList) {
         cc.log("monsterList = " + monsterList.length);
 
@@ -141,7 +174,9 @@ cc.Class({
 
     },
     createMonster: function (point) {
-        let data = global.gameDataController.getRandomMonsterData(global.gameData.levelCount, LevelData);
+
+        // let data = global.gameDataController.getRandomMonsterData(global.gameData.levelCount, LevelData);
+        let data = global.gameDataController.getRandomObjInList(this.levelData.monsterList);
         cc.loader.loadRes(defines.monsterSpriteFrameConfig[data],cc.SpriteFrame,(err, spriteFrame)=>{
             if (err){
                 return;
