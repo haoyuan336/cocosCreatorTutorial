@@ -15,6 +15,7 @@ cc.Class({
     },
     okButtonClick: function () {
         global.eventListener.fire("enter_main_world");
+
     }
 
   

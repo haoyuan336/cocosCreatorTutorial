@@ -45,19 +45,28 @@ cc.Class({
                 });
             }
         });
-        global.eventListener.on("enter_game_world",(data)=>{
-        });
+        // global.eventListener.on("enter_game_world",(data)=>{
+        // });
 
 
 
         global.eventListener.on("enter_monster_world",(monster)=>{
             cc.log("enter monster world" + monster.name);
             this.enterLoadingNode(()=>{
-
+                console.log("enter monster world");
+                this.mainWorld = cc.instantiate(this.gameWorldPrefab);
+                this.mainWorld.parent = this.node;
+                this.mainWorld.getComponent("game-world").init(monster);
             });
         });
         global.eventListener.on("enter_main_world", ()=>{
             cc.log("进入mainworld的关卡")
+            this.enterLoadingNode(()=>{
+                this.mainWorld = cc.instantiate(this.mainWorldPrefab);
+                this.mainWorld.parent = this.node;
+
+            })
+
         });
 
 
@@ -70,32 +79,19 @@ cc.Class({
 
         this.enterLoadingNode(()=>{
            cc.log("加载完毕");
-            this.enterMainWorld()
+            this.mainWorld = cc.instantiate(this.mainWorldPrefab);
+            // this.mainWorld.getComponent("game-node").init();
+            this.mainWorld.parent = this.node;
         });
         
     },
-    enterWorld: function (data) {
-        // this.enterMainWorld(type);
-        cc.log("enter world" + JSON.stringify(data));
-        if (data.type === "main_world"){
-            this.enterMainWorld(data);
-        }
-        if (data.type === "game_world"){
-            this.enterGameWorld(data);
+
+    enterLoadingNode: function (callBack) {
+        if (this.mainWorld){
+            this.mainWorld.removeFromParent(true);
+            this.mainWorld.destroy();
         }
 
-    },
-    enterGameWorld: function (data) {
-        let node = cc.instantiate(this.gameWorldPrefab);
-        node.parent = this.node;
-        node.getComponent("game-world").init(data);
-    },
-    enterMainWorld: function () {
-        this.mainWorld = cc.instantiate(this.mainWorldPrefab);
-        // this.mainWorld.getComponent("game-node").init();
-        this.mainWorld.parent = this.node;
-    },
-    enterLoadingNode: function (callBack) {
         let node = cc.instantiate(this.loadingPrefab);
         node.parent = this.node;
         node.getComponent("loding-node").init(callBack);

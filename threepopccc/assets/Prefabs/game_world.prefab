@@ -2020,11 +2020,11 @@
       "__id__": 58
     },
     "_enabled": true,
-    "_N$totalLength": 100,
     "_N$barSprite": {
       "__id__": 60
     },
     "_N$mode": 0,
+    "_N$totalLength": 100,
     "_N$progress": 0,
     "_N$reverse": false
   },
@@ -2625,11 +2625,11 @@
       "__id__": 78
     },
     "_enabled": true,
-    "_N$totalLength": 100,
     "_N$barSprite": {
       "__id__": 80
     },
     "_N$mode": 0,
+    "_N$totalLength": 100,
     "_N$progress": 0,
     "_N$reverse": false
   },

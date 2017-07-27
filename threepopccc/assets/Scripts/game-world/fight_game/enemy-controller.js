@@ -33,9 +33,12 @@ cc.Class({
             this.addEnemyWithInitData(data);
         });
 
+
+
     },
     init: function (data) {
-        let monster = data.data.name;
+        cc.log("enemy controller  =" + JSON.stringify(data));
+        let monster = data.name;
         cc.log("monster = " + monster);
         this.levelData = global.gameDataController.getMonsterData(monster + "_level", monsterLevelData);
         cc.log("enemy data" + JSON.stringify(this.levelData));
@@ -43,8 +46,6 @@ cc.Class({
         global.eventListener.on("game_start",()=>{
            this.setState(MonsterLevelState.AddEnemyLevel1);
         });
-
-
 
     },
     update: function (dt) {

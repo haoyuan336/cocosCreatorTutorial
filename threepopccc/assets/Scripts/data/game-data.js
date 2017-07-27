@@ -37,6 +37,9 @@ const GameData = function () {
 
       //储存一下 当前玩家在第几关的位置
       localDataController.setData(InfoMap.levelCount, 0 );
+
+
+      localDataController.setData(defines.KeyMap.now_level_count, "Level1");
     }
     that.playerID = localDataController.getData(defines.userKey).playerID;
     cc.log("用户ID = " + that.playerID);
@@ -82,15 +85,44 @@ const GameData = function () {
     if (localDataController.getData(defines.KeyMap.now_level_count)){
       monsterLevelCount = localDataController.getData(defines.KeyMap.now_level_count);
     }
-    if (localDataController.getData(defines.KeyMap.start_point)){
-      startPoint = localDataController.getData(defines.KeyMap.start_point);
+    if (localDataController.getData(monsterLevelCount + defines.KeyMap.start_point)){
+      startPoint = localDataController.getData(defines.KeyMap.now_level_count + defines.KeyMap.start_point);
     }
+
+
+
 
     return {
       nowLevelCount: monsterLevelCount,
       startPoint: startPoint
     }
   };
+
+  that.getStartPointData  = function () {
+    let monsterLevelCount = "Level1";
+    if (localDataController.getData(defines.KeyMap.now_level_count)){
+      monsterLevelCount = localDataController.getData(defines.KeyMap.now_level_count);
+    }
+    let startPoint = undefined;
+    if (localDataController.getData(monsterLevelCount + defines.KeyMap.start_point)){
+      startPoint = localDataController.getData(monsterLevelCount + defines.KeyMap.start_point);
+    }
+    return startPoint;
+  };
+  that.getLevelCount = function () {
+    let monsterLevelCount = "Level1";
+    if (localDataController.getData(defines.KeyMap.now_level_count)){
+      monsterLevelCount = localDataController.getData(defines.KeyMap.now_level_count);
+    }
+    return monsterLevelCount;
+  };
+  that.setStartPointData = function (point) {
+
+    cc.log("set start point = " + JSON.stringify(point));
+    let levelCount = that.getLevelCount();
+    localDataController.setData(levelCount + defines.KeyMap.start_point, point);
+  };
+
   return that;
 };
 export default GameData;
