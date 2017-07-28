@@ -58,7 +58,6 @@ cc.Class({
             this.returnPoint = this.getTiledPoint(returnPos);
             this.grounds = this.tiledMap.getLayer("ground");
             this.walls = this.tiledMap.getLayer("wall");
-            this.createMonstersList(this.tiledMap.getObjectGroup("monsters").getObjects());
 
             if ( this.startPoint !== undefined && this.startPoint !== null ){
                 this.moveToTiledMapPoint(this.startPoint);
@@ -67,6 +66,9 @@ cc.Class({
                 let startPoint = this.getTiledPoint(startPos);
                 this.moveToTiledMapPoint(startPoint);
             }
+
+            this.createMonstersList(this.tiledMap.getObjectGroup("monsters").getObjects());
+
         });
     },
     moveToTiledMapPoint: function (newTiled) {
@@ -157,6 +159,7 @@ cc.Class({
 
         //初始化几个怪兽
         for (let i = 0 ; i < monsterList.length ; i ++){
+            ///首先检查一下。这个位置上有没有怪物
             let point = this.getTiledPoint(monsterList[i].getProperties());
             this.createMonster(point);
         }
@@ -165,7 +168,21 @@ cc.Class({
     createMonster: function (point) {
 
         // let data = global.gameDataController.getRandomMonsterData(global.gameData.levelCount, LevelData);
-        let data = global.gameDataController.getRandomObjInList(this.levelData.monsterList);
+
+
+        if (cc.pointEqualToPoint(point, this.playerTiled)){
+            return;
+        }
+
+        let data = undefined;
+        if (global.gameData.getMonsterDataInPoint(point)){
+            data = global.gameData.getMonsterDataInPoint(point);
+        }else {
+            data = global.gameDataController.getRandomObjInList(this.levelData.monsterList);
+            global.gameData.setMonsterDataInPoint(point, data);
+        }
+
+
         cc.loader.loadRes(defines.monsterSpriteFrameConfig[data],cc.SpriteFrame,(err, spriteFrame)=>{
             if (err){
                 return;

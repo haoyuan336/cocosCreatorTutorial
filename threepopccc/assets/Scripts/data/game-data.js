@@ -123,6 +123,18 @@ const GameData = function () {
     localDataController.setData(levelCount + defines.KeyMap.start_point, point);
   };
 
+  that.getMonsterDataInPoint = function (point) {
+    let level = that.getLevelCount();
+    if (localDataController.getData(level + defines.KeyMap.monster_data + JSON.stringify(point)) === null){
+      return false
+    }
+    return localDataController.getData(level + defines.KeyMap.monster_data + JSON.stringify(point));
+  };
+
+  that.setMonsterDataInPoint = function (point, monsterdata) {
+    let level = that.getLevelCount();
+    localDataController.setData(level + defines.KeyMap.monster_data + JSON.stringify(point), monsterdata);
+  };
   return that;
 };
 export default GameData;

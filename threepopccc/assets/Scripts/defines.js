@@ -44,7 +44,8 @@ defines.monsterSpriteFrameConfig = {
 defines.userKey = "userkey";
 defines.KeyMap = {
   "now_level_count": "now_level_count",
-  "start_point": "start_point"
+  "start_point": "start_point",
+  "monster_data": "monster_data"  //储存的怪物类型
 
 };
 

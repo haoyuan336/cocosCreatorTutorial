@@ -198,7 +198,7 @@ const GameDataController = function() {
   };
 
   that.getRandomObjInList = function (list) {
-    return list[Math.floor(Math.random() * (list.length))];
+    return list[Math.floor(Math.random() * (list.length - 1))];
   };
 
   that.getRandomMonsterData = function (levelData,config) {
