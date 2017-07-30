@@ -29,7 +29,7 @@ cc.Class({
 
     // called every frame, uncomment this function to activate update callback
     update: function (dt) {
-        this.node.position = cc.pAdd(this.node.position, this.moveSpeed);
+        this.node.position = cc.pAdd(this.node.position,  cc.pMult(cc.p(this.moveSpeed.x, this.moveSpeed.y), 20));
         if (this.node.position.x > cc.Canvas.instance.designResolution.width * 0.5 - 100){
             this.node.destroy();
         }
@@ -43,8 +43,15 @@ cc.Class({
         // cc.log("碰撞了");
         // other.removeFromParent(true);
         // self.removeFromParent(true);
-        this.node.removeFromParent(true);
-        this.node.destroy();
+        // this.node.removeFromParent(true);
+        // this.node.destroy();
+
+        if (other.node.name === "enemy"){
+            cc.log("碰到的是敌人");
+            this.node.removeFromParent(true);
+        }
+
+
     },
     getDamage: function () {
         return this.damage;

@@ -27,9 +27,9 @@ cc.Class({
         this.shootNowTime = 0;
         this.healthCount = 10;
         this.healthCountTotal = 10;
-        global.gameworldEventListener.on("enter_game_level_2",()=>{
-            this.setState(PlayerState.GameLevel2);
-        });
+        // global.gameworldEventListener.on("enter_game_level_2",()=>{
+        //     // this.setState(PlayerState.GameLevel2);
+        // });
 
         global.gameworldEventListener.on("game_start" , ()=>{
             this.setState(PlayerState.Running);
@@ -45,18 +45,25 @@ cc.Class({
         if (this.enemyTarget === undefined){
             cc.log("找敌人");
             this.enemyTarget = this.getEnemyTarget();
+            if (this.enemyTarget !== undefined){
+                cc.log("找到了敌人");
+                //找到敌人之后开始射击
+            }
         }
 
         if (this.enemyTarget !== undefined){
-            // cc.log("找到了敌人");
-            //找到敌人之后开始射击
+            if (this.enemyTarget.getComponent("enemy").getIsDead()){
+                cc.log("敌人死了");
+                this.enemyTarget = undefined;
+            }
         }
+
 
         // if (this.state === PlayerState.Running || this.state === PlayerState.GameLevel2){
         if (this.state === PlayerState.Running && this.enemyTarget !== undefined){
 
                 if (this.shootNowTime > 1){
-                this.shootBullet(this.enemyTarget);
+                this.shootBullet();
                 this.shootNowTime = 0
             }else {
                 this.shootNowTime += this.shootSpeed;
@@ -84,9 +91,17 @@ cc.Class({
         }
         return target;
     },
-    shootBullet: function (target) {
+    shootBullet: function () {
         //发射一枚子弹
         // cc.log("shoow");
+
+        if (this.enemyTarget === undefined){
+            return;
+        }
+
+
+        cc.log("发射子弹");
+
         let bullet = cc.instantiate(this.bulletPrefab);
         bullet.parent = this.node.parent;
         bullet.position = {
@@ -94,12 +109,11 @@ cc.Class({
             y: this.node.position.y
         };
 
-        let angle = cc.pSub(target.position, bullet.position);
+        let angle = cc.pSub(this.enemyTarget.position, bullet.position);
         angle = cc.pNormalize(angle);
         bullet.getComponent("bullet").init({
             angle: angle
         });
-
     },
     setState: function (state) {
         if (state === this.state){
@@ -130,11 +144,14 @@ cc.Class({
         this.state = state;
     },
     onCollisionEnter: function (other, self) {
+        cc.log("碰到主角了 敌人");
         if (other.node.getComponent("enemy") && this.state === PlayerState.Running){
             let damage = other.node.getComponent("enemy").getDamage();
+            cc.log("造成伤害" + damage);
             this.healthCount -= damage;
             if (this.healthCount < 0){
                 this.healthCount = 0;
+
                 this.setState(PlayerState.Dead);
             }
         }

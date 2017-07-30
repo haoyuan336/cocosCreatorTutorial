@@ -30,7 +30,7 @@ cc.Class({
             x: cc.Canvas.instance.designResolution.width * 0.5 ,
             y: 0
         };
-        global.gameworldEventListener.on("game_lose", function () {
+        global.gameworldEventListener.on("game_lose", ()=>{
            this.setState(BossState.Over);
         });
     },
@@ -145,6 +145,7 @@ cc.Class({
                 this.healthCount = 0;
             }
         }
-    }
+    },
+
 
 });

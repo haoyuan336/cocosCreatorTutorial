@@ -40,6 +40,7 @@ cc.Class({
         this.moveSpeed = enemyData["speed"];
         this.healthCount = enemyData["health"];
         this.healthCountTotal = enemyData["health"];
+        this.damage = enemyData["damage"];
         let image = enemyData.image;
         cc.loader.loadRes(image, cc.SpriteFrame, (err, spriteFrame)=>{
             if (err){
@@ -73,6 +74,8 @@ cc.Class({
             this.healthCount -= damage;
             if (other.node.getComponent("hero-node")){
                 cc.log("碰到主角了");
+                this.setState(MonsterState.ToDead);
+                
             }
             if (this.healthCount <= 0 ){
                 this.healthCount = 0;
@@ -97,10 +100,14 @@ cc.Class({
             case MonsterState.Dead:
                 if (this.node){
                     this.node.removeFromParent(true);
-                    this.node.destroy();
+                    // this.node.destroy();
+                    setTimeout(()=>{
+                        this.node.destroy();
+                    },5000)
                 }
                 break;
             case MonsterState.ToDead:
+                this.node.removeComponent(cc.BoxCollider);
                 setTimeout(()=>{
                     this.setState(MonsterState.Dead);
                 },1000);
@@ -111,7 +118,13 @@ cc.Class({
         this.state = state;
     },
     getDamage: function () {
-
+        return this.damage;
+    },
+    getIsDead: function () {
+        if (this.state === MonsterState.Dead){
+            return true;
+        }
+        return false;
     }
 
 });
