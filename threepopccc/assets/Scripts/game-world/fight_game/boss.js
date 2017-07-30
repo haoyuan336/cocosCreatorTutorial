@@ -6,7 +6,8 @@ const BossState = {
     EnterIng: 1,
     Running: 2,
     Dead: 3,
-    Win: 4
+    Win: 4,
+    Over : 5
 }
 cc.Class({
     extends: cc.Component,
@@ -28,7 +29,10 @@ cc.Class({
         this.node.position = {
             x: cc.Canvas.instance.designResolution.width * 0.5 ,
             y: 0
-        }
+        };
+        global.gameworldEventListener.on("game_lose", function () {
+           this.setState(BossState.Over);
+        });
     },
 
     init: function (data) {
@@ -62,12 +66,18 @@ cc.Class({
                 break;
             case BossState.Dead:
 
-                global.eventListener.fire("game_win"); // 游戏胜利
+                // global.gameData.isWin = true;
+
+
+                global.gameworldEventListener.fire("game_win"); // 游戏胜利
 
                 break;
             case BossState.Running:
                 break;
             case BossState.Win:
+
+                break;
+            case BossState.Over:
                 break;
         }
         this.state = state;
@@ -109,16 +119,16 @@ cc.Class({
             //每添加一个敌人，自己减一定的血量
 
 
-            let healthCount = EnemyMonsterData[this.monsterData["monster_1"]].health;
-            if (this.healthCount <= 0 ){
-                this.healthCount = 0;
-            }else {
-                this.healthCount -= healthCount;
-            }
+            // let healthCount = EnemyMonsterData[this.monsterData["monster_1"]].health;
+            // if (this.healthCount <= 0 ){
+            //     this.healthCount = 0;
+            // }else {
+            //     this.healthCount -= healthCount;
+            // }
 
 
             let pos = cc.pRotateByAngle(startVec, cc.p(0,0), preAngle * i);
-            global.eventListener.fire("add_enemy_with_data",{
+            global.gameworldEventListener.fire("add_enemy_with_data",{
                 monster: this.monsterData["monster_1"],
                 position: this.node.convertToWorldSpace(pos)
             })

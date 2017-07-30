@@ -14,6 +14,10 @@ cc.Class({
         bulletPrefab: {
             default: null,
             type: cc.Prefab
+        },
+        progressBar: {
+            default: null,
+            type: cc.ProgressBar
         }
     },
 
@@ -21,32 +25,66 @@ cc.Class({
     onLoad: function () {
         this.shootSpeed = 0.1;
         this.shootNowTime = 0;
-        global.eventListener.on("enter_game_level_2",()=>{
+        this.healthCount = 10;
+        this.healthCountTotal = 10;
+        global.gameworldEventListener.on("enter_game_level_2",()=>{
             this.setState(PlayerState.GameLevel2);
         });
 
-        global.eventListener.on("game_start" , ()=>{
+        global.gameworldEventListener.on("game_start" , ()=>{
             this.setState(PlayerState.Running);
         });
-        global.eventListener.on("game_win", ()=>{
+        global.gameworldEventListener.on("game_win", ()=>{
             this.setState(PlayerState.Win);
         });
         this.state = PlayerState.Invalide;
     },
     update: function (dt) {
 
-        if (this.state === PlayerState.Running || this.state === PlayerState.GameLevel2){
-            if (this.shootNowTime > 1){
-                this.shootBullet();
+
+        if (this.enemyTarget === undefined){
+            cc.log("找敌人");
+            this.enemyTarget = this.getEnemyTarget();
+        }
+
+        if (this.enemyTarget !== undefined){
+            // cc.log("找到了敌人");
+            //找到敌人之后开始射击
+        }
+
+        // if (this.state === PlayerState.Running || this.state === PlayerState.GameLevel2){
+        if (this.state === PlayerState.Running && this.enemyTarget !== undefined){
+
+                if (this.shootNowTime > 1){
+                this.shootBullet(this.enemyTarget);
                 this.shootNowTime = 0
             }else {
                 this.shootNowTime += this.shootSpeed;
             }
         }
 
+        this.progressBar.progress = this.healthCount / this.healthCountTotal;
 
     },
-    shootBullet: function () {
+    getEnemyTarget: function () {
+
+        let childList = this.node.parent.children;
+        let maxDis = 10000;
+        let target = undefined;
+        for(let i in childList){
+            let child = childList[i];
+            if (child.name === "enemy"){
+                cc.log("敌人");
+                let dis = cc.pDistance(this.node.position, child.position);
+                if (dis < maxDis){
+                    maxDis = dis;
+                    target = child;
+                }
+            }
+        }
+        return target;
+    },
+    shootBullet: function (target) {
         //发射一枚子弹
         // cc.log("shoow");
         let bullet = cc.instantiate(this.bulletPrefab);
@@ -55,6 +93,12 @@ cc.Class({
             x: this.node.position.x + 100,
             y: this.node.position.y
         };
+
+        let angle = cc.pSub(target.position, bullet.position);
+        angle = cc.pNormalize(angle);
+        bullet.getComponent("bullet").init({
+            angle: angle
+        });
 
     },
     setState: function (state) {
@@ -72,6 +116,12 @@ cc.Class({
 
                 break;
             case PlayerState.Dead:
+
+
+                console.log("game lose");
+                global.gameData.isWin = false;
+                global.gameworldEventListener.fire("game_lose");
+
                 break;
             case PlayerState.Win:
                 break;
@@ -79,10 +129,20 @@ cc.Class({
         }
         this.state = state;
     },
+    onCollisionEnter: function (other, self) {
+        if (other.node.getComponent("enemy") && this.state === PlayerState.Running){
+            let damage = other.node.getComponent("enemy").getDamage();
+            this.healthCount -= damage;
+            if (this.healthCount < 0){
+                this.healthCount = 0;
+                this.setState(PlayerState.Dead);
+            }
+        }
+    },
     onDestroy: function () {
-        global.eventListener.removeListenerType("enter_game_level_2");
-        global.eventListener.removeListenerType("game_start");
-        global.eventListener.removeListenerType("game_win");
+        // global.gameworldEventListener.removeListenerType("enter_game_level_2");
+        // global.gameworldEventListener.removeListenerType("game_start");
+        // global.gameworldEventListener.removeListenerType("game_win");
 
     }
 });

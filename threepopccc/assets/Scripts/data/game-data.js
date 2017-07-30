@@ -23,11 +23,14 @@ const GameData = function () {
     that.distanceCount = 0;
     that.energyCount = 0;
     // localDataController.removeLocalData(defines.userKey);
+
+
     if (localDataController.getData(defines.userKey) === null){
       let date = new Date();
       let id = date.getTime();
       localDataController.setData(defines.userKey,{playerID: id});
       cc.log("储存用户id");
+
 
       //储存一下激活的技能
       let skillList = defines.SkillList[[defines.SkillMap.fireAttack]];
@@ -77,24 +80,68 @@ const GameData = function () {
     // cc.log("value = " + value);
     return value;
   };
-  that.getMonsterLevelAndStartPoint = function () {
-    //获取初始
-    let monsterLevelCount = "Level1";
-    let startPoint = undefined;
+  // that.getMonsterLevelAndStartPoint = function () {
+  //   //获取初始
+  //   let monsterLevelCount = "Level1";
+  //   let startPoint = undefined;
+  //
+  //   if (localDataController.getData(defines.KeyMap.now_level_count)){
+  //     monsterLevelCount = localDataController.getData(defines.KeyMap.now_level_count);
+  //   }
+  //   if (localDataController.getData(monsterLevelCount + defines.KeyMap.start_point)){
+  //     startPoint = localDataController.getData(defines.KeyMap.now_level_count + defines.KeyMap.start_point);
+  //   }
+  //   return {
+  //     nowLevelCount: monsterLevelCount,
+  //     startPoint: startPoint
+  //   }
+  // };
 
+
+  that.getLevelCount = function () {
+    let monsterLevelCount = "Level1";
     if (localDataController.getData(defines.KeyMap.now_level_count)){
       monsterLevelCount = localDataController.getData(defines.KeyMap.now_level_count);
     }
-    if (localDataController.getData(monsterLevelCount + defines.KeyMap.start_point)){
-      startPoint = localDataController.getData(defines.KeyMap.now_level_count + defines.KeyMap.start_point);
+    return monsterLevelCount;
+  };
+  that.setLevelCount = function (data) {
+    localDataController.setData(defines.KeyMap.now_level_count, data);
+  };
+
+  that.getMonsterDataInPoint = function (point) {
+    let level = that.getLevelCount();
+    if (localDataController.getData(level + defines.KeyMap.monster_data + JSON.stringify(point)) === null){
+      return false
     }
+    return localDataController.getData(level + defines.KeyMap.monster_data + JSON.stringify(point));
+  };
+  that.setMonsterDataInPoint = function (point, monsterdata) {
+    let level = that.getLevelCount();
+    //首先获取到这个点，储存的时间
+    let time = getPointMonsterCreateTime(point);
+    cc.log("set monster data point" + time);
+    let nowTime = new Date().getTime();
+    cc.log("now time = " + nowTime);
+    if (nowTime - time > 100000){
 
-
-
-
-    return {
-      nowLevelCount: monsterLevelCount,
-      startPoint: startPoint
+    }else {
+      return false;
+    }
+    localDataController.setData(level + defines.KeyMap.monster_data + JSON.stringify(point), monsterdata);
+    setPointMonsterCreateTime(point);
+  };
+  const setPointMonsterCreateTime = function (point) {
+    let level = that.getLevelCount();
+    localDataController.setData(level + defines.KeyMap.monster_create_time + JSON.stringify(point), new Date().getTime());
+  };
+  const getPointMonsterCreateTime = function (point) {
+    let time = 0;
+    let level = that.getLevelCount();
+    if (localDataController.getData(level + defines.KeyMap.monster_create_time + JSON.stringify(point)) === null){
+      return time;
+    }else {
+      return localDataController.getData(level + defines.KeyMap.monster_create_time + JSON.stringify(point));
     }
   };
 
@@ -109,13 +156,6 @@ const GameData = function () {
     }
     return startPoint;
   };
-  that.getLevelCount = function () {
-    let monsterLevelCount = "Level1";
-    if (localDataController.getData(defines.KeyMap.now_level_count)){
-      monsterLevelCount = localDataController.getData(defines.KeyMap.now_level_count);
-    }
-    return monsterLevelCount;
-  };
   that.setStartPointData = function (point) {
 
     cc.log("set start point = " + JSON.stringify(point));
@@ -123,18 +163,15 @@ const GameData = function () {
     localDataController.setData(levelCount + defines.KeyMap.start_point, point);
   };
 
-  that.getMonsterDataInPoint = function (point) {
-    let level = that.getLevelCount();
-    if (localDataController.getData(level + defines.KeyMap.monster_data + JSON.stringify(point)) === null){
-      return false
-    }
-    return localDataController.getData(level + defines.KeyMap.monster_data + JSON.stringify(point));
+  that.setWinOrLoseData = function (data) {
+    localDataController.setData(defines.KeyMap.game_win_or_lose, data);
+  };
+  that.getWinOrLoseData = function () {
+    return localDataController.getData(defines.KeyMap.game_win_or_lose);
   };
 
-  that.setMonsterDataInPoint = function (point, monsterdata) {
-    let level = that.getLevelCount();
-    localDataController.setData(level + defines.KeyMap.monster_data + JSON.stringify(point), monsterdata);
-  };
+
+
   return that;
 };
 export default GameData;

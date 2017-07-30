@@ -21,12 +21,14 @@ cc.Class({
         this.bgList = [];//背景 的列表
         this.scale = 1;
 
-        global.eventListener.on("game_start", ()=> {
+        global.gameworldEventListener.on("game_start", ()=> {
+            // cc.log("recire bg game start");
            this.setState(BGState.Running);
         });
 
-        global.eventListener.on("enter_game_level_2",()=>{
-           cc.log("recircle bg 游戏进入第二阶段，背景停止滚动");
+        global.gameworldEventListener.on("enter_game_level_2",()=>{
+           // cc.log("recircle bg 游戏进入第二阶段，背景停止滚动");
+
             this.setState(BGState.Stop);
         });
         this.state = BGState.Invalide;

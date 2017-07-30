@@ -32,7 +32,7 @@ cc.Class({
         this.indexHeight = 0;
         this.removeCellList = [];
         this.state = GameState.Invalide;
-        global.eventListener.on("play_suilie_animation", (data)=> {
+        global.gameworldEventListener.on("play_suilie_animation", (data)=> {
             cc.log("remove a diamond" + JSON.stringify(data));
 
             let animate = cc.instantiate(this.diamondAnimation);
@@ -47,10 +47,10 @@ cc.Class({
             //     cc.log("播放结束");
             // });
         });
-        global.eventListener.on("enter_game_level_2",function () {
+        global.gameworldEventListener.on("enter_game_level_2",function () {
            cc.log("游戏进入第二阶段");
         });
-        global.eventListener.on("game_start",  ()=> {
+        global.gameworldEventListener.on("game_start",  ()=> {
             this.setState(GameState.Running);
         })
 
@@ -218,10 +218,11 @@ cc.Class({
         //这个cell双击了
         // cc.log("双击" + target.node.indexRow + "," + target.node.indexLine);
         let map = global.gameDataController.getPopCellList(target, this.cellList);
+        cc.log("map  " + JSON.stringify(map));
         //            global.gameData.addEnergyCount(cell.getComponent("cell").getEnergy());
         let data = global.gameDataController.proceGetAllEnergy(map, this.cellList);
-        global.eventListener.fire("add_combo_effect",data.rateIndex);
-        global.eventListener.fire("add_energy",data.energyCount);//增加能量
+        global.gameworldEventListener.fire("add_combo_effect",data.rateIndex);
+        global.gameworldEventListener.fire("add_energy",data.energyCount);//增加能量
         for (let i in map){
             this.removeCellList.push(this.cellList[parseInt(i)]);
             this.cellList[parseInt(i)] = undefined;
@@ -244,7 +245,7 @@ cc.Class({
         return node;
     },
     onDestroy: function () {
-        global.eventListener.removeListenerType("enter_game_level_2");
+        global.gameworldEventListener.removeListenerType("enter_game_level_2");
     },
     setState: function (state) {
         if (this.state === state){

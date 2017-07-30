@@ -52,22 +52,56 @@ cc.Class({
             let players = this.tiledMap.getObjectGroup("players");
 
 
-            let endPos = players.getObject("endPos").getProperties();
+            let endPos = undefined;
+
+            if (players.getObject("endPos")){
+                endPos = players.getObject("endPos").getProperties();
+
+            }
             this.endPoint = this.getTiledPoint(endPos);
-            let returnPos = players.getObject("returnPos").getProperties();
+
+
+            let returnPos = undefined;
+            if (players.getObject("returnPos")){
+              returnPos = players.getObject("returnPos").getProperties();
+            }
             this.returnPoint = this.getTiledPoint(returnPos);
+
+
             this.grounds = this.tiledMap.getLayer("ground");
             this.walls = this.tiledMap.getLayer("wall");
 
-            if ( this.startPoint !== undefined && this.startPoint !== null ){
-                this.moveToTiledMapPoint(this.startPoint);
-            }else {
-                let startPos = players.getObject("startPos").getProperties();
-                let startPoint = this.getTiledPoint(startPos);
-                this.moveToTiledMapPoint(startPoint);
-            }
 
-            this.createMonstersList(this.tiledMap.getObjectGroup("monsters").getObjects());
+            // cc.log("start point = " + JSON.stringify(this.startPoint));
+            // cc.log("end point = " + JSON.stringify(this.returnPoint));
+
+            if (cc.pointEqualToPoint(this.startPoint, this.endPoint)){
+              this.startPoint = this.getTiledPoint(players.getObject("returnStartPos").getProperties());
+            }
+            if (cc.pointEqualToPoint(this.startPoint, this.returnPoint)){
+              // this.startPoint = this.getTiledPoint();
+              this.startPoint = this.getTiledPoint(players.getObject("startPos").getProperties());
+            }
+          let list = this.tiledMap.getObjectGroup("monsters").getObjects();
+
+
+          let winOrLose = global.gameData.getWinOrLoseData();
+          if (winOrLose === 'lose'){
+            this.startPoint = this.getTiledPoint(players.getObject("startPos").getProperties());
+          }
+
+
+           if ( this.startPoint !== undefined && this.startPoint !== null ){
+             this.moveToTiledMapPoint(this.startPoint);
+           }else {
+             let startPos = players.getObject("startPos").getProperties();
+             let startPoint = this.getTiledPoint(startPos);
+
+             this.moveToTiledMapPoint(startPoint);
+           }
+
+          this.createMonstersList(list);
+
 
         });
     },
@@ -96,11 +130,12 @@ cc.Class({
 
         global.gameData.setStartPointData(newTiled);
 
-        if (cc.pointEqualToPoint(newTiled,this.endPoint)){
+
+        if ( this.endPoint !== undefined && cc.pointEqualToPoint(newTiled,this.endPoint)){
             cc.log("进入了出口位置了");
             global.eventListener.fire("enter_next_map");
         }
-        if (cc.pointEqualToPoint(newTiled, this.returnPoint)){
+        if (this.returnPoint !== undefined && cc.pointEqualToPoint(newTiled, this.returnPoint)){
             cc.log("返回上一个地图");
             global.eventListener.fire("enter_befor_map");
         }
@@ -169,19 +204,30 @@ cc.Class({
 
         // let data = global.gameDataController.getRandomMonsterData(global.gameData.levelCount, LevelData);
 
+        let winOrLose = global.gameData.getWinOrLoseData();
 
-        if (cc.pointEqualToPoint(point, this.playerTiled)){
+        if (cc.pointEqualToPoint(point, this.playerTiled) && winOrLose === 'win'){
+          cc.log("游戏胜利,删掉这个怪物");
+            global.gameData.setMonsterDataInPoint(point, null);
             return;
         }
 
         let data = undefined;
         if (global.gameData.getMonsterDataInPoint(point)){
             data = global.gameData.getMonsterDataInPoint(point);
+            cc.log("找到了怪物类型");
         }else {
             data = global.gameDataController.getRandomObjInList(this.levelData.monsterList);
-            global.gameData.setMonsterDataInPoint(point, data);
+            cc.log("美债到怪物类型");
+
+            if (global.gameData.setMonsterDataInPoint(point, data) === false){
+              return
+            }
+
+            // global.gameData.setMonsterDataInPoint(point, data);
         }
 
+        cc.log("monster data = " + data);
 
         cc.loader.loadRes(defines.monsterSpriteFrameConfig[data],cc.SpriteFrame,(err, spriteFrame)=>{
             if (err){
@@ -227,6 +273,9 @@ cc.Class({
     },
     
     getTiledPoint: function (position) {
+        if (position === undefined){
+          return undefined;
+        }
         position = cc.p(position.x, position.y);
         let tiledSize = this.tiledMap.getTileSize();
         cc.log("tiled size = " + JSON.stringify(tiledSize));

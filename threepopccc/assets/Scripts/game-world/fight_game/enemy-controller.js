@@ -4,7 +4,8 @@ import monsterData from './../../data/config/monster-data'
 const MonsterLevelState =  {
     Invalide: -1,
     AddEnemyLevel1: 1,
-    AddEnemyLevel2 : 2
+    AddEnemyLevel2 : 2,
+    Over: 3
 }
 cc.Class({
     extends: cc.Component,
@@ -29,10 +30,19 @@ cc.Class({
         this.state = MonsterLevelState.Invalide;
         // this.state = MonsterLevelState.Invalide;
         // this.setState(MonsterLevelState.AddEnemyLevel1);
-        global.eventListener.on("add_enemy_with_data", (data)=>{
+        global.gameworldEventListener.on("add_enemy_with_data", (data)=>{
+            cc.log("add enemy with data = " + JSON.stringify(data));
             this.addEnemyWithInitData(data);
         });
 
+        global.gameworldEventListener.on("game_lose", function () {
+            //游戏失败
+            // this.setState(MonsterLevelState.)
+        });
+
+        global.gameworldEventListener.on("game_start",()=>{
+            this.setState(MonsterLevelState.AddEnemyLevel1);
+        });
 
 
     },
@@ -43,9 +53,6 @@ cc.Class({
         this.levelData = global.gameDataController.getMonsterData(monster + "_level", monsterLevelData);
         cc.log("enemy data" + JSON.stringify(this.levelData));
         this.totalEnergyCount = this.levelData["monster_count"];
-        global.eventListener.on("game_start",()=>{
-           this.setState(MonsterLevelState.AddEnemyLevel1);
-        });
 
     },
     update: function (dt) {
@@ -72,6 +79,7 @@ cc.Class({
     addEnemy: function () {
         // let obj = global.gameDataController.getRandomObjInList(this.EnemyPrefab);
         // let obj = global
+        cc.log("add enemy");
         let enemy = cc.instantiate(this.EnemyPrefab);
         enemy.parent = this.node.parent;
         enemy.position = this.node.position;
@@ -86,6 +94,7 @@ cc.Class({
         //     x: this.node.position.x - 400,
         //     y: this.node.position.y
         // };
+
         enemy.getComponent("boss").init(this.levelData["monster_boss"]);
 
 
@@ -98,7 +107,7 @@ cc.Class({
             case MonsterLevelState.AddEnemyLevel1:
                 break;
             case MonsterLevelState.AddEnemyLevel2:
-                global.eventListener.fire("enter_game_level_2"); //游戏进入第二阶段
+                global.gameworldEventListener.fire("enter_game_level_2"); //游戏进入第二阶段
               //添加一个游戏关主
                 this.addBigEnemy();
                 break;
@@ -115,6 +124,7 @@ cc.Class({
         //     let monster = cc.instantiate(this)
         // });
 
+        cc.log("add enemy width init data" + JSON.stringify(data));
         let enemy = cc.instantiate(this.EnemyPrefab);
         enemy.parent = this.node.parent;
         enemy.position = this.node.parent.convertToNodeSpace(data.position);

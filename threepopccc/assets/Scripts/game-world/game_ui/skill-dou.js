@@ -17,7 +17,8 @@ cc.Class({
         // this.addOneSkill();
         // this.addOneSkill();
 
-        global.eventListener.on("add_one_skill_node",()=>{
+        global.gameworldEventListener.on("add_one_skill_node",()=>{
+            // cc.log(" add one skill node");
             this.addOneSkill();
         });
 

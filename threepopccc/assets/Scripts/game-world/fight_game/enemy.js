@@ -20,15 +20,16 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        // this.node.tag = "enemy";
         this.moveSpeed = 1;
         this.healthCount = 4;
         this.state = MonsterState.Invalide;
         this.setState(MonsterState.Live);
         this.speedY = 0;
         this.accY = 0.1;
-        global.eventListener.on("game_win", ()=>{
+        global.gameworldEventListener.on("game_win", ()=>{
             cc.log("game win");
-           // this.setState(MonsterState.ToDead);
+           this.setState(MonsterState.ToDead);
         });
 
     },
@@ -41,6 +42,12 @@ cc.Class({
         this.healthCountTotal = enemyData["health"];
         let image = enemyData.image;
         cc.loader.loadRes(image, cc.SpriteFrame, (err, spriteFrame)=>{
+            if (err){
+                cc.log("err = " + err);
+            }
+            if (this.node === null){
+                return;
+            }
             this.node.addComponent(cc.Sprite).spriteFrame = spriteFrame;
             this.node.addComponent(cc.BoxCollider);
         });
@@ -102,6 +109,9 @@ cc.Class({
                 break;
         }
         this.state = state;
+    },
+    getDamage: function () {
+
     }
 
 });

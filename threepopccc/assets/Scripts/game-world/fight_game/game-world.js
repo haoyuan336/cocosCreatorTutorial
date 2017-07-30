@@ -1,5 +1,6 @@
 import global from './../../global'
 // import monsterleveldata from './../../data/config/monster-level-data'
+import EventListener from './../../EventListener'
 cc.Class({
     extends: cc.Component,
 
@@ -32,14 +33,27 @@ cc.Class({
         this.StringList = ["","GO!","1","2","3"];
 
         this.timeCountDownLabel.string = "3";
-        global.eventListener.on("game_win", ()=>{
+
+        global.gameworldEventListener = EventListener({});
+
+        global.gameworldEventListener.on("game_win", ()=>{
             this.gameWinLabel.string = "WIN";
+            global.gameData.setWinOrLoseData("win");
             setTimeout(()=>{
                 let node = cc.instantiate(this.gameWinModelLayerPrefab);
                 node.parent = this.node;
-            }, 1000);
+            }, 2000);
 
 
+        });
+        global.gameworldEventListener.on("game_lose", ()=>{
+            this.gameWinLabel.string = "LOSE";
+            global.gameData.setWinOrLoseData("lose");
+
+            setTimeout(()=>{
+                let node = cc.instantiate(this.gameWinModelLayerPrefab);
+                node.parent = this.node;
+            }, 2000);
         });
 
     },
@@ -69,7 +83,7 @@ cc.Class({
     gameStart: function () {
       cc.log("游戏开始");
         this.timeCountDownLabel.node.active = false;
-        global.eventListener.fire("game_start");
+        global.gameworldEventListener.fire("game_start");
     },
     onDestroy: function () {
 

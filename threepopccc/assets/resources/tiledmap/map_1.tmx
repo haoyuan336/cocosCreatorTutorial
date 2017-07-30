@@ -49,9 +49,6 @@
   <object id="43" name="endPos" x="920.588" y="164.706" width="11.7647" height="17.6471">
    <ellipse/>
   </object>
-  <object id="45" name="returnPos" x="670.588" y="867.647" width="14.7059" height="17.6471">
-   <ellipse/>
-  </object>
   <object id="46" name="returnStartPos" x="855.882" y="170.588" width="20.5882" height="20.5882">
    <ellipse/>
   </object>
