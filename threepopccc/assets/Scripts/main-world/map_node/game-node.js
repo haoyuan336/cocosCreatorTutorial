@@ -1,6 +1,7 @@
 import global from './../../global'
 import defines from './../../defines'
 import LevelData from './../../data/config/level-data'
+import EventListener from './../../EventListener'
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -32,6 +33,7 @@ cc.Class({
         // let levelData = LevelData[levelCount];
         // this.levelData = levelData;
         // cc.log("level data = " + JSON.stringify(levelData));
+        global.mainworldEventListener = EventListener({});
 
         let levelCount = global.gameData.getLevelCount();
         cc.log("level count =  " + levelCount);
@@ -133,18 +135,18 @@ cc.Class({
 
         if ( this.endPoint !== undefined && cc.pointEqualToPoint(newTiled,this.endPoint)){
             cc.log("进入了出口位置了");
-            global.eventListener.fire("enter_next_map");
+            global.mainworldEventListener.fire("enter_next_map");
         }
         if (this.returnPoint !== undefined && cc.pointEqualToPoint(newTiled, this.returnPoint)){
             cc.log("返回上一个地图");
-            global.eventListener.fire("enter_befor_map");
+            global.mainworldEventListener.fire("enter_befor_map");
         }
 
         let monster = this.checkMonsterPoint(newTiled);
         if (monster === null){
             cc.log("没找到怪兽");
         }else {
-            global.eventListener.fire("enter_monster_world",{
+            global.mainworldEventListener.fire("enter_monster_world",{
                 point: monster.point,
                 name: monster.name
             });
@@ -249,7 +251,7 @@ cc.Class({
         cc.log("start");
         // let self = this;
         // this.getComponent(cc.TiledMap);
-        global.eventListener.on("button_click", (direction) => {
+        global.mainworldEventListener.on("button_click", (direction) => {
             let newTiled = cc.p(this.playerTiled.x, this.playerTiled.y);
             console.log("button click ");
             switch (direction){
@@ -293,7 +295,7 @@ cc.Class({
     },
     onDestroy: function () {
         cc.log("on destroy");
-        global.eventListener.removeListenerType("button_click",LevelData);
+        global.mainworldEventListener.removeListenerType("button_click",LevelData);
 
     }
 

@@ -14,7 +14,7 @@ cc.Class({
 
     uiButtonClick: function (target,customEventData) {
         cc.log("click data = " + customEventData);
-        global.eventListener.fire('button_click',customEventData);
+        global.mainworldEventListener.fire('button_click',customEventData);
 
     }
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="10" height="7" tilewidth="64" tileheight="64" nextobjectid="1">
- <tileset firstgid="1" name="cell" tilewidth="64" tileheight="64" tilecount="1" columns="1">
-  <image source="zhuang.png" width="64" height="64"/>
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="7" height="7" tilewidth="128" tileheight="128" nextobjectid="1">
+ <tileset firstgid="1" name="zhuang" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="zhuang.png" width="128" height="128"/>
  </tileset>
- <layer name="layer" width="10" height="7">
+ <layer name="layers" width="7" height="7">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYBzFGBgAJ+wARw==
+   eJxjZGBgYBziGAAT6AAy
   </data>
  </layer>
 </map>

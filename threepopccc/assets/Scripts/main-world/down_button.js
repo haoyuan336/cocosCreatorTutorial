@@ -1,4 +1,3 @@
-import global from './../global'
 cc.Class({
     extends: cc.Component,
 
@@ -19,11 +18,12 @@ cc.Class({
     onLoad: function () {
 
     },
-    buttonClick: function (event,coustomData) {
-        cc.log("customData" + coustomData);
-        global.mainworldEventListener.fire("show_tab_node", coustomData);
-    }
 
+    buttonClick : function (event, customData) {
+
+
+        cc.log("button click custom data = " + customData);
+    }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 
