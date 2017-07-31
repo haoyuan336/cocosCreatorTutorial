@@ -69,14 +69,17 @@ cc.Class({
         }
     },
     onCollisionEnter: function (other, self) {
+
+        if (other.node.getComponent("hero-node") && this.state === MonsterState.Running){
+            cc.log("碰到主角了");
+            this.setState(MonsterState.Dead);
+
+        }
+
         if (other.node.getComponent("bullet") && this.state === MonsterState.Running){
             let damage = other.node.getComponent("bullet").getDamage();
             this.healthCount -= damage;
-            if (other.node.getComponent("hero-node")){
-                cc.log("碰到主角了");
-                this.setState(MonsterState.ToDead);
-                
-            }
+
             if (this.healthCount <= 0 ){
                 this.healthCount = 0;
                 this.setState(MonsterState.Dead);
@@ -99,6 +102,7 @@ cc.Class({
                 break;
             case MonsterState.Dead:
                 if (this.node){
+                    this.node.removeComponent(cc.BoxCollider);
                     this.node.removeFromParent(true);
                     // this.node.destroy();
                     setTimeout(()=>{
