@@ -1,3 +1,4 @@
+import global from './../global'
 cc.Class({
     extends: cc.Component,
 
@@ -23,6 +24,10 @@ cc.Class({
 
 
         cc.log("button click custom data = " + customData);
+
+
+        global.mainworldEventListener.fire('button_click',customData);
+
     }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

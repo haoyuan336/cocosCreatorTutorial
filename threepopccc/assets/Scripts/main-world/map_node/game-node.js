@@ -135,23 +135,22 @@ cc.Class({
 
         if ( this.endPoint !== undefined && cc.pointEqualToPoint(newTiled,this.endPoint)){
             cc.log("进入了出口位置了");
-            global.mainworldEventListener.fire("enter_next_map");
+            global.eventListener.fire("enter_next_map");
         }
         if (this.returnPoint !== undefined && cc.pointEqualToPoint(newTiled, this.returnPoint)){
             cc.log("返回上一个地图");
-            global.mainworldEventListener.fire("enter_befor_map");
+            global.eventListener.fire("enter_befor_map");
         }
 
         let monster = this.checkMonsterPoint(newTiled);
         if (monster === null){
             cc.log("没找到怪兽");
         }else {
-            global.mainworldEventListener.fire("enter_monster_world",{
+            global.eventListener.fire("enter_monster_world",{
                 point: monster.point,
                 name: monster.name
             });
         }
-
         // if (this.checkMonsterPoint(newTiled)){
         //     cc.log("打怪");
         //     global.eventListener.fire("enter_monster_world",)
