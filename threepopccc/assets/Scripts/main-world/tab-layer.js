@@ -32,12 +32,16 @@ cc.Class({
            cc.log("show tab node" + type);
             switch (type){
                 case "weapon":
+                    this.createNode(this.weaponNodePrefab);
                     break;
                 case "close":
+                    this.createNode(this.closeNodePrefab);
                     break;
                 case "skill":
+                    this.createNode(this.skillNodePrefab);
                     break;
                 case "thing":
+                    this.createNode(this.thingNodePrefab);
                     break;
                 case "game":
                     this.createNode(this.gameNodePrefab);
