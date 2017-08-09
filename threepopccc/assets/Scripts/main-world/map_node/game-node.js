@@ -1,7 +1,7 @@
 import global from './../../global'
 import defines from './../../defines'
 import LevelData from './../../data/config/level-data'
-import EventListener from './../../EventListener'
+import EventListener from './../../utility/event-listener'
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -119,7 +119,6 @@ cc.Class({
             cc.log("超出界限");
             return;
         }
-
 
         if (this.checkWall(newTiled)){
             cc.log("是墙");

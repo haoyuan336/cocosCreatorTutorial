@@ -1,6 +1,6 @@
 import global from './../../global'
 // import monsterleveldata from './../../data/config/monster-level-data'
-import EventListener from './../../EventListener'
+import EventListener from './../../utility/event-listener'
 cc.Class({
     extends: cc.Component,
 
