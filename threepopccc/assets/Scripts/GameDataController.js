@@ -209,6 +209,7 @@ const GameDataController = function() {
   that.getMonsterData = function (monster, config) {
     return config[monster];
   };
+
   return that;
 };
 export default GameDataController;
