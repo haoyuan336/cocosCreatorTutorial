@@ -1,3 +1,4 @@
+import global from './../../global'
 cc.Class({
     extends: cc.Component,
 
@@ -16,8 +17,13 @@ cc.Class({
                 cc.log("load res err = " + err);
             }
             this.node.addComponent(cc.TiledMap).tmxAsset = tiledmap;
+            this.initWeapon();
         });
     },
 
+    initWeapon: function () {
+        let weaponNameData = global.gameData.getWeaponData();
+        cc.log("激活的武器名称列表" + JSON.stringify(weaponNameData));
+    }
 
 });

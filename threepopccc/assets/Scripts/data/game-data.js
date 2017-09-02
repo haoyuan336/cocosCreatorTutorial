@@ -169,6 +169,9 @@ const GameData = function () {
   that.getWinOrLoseData = function () {
     return localDataController.getData(defines.KeyMap.game_win_or_lose);
   };
+  that.getWeaponData = function () {
+    return localDataController.getData()
+  };
 
 
 

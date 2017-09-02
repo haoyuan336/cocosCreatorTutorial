@@ -54,7 +54,8 @@ defines.KeyMap = {
   "start_point": "start_point",
   "monster_data": "monster_data",  //储存的怪物类型
   "monster_create_time": "monster_create_time", //创建怪兽的时间
-  "game_win_or_lose": "game_win_or_lose" // 游戏是胜利还是失败
+  "game_win_or_lose": "game_win_or_lose", // 游戏是胜利还是失败
+  "action_weapon_name_list": "action_weapon_name_list" //激活的武器名字的列表
 };
 
 export default defines
