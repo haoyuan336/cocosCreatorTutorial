@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "weaponltablayer",
+    "_name": "menu_thing_node",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -61,13 +61,16 @@
     "groupIndex": 0
   },
   {
-    "__type__": "6f739Q2NeZFtIUWJ4r+9uGI",
+    "__type__": "0e3dd+9JslE4JGOmwaP6ajG",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
-    "_enabled": true
+    "_enabled": true,
+    "thing_sprite_frames": {
+      "__uuid__": "2713f92c-5594-4635-9ed0-24aa4d6b9c62"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -75,9 +78,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "476d8f83-967a-4514-8262-79346ed46932"
+      "__uuid__": "39e25219-e530-4be1-bfce-a1056d2d71f5"
     },
-    "fileId": "801902PdShJHKv+Aacc7Z2V",
+    "fileId": "cebe0TihnRGSrr2zlk6IevD",
     "sync": false
   }
 ]

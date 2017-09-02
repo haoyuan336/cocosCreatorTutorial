@@ -57,5 +57,6 @@ defines.KeyMap = {
   "game_win_or_lose": "game_win_or_lose", // 游戏是胜利还是失败
   "action_weapon_name_list": "action_weapon_name_list" //激活的武器名字的列表
 };
+defines.weaponKey = ["gun_1","gun_2"];
 
 export default defines

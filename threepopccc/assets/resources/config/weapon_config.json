@@ -1,1 +1,4 @@
-{"weapon_name": [""]}
+[
+  {"gun_type":"gun_1","name":"小手枪","fire_speed":"1","bullet_name":"gun_1_bullet","image":"shouqiang1"},
+  {"gun_type":"gun_2","name":"左轮手枪","fire_speed":"0.5","bullet_name":"gun_2_bullet","image":"shouqiang2"}
+]

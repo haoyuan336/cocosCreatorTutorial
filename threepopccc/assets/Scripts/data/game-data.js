@@ -169,8 +169,21 @@ const GameData = function () {
   that.getWinOrLoseData = function () {
     return localDataController.getData(defines.KeyMap.game_win_or_lose);
   };
-  that.getWeaponData = function () {
-    return localDataController.getData()
+  that.getWeaponDataList = function () {
+    var weaponList = [];
+    for (var i = 0 ; i < defines.weaponKey.length ; i ++){
+      if (!!localDataController.getData(defines.weaponKey[i])){
+          weaponList.push(defines.weaponKey[i]);
+      }
+    }
+
+    console.log('weapon list = ' + JSON.stringify(weaponList));
+
+    return weaponList;
+  };
+  that.setActiveWeaponWithType = function (weaponType) {
+    //首先取出
+    localDataController.setData(weaponType,true);
   };
 
 
