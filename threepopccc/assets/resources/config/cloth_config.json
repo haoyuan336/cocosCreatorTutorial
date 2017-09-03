@@ -1,0 +1,9 @@
+[
+  {"cloth_type":"cloth_1","name":"破旧的衣服","defense":"5","image":"maozi0","description":"description"},
+  {"cloth_type":"cloth_2","name":"干净整洁的衣服","defense":"6","image":"maozi1","description":"description"},
+  {"cloth_type":"cloth_3","name":"尊贵华丽的衣服","defense":"8","image":"maozi2","description":"description"},
+  {"cloth_type":"cloth_4","name":"藤甲","defense":"10","image":"dunpai1","description":"description"},
+  {"cloth_type":"cloth_5","name":"铁盔甲","defense":"15","image":"dunpai3","description":"description"},
+  {"cloth_type":"cloth_6","name":"皮盔甲","defense":"20","image":"dunpai2","description":"description"},
+  {"cloth_type":"cloth_7","name":"精致铁盔甲","defense":"25","image":"kuijia","description":"description"}
+]

@@ -44,15 +44,10 @@ cc.Class({
             var size = this.tiledMap.getMapSize();
             console.log("size = " + JSON.stringify(size));
 
-            for (let i = 0 ; i < size.width ; i ++){
-                for (let j = 0 ; j <size.height ; j ++){
-
-                }
-            }
 
             var index = 0 ;
             for (let i = 0 ; i < weaponNameData.length ; i ++){
-                let name = result[i].gun_type;
+                let name = result[i].gun_type; //todo
                 if (name === weaponNameData[i]){
                     console.log("找到了这个武器" + name);
                     //创建一个物品

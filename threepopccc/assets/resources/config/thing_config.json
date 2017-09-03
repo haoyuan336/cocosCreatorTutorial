@@ -1,0 +1,10 @@
+[
+  {"thing_type":"thing_1","name":"橙子","safe":"10","image":"chengzi","description":"description"},
+  {"thing_type":"thing_2","name":"黄色药水","safe":"11","image":"dahuangyaoshui","description":"description"},
+  {"thing_type":"thing_3","name":"苹果","safe":"12","image":"hongpongguo","description":"description"},
+  {"thing_type":"thing_4","name":"绿色药水","safe":"13","image":"dapinglvyaoshui","description":"description"},
+  {"thing_type":"thing_5","name":"青苹果","safe":"14","image":"qingpingguo","description":"description"},
+  {"thing_type":"thing_6","name":"蓝色药水","safe":"15","image":"lanyaoshui","description":"description"},
+  {"thing_type":"thing_7","name":"香蕉","safe":"16","image":"xiangjao","description":"description"},
+  {"thing_type":"thing_8","name":"橡子","safe":"17","image":"xiangzi","description":"description"}
+]

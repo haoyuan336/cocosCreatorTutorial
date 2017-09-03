@@ -16,9 +16,13 @@
     "_children": [],
     "_tag": -1,
     "_active": true,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
     "_prefab": {
-      "__id__": 2
+      "__id__": 3
     },
     "_id": "",
     "_opacity": 255,
@@ -46,8 +50,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 4,
-      "y": -350
+      "x": 0,
+      "y": 0
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -57,12 +61,27 @@
     "groupIndex": 0
   },
   {
+    "__type__": "640c2Pc0mBNOLasANXEZ26w",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "thing_prefab": {
+      "__uuid__": "39e25219-e530-4be1-bfce-a1056d2d71f5"
+    },
+    "tiledmap_asset": {
+      "__uuid__": "9b0bb7ca-4a1c-471c-a066-b284f5160065"
+    }
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "ef289d70-27b7-4ff0-a5dc-39396586bf36"
     },
     "fileId": "3ce31RuKCJAI7duUDabKBmS",
     "sync": false

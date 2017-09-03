@@ -185,7 +185,29 @@ const GameData = function () {
     //首先取出
     localDataController.setData(weaponType,true);
   };
+  that.setActiveClothWithType = function (clothType) {
+    localDataController.setData(clothType, true);
+  };
+  that.getActiveClothDataList = function () {
+    var clothList = [];
+    for (var i = 0 ; i < defines.clothKey.length ; i ++){
+      if (!!localDataController.getData(defines.clothKey[i])){
+        clothList.push(defines.clothKey[i]);
+      }
+    }
+    return clothList;
+  };
 
+  that.getActiveThingDataList = function () {
+    var thingList = [];
+    for (var i = 0 ; i < defines.thingKey.length ; i ++){
+      thingList.push(defines.thingKey[i]);
+    }
+    return thingList;
+  };
+  that.setActiveThingWithKey = function (thingType) {
+    localDataController.setData(thingType, true);
+  };
 
 
   return that;

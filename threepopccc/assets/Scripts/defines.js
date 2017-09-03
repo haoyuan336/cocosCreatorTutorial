@@ -55,8 +55,10 @@ defines.KeyMap = {
   "monster_data": "monster_data",  //储存的怪物类型
   "monster_create_time": "monster_create_time", //创建怪兽的时间
   "game_win_or_lose": "game_win_or_lose", // 游戏是胜利还是失败
-  "action_weapon_name_list": "action_weapon_name_list" //激活的武器名字的列表
+  "action_weapon_name_list": "action_weapon_name_list", //激活的武器名字的列表
+  "action_cloth_name_list": "sction_cloth_name_list"   //激活点衣服名字点列表
 };
 defines.weaponKey = ["gun_1","gun_2"];
-
+defines.clothKey = ["cloth_1", "cloth_2", "cloth_3", "cloth_4", "cloth_5", "cloth_6"];
+defines.thingKey = ['thing_1',"thing_2","thing_3","thing_4","thing_5","thing_6","thing_7", "thing_8"];
 export default defines
