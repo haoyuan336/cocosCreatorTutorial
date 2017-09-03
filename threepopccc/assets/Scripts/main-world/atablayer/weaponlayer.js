@@ -43,8 +43,7 @@ cc.Class({
             // 配置加载出来之后
             var size = this.tiledMap.getMapSize();
             console.log("size = " + JSON.stringify(size));
-
-
+            var tileSize = this.tiledMap.getTileSize();
             var index = 0 ;
             for (let i = 0 ; i < weaponNameData.length ; i ++){
                 let name = result[i].gun_type; //todo
@@ -55,8 +54,8 @@ cc.Class({
                     thingNode.parent = this.node;
                     thingNode.getComponent("menu_thing_node").setThingData(result[i]);
 
-                    let x = index - Math.floor(index / 7);
-                    let y = Math.floor(index / 7);
+                    let x = index - Math.floor(index / size.width) * size.width;
+                    let y = Math.floor(index / size.height);
                     let ground = this.tiledMap.getLayer("layers");
                     let pos = ground.getPositionAt(x, y);
                     console.log("pos = " + JSON.stringify(pos));
@@ -64,9 +63,7 @@ cc.Class({
                     console.log("current pos = " + JSON.stringify(worldPos));
                     let currentPos = this.node.parent.convertToNodeSpace(worldPos);
                     console.log("current pos = " + JSON.stringify(currentPos));
-                    let size = this.tiledMap.getTileSize();
-                    console.log("size " + JSON.stringify(size));
-                    thingNode.position = cc.pAdd(currentPos, cc.p(size.width * 0.5,size.height * 0.5));
+                    thingNode.position = cc.pAdd(currentPos, cc.p(tileSize.width * 0.5,tileSize.height * 0.5));
                     index ++;
                 }
             }

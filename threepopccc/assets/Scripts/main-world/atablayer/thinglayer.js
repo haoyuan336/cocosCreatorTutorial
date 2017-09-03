@@ -48,8 +48,10 @@ cc.Class({
                    var thingNode = cc.instantiate(this.thing_prefab);
                    thingNode.parent = this.node;
                    thingNode.getComponent("menu_thing_node").setThingData(result[i]);
-                   var x = index - Math.floor(index / size.width);
+                   var x = index - Math.floor(index / size.width) * size.width;
                    var y = Math.floor(index / size.height);
+                   cc.log("x = " + x);
+                   cc.log("y = " + y);
                    var pos = layers.getPositionAt(x, y);
                    var worldPos = this.node.convertToWorldSpace(pos);
                    var currentPos = this.node.parent.convertToNodeSpace(worldPos);

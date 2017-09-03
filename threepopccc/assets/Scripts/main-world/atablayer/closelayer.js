@@ -45,7 +45,7 @@ cc.Class({
                 clothNode.parent = this.node;
                 clothNode.getComponent("menu_thing_node").setThingData(clothConfig);
                 var layer = this.tiledMap.getLayer("layers");
-                let x = index - Math.floor(index / size.width);
+                let x = index - Math.floor(index / size.width) * size.width;
                 let y = Math.floor(index / size.height);
                 index ++;
                 var pos = layer.getPositionAt(x, y);
