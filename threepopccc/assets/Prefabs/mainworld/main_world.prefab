@@ -607,6 +607,9 @@
     },
     "closeNodePrefab": {
       "__uuid__": "99619709-57bd-48f9-bc3a-8938550bc086"
+    },
+    "thing_infor_modellayer_prefab": {
+      "__uuid__": "de9b2001-1b34-4ad8-aa8a-8d7a57e8d1ef"
     }
   },
   {

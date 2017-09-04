@@ -22,6 +22,10 @@ cc.Class({
         closeNodePrefab: {
             default: null,
             type: cc.Prefab
+        },
+        thing_infor_modellayer_prefab: {
+         default: null,
+         type: cc.Prefab
         }
     },
 
@@ -53,6 +57,8 @@ cc.Class({
             }
         });
         global.mainworldEventListener.fire("show_tab_node","game");
+        global.mainworldEventListener.on("thing_node_touch", this.thingNodeTouch.bind(this));
+
     },
     createNode: function (prefab) {
         if (this.mainNode){
@@ -61,7 +67,14 @@ cc.Class({
         }
         this.mainNode = cc.instantiate(prefab);
         this.mainNode.parent = this.node;
-    }
+    },
+  thingNodeTouch: function (data) {
+    cc.log("thing node touch " + JSON.stringify(data));
+    //创建一个modelayer
+    var modelLayer = cc.instantiate(this.thing_infor_modellayer_prefab);
+    modelLayer.parent = this.node;
+
+  },
 
 
     // called every frame, uncomment this function to activate update callback

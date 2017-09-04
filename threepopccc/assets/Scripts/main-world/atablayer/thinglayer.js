@@ -19,7 +19,6 @@ cc.Class({
     onLoad: function () {
         this.tiledMap = this.node.addComponent(cc.TiledMap);
         this.tiledMap.tmxAsset = this.tiledmap_asset;
-
         this.initThing();
     },
     initThing: function () {
