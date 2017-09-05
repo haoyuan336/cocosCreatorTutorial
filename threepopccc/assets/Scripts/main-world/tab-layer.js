@@ -65,15 +65,16 @@ cc.Class({
             this.node.removeChild(this.mainNode);
             this.mainNode.destroy();
         }
-        this.mainNode = cc.instantiate(prefab);
-        this.mainNode.parent = this.node;
+      this.node.removeAllChildren(true);
+      this.mainNode = cc.instantiate(prefab);
+      this.mainNode.parent = this.node;
     },
   thingNodeTouch: function (data) {
     cc.log("thing node touch " + JSON.stringify(data));
     //创建一个modelayer
     var modelLayer = cc.instantiate(this.thing_infor_modellayer_prefab);
     modelLayer.parent = this.node;
-
+    modelLayer.getComponent("thing_infor_modellayer").initWithData(data);
   },
 
 
