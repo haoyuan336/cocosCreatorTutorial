@@ -142,7 +142,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "acc12d05-28c3-4f47-b803-dfaa95023daa"
+      "__uuid__": "1efa8364-69aa-4d49-b41e-a80811c67dc0"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -157,7 +157,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "765d90ec-4bdc-4b8c-a06c-f527f6f415e9"
+    }
   },
   {
     "__type__": "cc.Button",
@@ -299,7 +301,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "991174f1-a3f0-4e79-9a51-24e4b5af36ae"
+      "__uuid__": "036a421e-0c59-4711-82a5-a4b643f04435"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -314,7 +316,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "765d90ec-4bdc-4b8c-a06c-f527f6f415e9"
+    }
   },
   {
     "__type__": "cc.Button",
@@ -456,7 +460,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "7794d17a-f0b9-473e-b9dc-3da42274bc0d"
+      "__uuid__": "42f942fa-6874-4532-8696-9b3065d0111f"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -471,7 +475,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "765d90ec-4bdc-4b8c-a06c-f527f6f415e9"
+    }
   },
   {
     "__type__": "cc.Button",
@@ -613,7 +619,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "da2cc2a4-26d3-49fa-9d5d-2a43b2e6a68d"
+      "__uuid__": "e28d9ecb-abd4-4bf8-9c72-6adf67e6e52e"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -628,7 +634,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "765d90ec-4bdc-4b8c-a06c-f527f6f415e9"
+    }
   },
   {
     "__type__": "cc.Button",
@@ -770,7 +778,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "86dd80cf-e6c2-405f-8447-899bd5b8ff39"
+      "__uuid__": "ffa2448d-5d73-4a99-9714-f725e1fcf36d"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -785,7 +793,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "765d90ec-4bdc-4b8c-a06c-f527f6f415e9"
+    }
   },
   {
     "__type__": "cc.Button",
